@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Zona Eksperimen - ZATOPIA</title>
+    <meta
+      name="description"
+      content="Zona Eksperimen ZATOPIA: amati tiga eksperimen virtual sederhana tentang perubahan wujud zat."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌎</text></svg>"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS umum ZATOPIA -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- CSS halaman materi (hero, kartu, tombol, umpan balik) -->
+    <link rel="stylesheet" href="../css/materi.css" />
+    <!-- CSS khusus Zona Eksperimen -->
+    <link rel="stylesheet" href="../css/eksperimen.css" />
+  </head>
+  <body>
+    <!-- ==================== NAVIGASI (sama dengan halaman lain) ==================== -->
+    <header class="navbar">
+      <a
+        class="navbar-logo"
+        href="../index.html"
+        aria-label="ZATOPIA, kembali ke Beranda"
+        >🌎 ZATOPIA</a
+      >
+
+      <nav aria-label="Menu utama">
+        <ul class="navbar-menu">
+          <li><a href="../index.html">Beranda</a></li>
+          <li><a href="../index.html#petunjuk">Petunjuk</a></li>
+          <!-- HAPUS data-placeholder setelah pages/tentang.html dibuat -->
+          <li>
+            <a href="tentang.html" data-placeholder="Tentang ZATOPIA"
+              >Tentang</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!--
+    data-tema     : warna halaman ("eksperimen")
+    data-lokasi   : kode lokasi di peta, dipakai untuk menyimpan progress
+    data-avatar   : diisi otomatis oleh js/eksperimen.js ("zaki" atau "zara")
+  -->
+    <main
+      class="halaman-materi"
+      id="halaman-materi"
+      data-tema="eksperimen"
+      data-lokasi="zona-eksperimen"
+      data-avatar="zaki"
+    >
+      <!-- ==================== HERO ==================== -->
+      <section class="hero hero-materi">
+        <div class="hero-isi">
+          <a class="tautan-peta" href="peta.html">← Peta ZATOPIA</a>
+
+          <h1 class="judul-materi">🧪 ZONA EKSPERIMEN</h1>
+
+          <div class="teman">
+            <div class="teman-avatar" data-karakter>
+              <img id="avatar-teman" alt="" />
+              <span class="emoji-karakter" id="emoji-teman" aria-hidden="true"
+                >👦</span
+              >
+            </div>
+            <div class="teman-bubble">
+              <p
+                class="teman-teks"
+                id="teman-teks"
+                data-sapa-awal="Ayo coba tiga eksperimen seru bersama"
+              >
+                Ayo coba tiga eksperimen seru bersama!
+              </p>
+            </div>
+          </div>
+
+          <p class="pengantar-eksperimen">
+            Amati apa yang terjadi pada setiap eksperimen, lalu jawab
+            pertanyaannya.
+          </p>
+          <p class="hitung-temuan hitung-eksperimen" id="hitung-eksperimen">
+            Eksperimen selesai: 0 dari 3
+          </p>
+        </div>
+
+        <svg
+          class="gelombang"
+          viewBox="0 0 1440 80"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,30 L1440,80 L0,80 Z"
+            fill="#ffffff"
+          />
+        </svg>
+      </section>
+
+      <div class="materi-isi">
+        <!-- ==================== EKSPERIMEN 1: ES DIPANASKAN ==================== -->
+        <section class="bagian">
+          <div
+            class="aktivitas eksperimen"
+            id="eksperimen-es"
+            data-lokasi-progress="es"
+          >
+            <div class="eksperimen-kepala">
+              <span class="eksperimen-nomor">1</span>
+              <h2 id="judul-es">
+                🧊 Apa yang terjadi pada es ketika dipanaskan?
+              </h2>
+              <span class="lencana-selesai" id="lencana-es" hidden
+                >✓ Selesai</span
+              >
+            </div>
+            <p class="aktivitas-petunjuk">
+              Ketuk tombol PANASKAN, lalu perhatikan apa yang terjadi pada es
+              batu.
+            </p>
+
+            <!-- Panggung: es batu di atas panci -->
+            <div class="panggung-eksperimen" id="panggung-es">
+              <svg
+                class="eksperimen-svg"
+                viewBox="0 0 220 200"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <!-- panci -->
+                <ellipse cx="110" cy="168" rx="82" ry="14" fill="#c7ccd6" />
+                <path
+                  d="M32 130 h156 l-10 40 a10 10 0 0 1 -10 8 H52 a10 10 0 0 1 -10 -8 Z"
+                  fill="#aab0bd"
+                />
+                <rect
+                  x="18"
+                  y="120"
+                  width="184"
+                  height="16"
+                  rx="8"
+                  fill="#8f95a3"
+                />
+                <rect
+                  x="0"
+                  y="122"
+                  width="20"
+                  height="10"
+                  rx="5"
+                  fill="#8f95a3"
+                />
+                <rect
+                  x="200"
+                  y="122"
+                  width="20"
+                  height="10"
+                  rx="5"
+                  fill="#8f95a3"
+                />
+
+                <!-- ES BATU (keadaan awal) -->
+                <g id="keadaan-es">
+                  <rect
+                    x="76"
+                    y="78"
+                    width="34"
+                    height="34"
+                    rx="6"
+                    fill="#CDEBFF"
+                    stroke="#7CC4FF"
+                    stroke-width="3"
+                    transform="rotate(-8 93 95)"
+                  />
+                  <rect
+                    x="104"
+                    y="86"
+                    width="30"
+                    height="30"
+                    rx="6"
+                    fill="#DFF3FF"
+                    stroke="#7CC4FF"
+                    stroke-width="3"
+                    transform="rotate(10 119 101)"
+                  />
+                  <rect
+                    x="90"
+                    y="96"
+                    width="26"
+                    height="26"
+                    rx="6"
+                    fill="#CDEBFF"
+                    stroke="#7CC4FF"
+                    stroke-width="3"
+                    transform="rotate(-4 103 109)"
+                  />
+                </g>
+
+                <!-- AIR (keadaan setelah dipanaskan) -->
+                <g id="keadaan-air" hidden>
+                  <path
+                    id="permukaan-air"
+                    d="M40 122 q17 -8 35 0 t35 0 t35 0 t35 0 v10 H40 Z"
+                    fill="#4FA6F7"
+                  />
+                  <path
+                    d="M40 122 q17 -8 35 0 t35 0 t35 0 t35 0"
+                    fill="none"
+                    stroke="#8BCBFF"
+                    stroke-width="3"
+                  />
+                </g>
+
+                <!-- api (muncul sesaat saat dipanaskan) -->
+                <g id="api-panas" class="api" hidden>
+                  <path
+                    d="M92 176 q-6 -14 2 -22 q2 8 8 6 q-4 -12 4 -20 q2 12 10 14 q6 2 4 10 q10 -4 10 8 q0 14 -18 14 q-16 0 -20 -10z"
+                    fill="#FF8A3D"
+                  />
+                  <path
+                    d="M104 176 q-3 -8 1 -12 q4 8 8 4 q4 6 -1 10z"
+                    fill="#FFD25A"
+                  />
+                </g>
+              </svg>
+              <p class="eksperimen-label" id="label-es" hidden>💧 Mencair</p>
+            </div>
+
+            <div class="eksperimen-aksi">
+              <button
+                type="button"
+                class="tombol tombol-utama"
+                id="tombol-panaskan"
+              >
+                🔥 PANASKAN
+              </button>
+            </div>
+
+            <!-- Pertanyaan (muncul setelah tombol PANASKAN diklik) -->
+            <div class="pertanyaan-eksperimen" id="pertanyaan-es" hidden>
+              <p class="pertanyaan-teks">Perubahan wujud apa yang terjadi?</p>
+              <div
+                class="pilihan-kuis pilihan-eksperimen"
+                data-jawaban-benar="mencair"
+                data-pesan-benar="🎉 Benar! Es yang dipanaskan berubah menjadi air, itu namanya mencair."
+                data-pesan-salah="Belum tepat. Perhatikan lagi: es tadi berubah menjadi apa?"
+              >
+                <button
+                  type="button"
+                  class="opsi-kuis"
+                  data-jawaban="membeku"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="opsi-huruf">A</span
+                  ><span class="opsi-teks">Membeku</span>
+                </button>
+                <button
+                  type="button"
+                  class="opsi-kuis"
+                  data-jawaban="mencair"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="opsi-huruf">B</span
+                  ><span class="opsi-teks">Mencair</span>
+                </button>
+                <button
+                  type="button"
+                  class="opsi-kuis"
+                  data-jawaban="mengembun"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="opsi-huruf">C</span
+                  ><span class="opsi-teks">Mengembun</span>
+                </button>
+                <button
+                  type="button"
+                  class="opsi-kuis"
+                  data-jawaban="mengkristal"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="opsi-huruf">D</span
+                  ><span class="opsi-teks">Mengkristal</span>
+                </button>
+              </div>
+              <p
+                class="umpan-balik"
+                id="umpan-es"
+                role="status"
+                aria-live="polite"
+              ></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== EKSPERIMEN 2: GELAS DINGIN BERKERINGAT ==================== -->
+        <section class="bagian">
+          <div
+            class="aktivitas eksperimen"
+            id="eksperimen-gelas"
+            data-lokasi-progress="gelas"
+          >
+            <div class="eksperimen-kepala">
+              <span class="eksperimen-nomor">2</span>
+              <h2 id="judul-gelas">🥛 Mengapa gelas dingin menjadi basah?</h2>
+              <span class="lencana-selesai" id="lencana-gelas" hidden
+                >✓ Selesai</span
+              >
+            </div>
+            <p class="aktivitas-petunjuk">
+              Ketuk tombol AMATI, lalu perhatikan permukaan luar gelasnya.
+            </p>
+
+            <!-- Panggung: gelas berisi es -->
+            <div class="panggung-eksperimen" id="panggung-gelas">
+              <svg
+                class="eksperimen-svg"
+                viewBox="0 0 200 220"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <!-- gelas -->
+                <path
+                  d="M56 40 H144 L132 190 a8 8 0 0 1 -8 8 H76 a8 8 0 0 1 -8 -8 Z"
+                  fill="#DDF3FF"
+                  stroke="#7CC4FF"
+                  stroke-width="4"
+                />
+                <!-- es di dalam gelas -->
+                <rect
+                  x="78"
+                  y="58"
+                  width="26"
+                  height="26"
+                  rx="5"
+                  fill="#ffffff"
+                  stroke="#BFE3FF"
+                  stroke-width="2"
+                  transform="rotate(-6 91 71)"
+                />
+                <rect
+                  x="98"
+                  y="66"
+                  width="24"
+                  height="24"
+                  rx="5"
+                  fill="#ffffff"
+                  stroke="#BFE3FF"
+                  stroke-width="2"
+                  transform="rotate(8 110 78)"
+                />
+                <rect
+                  x="86"
+                  y="82"
+                  width="24"
+                  height="24"
+                  rx="5"
+                  fill="#eaf7ff"
+                  stroke="#BFE3FF"
+                  stroke-width="2"
+                  transform="rotate(-3 98 94)"
+                />
+                <!-- air dingin di gelas -->
+                <path
+                  d="M60 100 H140 L132 188 a8 8 0 0 1 -8 8 H76 a8 8 0 0 1 -8 -8 Z"
+                  fill="#B7E1FF"
+                  opacity="0.75"
+                />
+
+                <!-- titik-titik air di luar gelas (muncul setelah diamati) -->
+                <g id="titik-embun" hidden>
+                  <circle
+                    class="tetes-embun d1"
+                    cx="50"
+                    cy="90"
+                    r="3.4"
+                    fill="#4FA6F7"
+                  />
+                  <circle
+                    class="tetes-embun d2"
+                    cx="150"
+                    cy="100"
+                    r="3"
+                    fill="#4FA6F7"
+                  />
+                  <circle
+                    class="tetes-embun d3"
+                    cx="46"
+                    cy="120"
+                    r="4"
+                    fill="#4FA6F7"
+                  />
+                  <circle
+                    class="tetes-embun d4"
+                    cx="154"
+                    cy="130"
+                    r="3.6"
+                    fill="#4FA6F7"
+                  />
+                  <circle
+                    class="tetes-embun d5"
+                    cx="52"
+                    cy="150"
+                    r="3"
+                    fill="#4FA6F7"
+                  />
+                  <circle
+                    class="tetes-embun d6"
+                    cx="148"
+                    cy="160"
+                    r="3.4"
+                    fill="#4FA6F7"
+                  />
+                  <path
+                    class="tetes-alir a1"
+                    d="M50 92 q0 10 0 16"
+                    stroke="#4FA6F7"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    fill="none"
+                  />
+                  <path
+                    class="tetes-alir a2"
+                    d="M150 102 q0 10 0 16"
+                    stroke="#4FA6F7"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    fill="none"
+                  />
+                </g>
+              </svg>
+              <p class="eksperimen-label" id="label-gelas" hidden>
+                💧 Mengembun
+              </p>
+            </div>
+
+            <div class="eksperimen-aksi">
+              <button
+                type="button"
+                class="tombol tombol-utama"
+                id="tombol-amati"
+              >
+                🔍 AMATI
+              </button>
+            </div>
+
+            <!-- Pertanyaan (muncul setelah tombol AMATI diklik) -->
+            <div class="pertanyaan-eksperimen" id="pertanyaan-gelas" hidden>
+              <p class="pertanyaan-teks">Perubahan wujud apa yang terjadi?</p>
+              <div
+                class="pilihan-kuis pilihan-eksperimen"
+                data-jawaban-benar="mengembun"
+                data-pesan-benar="🎉 Benar! Udara di sekitar gelas yang dingin berubah menjadi titik-titik air, itu namanya mengembun."
+                data-pesan-salah="Belum tepat. Ingat, titik-titik air itu muncul karena udara di sekitar gelas menjadi dingin."
+              >
+                <button
+                  type="button"
+                  class="opsi-kuis"
+                  data-jawaban="menguap"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="opsi-huruf">A</span
+                  ><span class="opsi-teks">Menguap</span>
+                </button>
+                <button
+                  type="button"
+                  class="opsi-kuis"
+                  data-jawaban="mengembun"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="opsi-huruf">B</span
+                  ><span class="opsi-teks">Mengembun</span>
+                </button>
+                <button
+                  type="button"
+                  class="opsi-kuis"
+                  data-jawaban="mencair"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="opsi-huruf">C</span
+                  ><span class="opsi-teks">Mencair</span>
+                </button>
+                <button
+                  type="button"
+                  class="opsi-kuis"
+                  data-jawaban="membeku"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="opsi-huruf">D</span
+                  ><span class="opsi-teks">Membeku</span>
+                </button>
+              </div>
+              <p
+                class="umpan-balik"
+                id="umpan-gelas"
+                role="status"
+                aria-live="polite"
+              ></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== EKSPERIMEN 3: PAKAIAN BASAH DIJEMUR ==================== -->
+        <section class="bagian">
+          <div
+            class="aktivitas eksperimen"
+            id="eksperimen-pakaian"
+            data-lokasi-progress="pakaian"
+          >
+            <div class="eksperimen-kepala">
+              <span class="eksperimen-nomor">3</span>
+              <h2 id="judul-pakaian">
+                👕 Mengapa pakaian basah menjadi kering?
+              </h2>
+              <span class="lencana-selesai" id="lencana-pakaian" hidden
+                >✓ Selesai</span
+              >
+            </div>
+            <p class="aktivitas-petunjuk">
+              Ketuk tombol JEMUR, lalu perhatikan pakaian di bawah sinar
+              matahari.
+            </p>
+
+            <!-- Panggung: jemuran -->
+            <div class="panggung-eksperimen" id="panggung-pakaian">
+              <svg
+                class="eksperimen-svg"
+                viewBox="0 0 220 200"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <!-- matahari + sinar (muncul saat dijemur) -->
+                <g id="matahari-jemur" hidden>
+                  <circle cx="182" cy="40" r="20" fill="#FFD25A" />
+                  <g
+                    class="sinar"
+                    stroke="#FFC93C"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                  >
+                    <line x1="182" y1="8" x2="182" y2="0" />
+                    <line x1="182" y1="72" x2="182" y2="80" />
+                    <line x1="150" y1="40" x2="142" y2="40" />
+                    <line x1="214" y1="40" x2="222" y2="40" />
+                    <line x1="159" y1="17" x2="153" y2="11" />
+                    <line x1="205" y1="63" x2="211" y2="69" />
+                    <line x1="205" y1="17" x2="211" y2="11" />
+                    <line x1="159" y1="63" x2="153" y2="69" />
+                  </g>
+                </g>
+
+                <!-- tali jemuran -->
+                <line
+                  x1="10"
+                  y1="46"
+                  x2="210"
+                  y2="46"
+                  stroke="#8C6239"
+                  stroke-width="3"
+                />
+                <circle cx="10" cy="46" r="5" fill="#8C6239" />
+                <circle cx="210" cy="46" r="5" fill="#8C6239" />
+
+                <!-- PAKAIAN BASAH (keadaan awal) -->
+                <g id="keadaan-basah">
+                  <path
+                    d="M70 46 v10 l-20 10 v70 a10 10 0 0 0 10 10 h60 a10 10 0 0 0 10 -10 V66 l-20 -10 V46 Z"
+                    fill="#3D8FE0"
+                  />
+                  <path
+                    d="M70 46 q20 14 40 0"
+                    fill="none"
+                    stroke="#2E72B8"
+                    stroke-width="3"
+                  />
+                  <!-- tetesan air menetes -->
+                  <g class="tetes-jemur">
+                    <ellipse cx="55" cy="150" rx="3.4" ry="5" fill="#4FA6F7" />
+                    <ellipse cx="110" cy="158" rx="3.4" ry="5" fill="#4FA6F7" />
+                    <ellipse cx="80" cy="150" rx="3" ry="4.4" fill="#4FA6F7" />
+                  </g>
+                </g>
+
+                <!-- PAKAIAN KERING (keadaan setelah dijemur) -->
+                <g id="keadaan-kering" hidden>
+                  <path
+                    d="M70 46 v10 l-20 10 v70 a10 10 0 0 0 10 10 h60 a10 10 0 0 0 10 -10 V66 l-20 -10 V46 Z"
+                    fill="#7FC4FF"
+                  />
+                  <path
+                    d="M70 46 q20 14 40 0"
+                    fill="none"
+                    stroke="#4FA6F7"
+                    stroke-width="3"
+                  />
+                  <path
+                    d="M60 110 h60 M60 128 h60 M60 146 h48"
+                    stroke="#ffffff"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    opacity="0.6"
+                  />
+                </g>
+              </svg>
+              <p class="eksperimen-label" id="label-pakaian" hidden>
+                ☁️ Menguap
+              </p>
+            </div>
+
+            <div class="eksperimen-aksi">
+              <button
+                type="button"
+                class="tombol tombol-utama"
+                id="tombol-jemur"
+              >
+                ☀️ JEMUR
+              </button>
+            </div>
+
+            <!-- Pertanyaan (muncul setelah tombol JEMUR diklik) -->
+            <div class="pertanyaan-eksperimen" id="pertanyaan-pakaian" hidden>
+              <p class="pertanyaan-teks">
+                Air pada pakaian mengalami perubahan wujud apa?
+              </p>
+              <div
+                class="pilihan-kuis pilihan-eksperimen"
+                data-jawaban-benar="menguap"
+                data-pesan-benar="🎉 Benar! Air pada pakaian berubah menjadi uap karena panas matahari, itu namanya menguap."
+                data-pesan-salah="Belum tepat. Ingat, panas matahari membuat air pada pakaian berubah menjadi gas."
+              >
+                <button
+                  type="button"
+                  class="opsi-kuis"
+                  data-jawaban="mencair"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="opsi-huruf">A</span
+                  ><span class="opsi-teks">Mencair</span>
+                </button>
+                <button
+                  type="button"
+                  class="opsi-kuis"
+                  data-jawaban="menguap"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="opsi-huruf">B</span
+                  ><span class="opsi-teks">Menguap</span>
+                </button>
+                <button
+                  type="button"
+                  class="opsi-kuis"
+                  data-jawaban="membeku"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="opsi-huruf">C</span
+                  ><span class="opsi-teks">Membeku</span>
+                </button>
+                <button
+                  type="button"
+                  class="opsi-kuis"
+                  data-jawaban="mengembun"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="opsi-huruf">D</span
+                  ><span class="opsi-teks">Mengembun</span>
+                </button>
+              </div>
+              <p
+                class="umpan-balik"
+                id="umpan-pakaian"
+                role="status"
+                aria-live="polite"
+              ></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Muncul setelah ketiga eksperimen selesai -->
+        <div
+          class="kotak-selesai kotak-selesai-halaman"
+          id="kotak-selesai"
+          hidden
+        >
+          <p class="selesai-judul">🌟 Semua eksperimen selesai!</p>
+          <p>
+            Kamu sudah mengamati tiga perubahan wujud dengan caramu sendiri.
+          </p>
+          <p class="selesai-info" id="selesai-info"></p>
+        </div>
+
+        <!-- Navigasi -->
+        <nav class="navigasi-materi" aria-label="Navigasi Zona Eksperimen">
+          <a class="tombol tombol-garis" href="peta.html">← Kembali ke Peta</a>
+          <!-- Halaman Arena Game dibuat di langkah berikutnya. data-cek-halaman: js/eksperimen.js memeriksa dulu apakah halamannya ada. -->
+          <a
+            class="tombol tombol-utama"
+            id="tombol-berikutnya"
+            href="game.html"
+            data-cek-halaman
+            data-nama="Arena Game"
+            >Lanjut ke Game →</a
+          >
+        </nav>
+      </div>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p><strong>ZATOPIA</strong> - Petualangan Dunia Zat</p>
+      <p>IPAS Kelas IV SD, materi Wujud, Zat, dan Perubahannya</p>
+    </footer>
+
+    <!-- Pesan singkat untuk halaman yang belum dibuat -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript (urutan penting: main.js dan storage.js dulu, eksperimen.js terakhir) -->
+    <script src="../js/main.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/eksperimen.js"></script>
+  </body>
+</html>

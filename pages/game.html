@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Arena Game - ZATOPIA</title>
+    <meta
+      name="description"
+      content="Arena Game ZATOPIA: tiga mini-game seru — Tangkap Wujud, Pasangkan Perubahan, dan Detektif Zat."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌎</text></svg>"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS umum ZATOPIA -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- CSS halaman materi (hero, kartu, tombol, umpan balik) -->
+    <link rel="stylesheet" href="../css/materi.css" />
+    <!-- CSS khusus Arena Game -->
+    <link rel="stylesheet" href="../css/game.css" />
+  </head>
+  <body>
+    <!-- ==================== NAVIGASI (sama dengan halaman lain) ==================== -->
+    <header class="navbar">
+      <a
+        class="navbar-logo"
+        href="../index.html"
+        aria-label="ZATOPIA, kembali ke Beranda"
+        >🌎 ZATOPIA</a
+      >
+
+      <nav aria-label="Menu utama">
+        <ul class="navbar-menu">
+          <li><a href="../index.html">Beranda</a></li>
+          <li><a href="../index.html#petunjuk">Petunjuk</a></li>
+          <!-- HAPUS data-placeholder setelah pages/tentang.html dibuat -->
+          <li>
+            <a href="tentang.html" data-placeholder="Tentang ZATOPIA"
+              >Tentang</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!--
+    data-tema     : warna halaman ("game")
+    data-lokasi   : kode lokasi di peta, dipakai untuk menyimpan progress
+    data-avatar   : diisi otomatis oleh js/game.js ("zaki" atau "zara")
+  -->
+    <main
+      class="halaman-materi"
+      id="halaman-materi"
+      data-tema="game"
+      data-lokasi="arena-game"
+      data-avatar="zaki"
+    >
+      <!-- ==================== HERO ==================== -->
+      <section class="hero hero-materi">
+        <div class="hero-isi">
+          <a class="tautan-peta" href="peta.html">← Peta ZATOPIA</a>
+
+          <h1 class="judul-materi">🎮 ARENA GAME</h1>
+
+          <!-- Karakter teman belajar -->
+          <div class="teman">
+            <div class="teman-avatar" data-karakter>
+              <img id="avatar-teman" alt="" />
+              <span class="emoji-karakter" id="emoji-teman" aria-hidden="true"
+                >👦</span
+              >
+            </div>
+            <div class="teman-bubble">
+              <p
+                class="teman-teks"
+                id="teman-teks"
+                data-sapa-awal="Siap main tiga game seru"
+              >
+                Siap main tiga game seru!
+              </p>
+            </div>
+          </div>
+
+          <!-- Papan skor keseluruhan -->
+          <div class="papan-skor" id="papan-skor">
+            <span class="papan-skor-item"
+              >🏆 Skor: <strong id="skor-total">0</strong></span
+            >
+            <span class="papan-skor-item papan-skor-benar"
+              >✅ Benar: <strong id="skor-benar">0</strong></span
+            >
+            <span class="papan-skor-item papan-skor-salah"
+              >❌ Salah: <strong id="skor-salah">0</strong></span
+            >
+          </div>
+
+          <p class="progres-game" id="progres-game">Game selesai: 0 dari 3</p>
+        </div>
+
+        <svg
+          class="gelombang"
+          viewBox="0 0 1440 80"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,30 L1440,80 L0,80 Z"
+            fill="#ffffff"
+          />
+        </svg>
+      </section>
+
+      <div class="materi-isi">
+        <!-- ==================== GAME 1: TANGKAP WUJUD ==================== -->
+        <section class="bagian">
+          <div class="aktivitas game" id="game-1">
+            <div class="aktivitas-kepala">
+              <span class="nomor-eksperimen">1</span>
+              <h2>🎯 Tangkap Wujud</h2>
+              <span class="lencana-selesai" id="lencana-1" hidden
+                >✓ Selesai</span
+              >
+            </div>
+            <p class="aktivitas-petunjuk">
+              Perhatikan bendanya, lalu ketuk wujud yang tepat.
+            </p>
+            <p class="hitung-temuan" id="soal-1-hitung">Soal 1 dari 6</p>
+
+            <!-- Panggung benda yang harus ditebak -->
+            <div class="panggung-tangkap" id="panggung-tangkap">
+              <span class="tangkap-ikon" id="tangkap-ikon">🧊</span>
+              <span class="tangkap-nama" id="tangkap-nama">Es batu</span>
+            </div>
+
+            <div class="pilihan-wujud" role="group" aria-label="Pilihan wujud">
+              <button type="button" class="tombol-wujud" data-wujud="padat">
+                <span aria-hidden="true">🧊</span> Padat
+              </button>
+              <button type="button" class="tombol-wujud" data-wujud="cair">
+                <span aria-hidden="true">💧</span> Cair
+              </button>
+              <button type="button" class="tombol-wujud" data-wujud="gas">
+                <span aria-hidden="true">☁️</span> Gas
+              </button>
+            </div>
+
+            <p
+              class="umpan-balik"
+              id="umpan-1"
+              role="status"
+              aria-live="polite"
+            ></p>
+
+            <div class="aksi-lanjut">
+              <button
+                type="button"
+                class="tombol tombol-utama"
+                id="lanjut-1"
+                hidden
+              >
+                Lanjut ▶
+              </button>
+            </div>
+
+            <!-- Muncul setelah 6 soal selesai -->
+            <div class="kotak-selesai" id="selesai-1" hidden>
+              <p class="selesai-judul">🌟 Tangkap Wujud selesai!</p>
+              <p class="selesai-info" id="selesai-1-info"></p>
+              <button type="button" class="tombol tombol-garis" id="ulang-1">
+                🔄 Main lagi
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== GAME 2: PASANGKAN PERUBAHAN ==================== -->
+        <section class="bagian">
+          <div class="aktivitas game" id="game-2">
+            <div class="aktivitas-kepala">
+              <span class="nomor-eksperimen">2</span>
+              <h2>🧩 Pasangkan Perubahan</h2>
+              <span class="lencana-selesai" id="lencana-2" hidden
+                >✓ Selesai</span
+              >
+            </div>
+            <p class="aktivitas-petunjuk">
+              Ketuk sebuah perubahan, lalu ketuk namanya yang tepat. Di
+              komputer, kamu juga bisa menyeretnya.
+            </p>
+            <p class="hitung-temuan" id="hitung-2">
+              Sudah dipasangkan: 0 dari 6
+            </p>
+
+            <div class="papan-pasangkan" id="papan-pasangkan">
+              <!-- Kolom kiri: kartu perubahan (diacak oleh js/game.js) -->
+              <div
+                class="kolom-pasangkan"
+                id="kolom-perubahan"
+                aria-label="Kartu perubahan"
+              ></div>
+              <!-- Kolom kanan: nama perubahan (diacak oleh js/game.js) -->
+              <div
+                class="kolom-pasangkan"
+                id="kolom-nama"
+                aria-label="Nama perubahan"
+              ></div>
+            </div>
+
+            <p
+              class="umpan-balik"
+              id="umpan-2"
+              role="status"
+              aria-live="polite"
+            ></p>
+
+            <!-- Muncul setelah keenam pasangan benar -->
+            <div class="kotak-selesai" id="selesai-2" hidden>
+              <p class="selesai-judul">🌟 Pasangkan Perubahan selesai!</p>
+              <p class="selesai-info" id="selesai-2-info"></p>
+              <button type="button" class="tombol tombol-garis" id="ulang-2">
+                🔄 Main lagi
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== GAME 3: DETEKTIF ZAT ==================== -->
+        <section class="bagian">
+          <div class="aktivitas game" id="game-3">
+            <div class="aktivitas-kepala">
+              <span class="nomor-eksperimen">3</span>
+              <h2>🔎 Detektif Zat</h2>
+              <span class="lencana-selesai" id="lencana-3" hidden
+                >✓ Selesai</span
+              >
+            </div>
+            <p class="aktivitas-petunjuk">
+              Baca kasusnya, lalu tebak perubahan wujud apa yang terjadi.
+            </p>
+            <p class="hitung-temuan" id="kasus-hitung">Kasus 1 dari 4</p>
+
+            <div class="kartu-kasus" id="kartu-kasus">
+              <p class="kasus-label">
+                <span aria-hidden="true">🕵️</span> Kasus
+              </p>
+              <p class="kasus-cerita" id="kasus-cerita">Memuat kasus...</p>
+              <p class="kasus-tanya" id="kasus-tanya">
+                Perubahan wujud apakah yang terjadi?
+              </p>
+            </div>
+
+            <div
+              class="pilihan-kasus"
+              id="pilihan-kasus"
+              role="radiogroup"
+              aria-label="Pilihan jawaban kasus"
+            ></div>
+
+            <p
+              class="umpan-balik"
+              id="umpan-3"
+              role="status"
+              aria-live="polite"
+            ></p>
+
+            <div class="aksi-lanjut">
+              <button
+                type="button"
+                class="tombol tombol-utama"
+                id="lanjut-3"
+                hidden
+              >
+                Kasus berikutnya ▶
+              </button>
+            </div>
+
+            <!-- Muncul setelah keempat kasus selesai -->
+            <div class="kotak-selesai" id="selesai-3" hidden>
+              <p class="selesai-judul">🌟 Detektif Zat selesai!</p>
+              <p class="selesai-info" id="selesai-3-info"></p>
+              <button type="button" class="tombol tombol-garis" id="ulang-3">
+                🔄 Main lagi
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Muncul setelah ketiga game selesai -->
+        <div
+          class="kotak-selesai kotak-selesai-halaman"
+          id="kotak-selesai"
+          hidden
+        >
+          <p class="selesai-judul">🏆 Semua game Arena Game selesai!</p>
+          <p>
+            Kamu sudah bermain sambil belajar tentang wujud dan perubahan zat.
+          </p>
+          <p class="selesai-info" id="selesai-info"></p>
+        </div>
+
+        <!-- Navigasi -->
+        <nav class="navigasi-materi" aria-label="Navigasi Arena Game">
+          <a class="tombol tombol-garis" href="peta.html">← Kembali ke Peta</a>
+          <!-- Halaman Evaluasi dibuat di langkah berikutnya. data-cek-halaman: js/game.js memeriksa dulu apakah halamannya ada. -->
+          <a
+            class="tombol tombol-utama"
+            id="tombol-berikutnya"
+            href="evaluasi.html"
+            data-cek-halaman
+            data-nama="Misi Akhir"
+            >Lanjut ke Evaluasi →</a
+          >
+        </nav>
+      </div>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p><strong>ZATOPIA</strong> - Petualangan Dunia Zat</p>
+      <p>IPAS Kelas IV SD, materi Wujud, Zat, dan Perubahannya</p>
+    </footer>
+
+    <!-- Pesan singkat untuk halaman yang belum dibuat -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript (urutan penting: main.js dan storage.js dulu, game.js terakhir) -->
+    <script src="../js/main.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/game.js"></script>
+  </body>
+</html>

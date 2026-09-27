@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Misi 2: Dunia Cair - ZATOPIA</title>
+    <meta
+      name="description"
+      content="Misi 2 ZATOPIA: kenali zat cair, lihat contohnya, coba simulasi wadah, lalu jawab kuisnya."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌎</text></svg>"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS umum ZATOPIA -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- CSS halaman materi (sama dipakai Dunia Padat) -->
+    <link rel="stylesheet" href="../css/materi.css" />
+    <!-- CSS khusus Dunia Cair (simulasi wadah + kuis) -->
+    <link rel="stylesheet" href="../css/dunia-cair.css" />
+  </head>
+  <body>
+    <!-- ==================== NAVIGASI (sama dengan halaman lain) ==================== -->
+    <header class="navbar">
+      <a
+        class="navbar-logo"
+        href="../index.html"
+        aria-label="ZATOPIA, kembali ke Beranda"
+        >🌎 ZATOPIA</a
+      >
+
+      <nav aria-label="Menu utama">
+        <ul class="navbar-menu">
+          <li><a href="../index.html">Beranda</a></li>
+          <li><a href="../index.html#petunjuk">Petunjuk</a></li>
+          <!-- HAPUS data-placeholder setelah pages/tentang.html dibuat -->
+          <li>
+            <a href="tentang.html" data-placeholder="Tentang ZATOPIA"
+              >Tentang</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!--
+    data-tema     : warna halaman ("cair")
+    data-lokasi   : kode lokasi di peta, dipakai untuk menyimpan progress
+    data-avatar   : diisi otomatis oleh js/dunia-cair.js ("zaki" atau "zara")
+  -->
+    <main
+      class="halaman-materi"
+      id="halaman-materi"
+      data-tema="cair"
+      data-lokasi="danau-cair"
+      data-avatar="zaki"
+    >
+      <!-- ==================== HERO ==================== -->
+      <section class="hero hero-materi">
+        <div class="hero-isi">
+          <a class="tautan-peta" href="peta.html">← Peta ZATOPIA</a>
+
+          <h1 class="judul-materi">💧 MISI 2 — DUNIA CAIR</h1>
+
+          <!-- Karakter teman belajar (gambar: assets/images/karakter/zaki.png / zara.png) -->
+          <div class="teman">
+            <div class="teman-avatar" data-karakter>
+              <img id="avatar-teman" alt="" />
+              <span class="emoji-karakter" id="emoji-teman" aria-hidden="true"
+                >👦</span
+              >
+            </div>
+            <div class="teman-bubble">
+              <p
+                class="teman-teks"
+                id="teman-teks"
+                data-sapa-awal="Ayo temukan keunikan zat cair bersama"
+              >
+                Ayo temukan keunikan zat cair bersama!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <svg
+          class="gelombang"
+          viewBox="0 0 1440 80"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,30 L1440,80 L0,80 Z"
+            fill="#ffffff"
+          />
+        </svg>
+      </section>
+
+      <div class="materi-isi">
+        <!-- 1. Materi -->
+        <section class="bagian" aria-labelledby="judul-materi-cair">
+          <h2 id="judul-materi-cair">Apa itu zat cair?</h2>
+
+          <div class="materi-kartu">
+            <p class="materi-inti">
+              Zat cair memiliki volume tetap, tetapi bentuknya mengikuti wadah.
+            </p>
+          </div>
+
+          <div class="ciri-daftar">
+            <div class="ciri">
+              <span class="ciri-ikon" aria-hidden="true">📦</span>
+              <h3>Volume tetap</h3>
+              <p>
+                Jumlah airnya tidak berubah walau dipindahkan ke wadah lain.
+              </p>
+            </div>
+            <div class="ciri">
+              <span class="ciri-ikon" aria-hidden="true">🌊</span>
+              <h3>Bentuk mengikuti wadah</h3>
+              <p>
+                Zat cair akan mengambil bentuk sesuai wadah yang ditempatinya.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Contoh -->
+        <section class="bagian" aria-labelledby="judul-contoh-cair">
+          <h2 id="judul-contoh-cair">Contoh zat cair</h2>
+
+          <ul class="contoh-daftar">
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">💧</span
+              ><span class="contoh-nama">Air</span>
+            </li>
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">🥛</span
+              ><span class="contoh-nama">Susu</span>
+            </li>
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">🧃</span
+              ><span class="contoh-nama">Jus</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 3. Simulasi wadah -->
+        <section class="bagian">
+          <div class="aktivitas" id="aktivitas-simulasi">
+            <h2 id="judul-simulasi">🧪 Coba Tuang Airnya!</h2>
+            <p class="aktivitas-petunjuk">
+              Ketuk sebuah wadah, lalu perhatikan bentuk airnya.
+            </p>
+
+            <!-- Pilihan wadah -->
+            <div
+              class="wadah-pilihan"
+              role="group"
+              aria-labelledby="judul-simulasi"
+            >
+              <button
+                type="button"
+                class="wadah-tombol"
+                data-wadah="gelas"
+                aria-pressed="false"
+              >
+                <span class="wadah-tombol-ikon" aria-hidden="true">🥛</span
+                ><span class="wadah-tombol-nama">Gelas</span>
+              </button>
+              <button
+                type="button"
+                class="wadah-tombol"
+                data-wadah="mangkuk"
+                aria-pressed="false"
+              >
+                <span class="wadah-tombol-ikon" aria-hidden="true">🥣</span
+                ><span class="wadah-tombol-nama">Mangkuk</span>
+              </button>
+              <button
+                type="button"
+                class="wadah-tombol"
+                data-wadah="botol"
+                aria-pressed="false"
+              >
+                <span class="wadah-tombol-ikon" aria-hidden="true">🧴</span
+                ><span class="wadah-tombol-nama">Botol</span>
+              </button>
+            </div>
+
+            <!-- Panggung simulasi: tempat air "dituang" -->
+            <div class="panggung-air" id="panggung-air">
+              <!-- Tetesan yang muncul sesaat saat berpindah wadah -->
+              <div class="tuang" id="tuang" aria-hidden="true">
+                <span class="tetes t1"></span>
+                <span class="tetes t2"></span>
+                <span class="tetes t3"></span>
+              </div>
+
+              <!-- Keadaan awal: belum ada wadah dipilih -->
+              <p class="panggung-kosong" id="panggung-kosong">
+                👆 Pilih salah satu wadah di atas untuk mulai menuang.
+              </p>
+
+              <!-- GELAS: bentuk trapesium (atas lebih lebar) -->
+              <svg
+                class="wadah-svg"
+                id="wadah-gelas"
+                viewBox="0 0 200 240"
+                hidden
+                aria-hidden="true"
+                focusable="false"
+              >
+                <polygon
+                  points="35,10 165,10 145,230 55,230"
+                  fill="none"
+                  stroke="#7CC4FF"
+                  stroke-width="6"
+                  stroke-linejoin="round"
+                />
+                <clipPath id="klip-gelas">
+                  <polygon points="38,13 162,13 143,227 57,227" />
+                </clipPath>
+                <g clip-path="url(#klip-gelas)">
+                  <rect
+                    id="air-gelas"
+                    x="30"
+                    y="90"
+                    width="140"
+                    height="150"
+                    fill="#4FA6F7"
+                  />
+                  <path
+                    d="M30 90 q35 -10 70 0 t70 0 v4 q-35 10 -70 0 t-70 0 z"
+                    fill="#8BCBFF"
+                  />
+                </g>
+              </svg>
+
+              <!-- MANGKUK: bentuk mangkuk (lebar, dasar melengkung) -->
+              <svg
+                class="wadah-svg"
+                id="wadah-mangkuk"
+                viewBox="0 0 260 180"
+                hidden
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M20 40 Q20 160 130 160 Q240 160 240 40"
+                  fill="none"
+                  stroke="#7CC4FF"
+                  stroke-width="6"
+                  stroke-linecap="round"
+                />
+                <clipPath id="klip-mangkuk">
+                  <path d="M23 42 Q23 156 130 156 Q237 156 237 42 Z" />
+                </clipPath>
+                <g clip-path="url(#klip-mangkuk)">
+                  <rect
+                    id="air-mangkuk"
+                    x="10"
+                    y="90"
+                    width="240"
+                    height="80"
+                    fill="#4FA6F7"
+                  />
+                  <path
+                    d="M10 90 q40 -12 80 0 t80 0 t80 0 v4 q-40 12 -80 0 t-80 0 t-80 0 z"
+                    fill="#8BCBFF"
+                  />
+                </g>
+              </svg>
+
+              <!-- BOTOL: leher sempit + badan lebar -->
+              <svg
+                class="wadah-svg"
+                id="wadah-botol"
+                viewBox="0 0 160 260"
+                hidden
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M65 10 H95 V50 Q130 70 130 110 V230 Q130 250 110 250 H50 Q30 250 30 230 V110 Q30 70 65 50 Z"
+                  fill="none"
+                  stroke="#7CC4FF"
+                  stroke-width="6"
+                  stroke-linejoin="round"
+                />
+                <clipPath id="klip-botol">
+                  <path
+                    d="M68 13 H92 V52 Q127 72 127 110 V230 Q127 247 110 247 H50 Q33 247 33 230 V110 Q33 72 68 52 Z"
+                  />
+                </clipPath>
+                <g clip-path="url(#klip-botol)">
+                  <rect
+                    id="air-botol"
+                    x="20"
+                    y="130"
+                    width="120"
+                    height="120"
+                    fill="#4FA6F7"
+                  />
+                  <path
+                    d="M20 130 q30 -10 60 0 t60 0 v4 q-30 10 -60 0 t-60 0 z"
+                    fill="#8BCBFF"
+                  />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Kuis -->
+        <section class="bagian">
+          <!-- Pesan umpan balik ada di atribut di bawah ini -->
+          <div
+            class="aktivitas"
+            id="aktivitas-kuis"
+            data-pesan-benar="🎉 Betul! Air mengambil bentuk wadahnya, tetapi jumlah airnya tetap sama."
+            data-pesan-salah-a="Coba perhatikan lagi. Saat dipindah ke gelas, mangkuk, atau botol, bentuk airnya ternyata berbeda-beda."
+            data-pesan-salah-c="Airnya tidak menghilang, hanya berpindah bentuk mengikuti wadahnya. Coba lihat lagi simulasi di atas."
+          >
+            <div class="aktivitas-kepala">
+              <h2 id="judul-kuis">❓ Apa yang terjadi pada bentuk air?</h2>
+              <span class="lencana-selesai" id="lencana-selesai" hidden
+                >✓ Sudah selesai</span
+              >
+            </div>
+
+            <p class="aktivitas-petunjuk">
+              Pilih salah satu jawaban di bawah ini.
+            </p>
+
+            <div
+              class="pilihan-kuis"
+              id="pilihan-kuis"
+              role="radiogroup"
+              aria-labelledby="judul-kuis"
+            >
+              <button
+                type="button"
+                class="opsi-kuis"
+                data-jawaban="a"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="opsi-huruf">A</span
+                ><span class="opsi-teks">Tetap sama</span>
+              </button>
+              <button
+                type="button"
+                class="opsi-kuis"
+                data-jawaban="b"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="opsi-huruf">B</span
+                ><span class="opsi-teks">Mengikuti bentuk wadah</span>
+              </button>
+              <button
+                type="button"
+                class="opsi-kuis"
+                data-jawaban="c"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="opsi-huruf">C</span
+                ><span class="opsi-teks">Menghilang</span>
+              </button>
+            </div>
+
+            <!-- Umpan balik langsung (diisi oleh js/dunia-cair.js) -->
+            <p
+              class="umpan-balik"
+              id="umpan-balik"
+              role="status"
+              aria-live="polite"
+            ></p>
+
+            <!-- Muncul setelah menjawab benar -->
+            <div class="kotak-selesai" id="kotak-selesai" hidden>
+              <p class="selesai-judul">🌟 Misi 2 selesai!</p>
+              <p>Kamu sudah memahami sifat zat cair.</p>
+              <p class="selesai-info" id="selesai-info"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Navigasi -->
+        <nav class="navigasi-materi" aria-label="Navigasi misi">
+          <a class="tombol tombol-garis" href="peta.html">← Kembali ke Peta</a>
+          <!-- Halaman Dunia Gas dibuat di langkah berikutnya. data-cek-halaman: js/dunia-cair.js memeriksa dulu apakah halamannya ada. -->
+          <a
+            class="tombol tombol-utama"
+            id="tombol-berikutnya"
+            href="dunia-gas.html"
+            data-cek-halaman
+            data-nama="Dunia Gas"
+            >Materi berikutnya →</a
+          >
+        </nav>
+      </div>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p><strong>ZATOPIA</strong> - Petualangan Dunia Zat</p>
+      <p>IPAS Kelas IV SD, materi Wujud, Zat, dan Perubahannya</p>
+    </footer>
+
+    <!-- Pesan singkat untuk halaman yang belum dibuat -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript (urutan penting: main.js dan storage.js dulu, dunia-cair.js terakhir) -->
+    <script src="../js/main.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/dunia-cair.js"></script>
+  </body>
+</html>

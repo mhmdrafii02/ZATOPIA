@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Misi Akhir: Evaluasi - ZATOPIA</title>
+    <meta
+      name="description"
+      content="Misi Akhir ZATOPIA: 10 soal pilihan ganda untuk menguji pemahamanmu tentang wujud dan perubahan zat."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌎</text></svg>"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS umum ZATOPIA -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- CSS halaman materi (hero, kartu, tombol) -->
+    <link rel="stylesheet" href="../css/materi.css" />
+    <!-- CSS khusus Evaluasi -->
+    <link rel="stylesheet" href="../css/evaluasi.css" />
+  </head>
+  <body>
+    <!-- ==================== NAVIGASI (sama dengan halaman lain) ==================== -->
+    <header class="navbar">
+      <a
+        class="navbar-logo"
+        href="../index.html"
+        aria-label="ZATOPIA, kembali ke Beranda"
+        >🌎 ZATOPIA</a
+      >
+
+      <nav aria-label="Menu utama">
+        <ul class="navbar-menu">
+          <li><a href="../index.html">Beranda</a></li>
+          <li><a href="../index.html#petunjuk">Petunjuk</a></li>
+          <!-- HAPUS data-placeholder setelah pages/tentang.html dibuat -->
+          <li>
+            <a href="tentang.html" data-placeholder="Tentang ZATOPIA"
+              >Tentang</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!--
+    data-tema     : warna halaman ("evaluasi")
+    data-lokasi   : kode lokasi di peta, dipakai untuk menyimpan progress
+    data-avatar   : diisi otomatis oleh js/evaluasi.js ("zaki" atau "zara")
+  -->
+    <main
+      class="halaman-materi"
+      id="halaman-materi"
+      data-tema="evaluasi"
+      data-lokasi="misi-akhir"
+      data-avatar="zaki"
+    >
+      <!-- ==================== HERO ==================== -->
+      <section class="hero hero-materi">
+        <div class="hero-isi">
+          <a class="tautan-peta" href="peta.html">← Peta ZATOPIA</a>
+
+          <h1 class="judul-materi">📝 MISI AKHIR</h1>
+
+          <!-- Karakter pemandu -->
+          <div class="teman">
+            <div class="teman-avatar" data-karakter>
+              <img id="avatar-teman" alt="" />
+              <span class="emoji-karakter" id="emoji-teman" aria-hidden="true"
+                >👦</span
+              >
+            </div>
+            <div class="teman-bubble">
+              <p
+                class="teman-teks"
+                id="teman-teks"
+                data-sapa-awal="Saatnya menguji semua yang sudah kamu pelajari"
+              >
+                Saatnya menguji semua yang sudah kamu pelajari!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <svg
+          class="gelombang"
+          viewBox="0 0 1440 80"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,30 L1440,80 L0,80 Z"
+            fill="#ffffff"
+          />
+        </svg>
+      </section>
+
+      <div class="materi-isi materi-isi-sempit">
+        <!-- ==================== HALAMAN PEMBUKA (sebelum soal dimulai) ==================== -->
+        <section class="bagian" id="layar-pembuka">
+          <div class="kartu-pembuka">
+            <p class="pembuka-ikon" aria-hidden="true">📝</p>
+            <h2>Siap menguji pemahamanmu?</h2>
+            <p class="pembuka-teks">
+              Ada 10 soal pilihan ganda tentang zat, wujudnya, dan perubahannya.
+              Jawab satu per satu, dan setiap jawaban tidak bisa diganti setelah
+              kamu menekan tombol Berikutnya. Jangan khawatir, hasilnya baru
+              terlihat di halaman berikutnya.
+            </p>
+            <button type="button" class="tombol tombol-utama" id="tombol-mulai">
+              🚀 MULAI EVALUASI
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================== LAYAR SOAL (satu soal per tampilan) ==================== -->
+        <section class="bagian" id="layar-soal" hidden>
+          <div class="aktivitas evaluasi">
+            <!-- Progress -->
+            <div class="progres-soal">
+              <p class="progres-soal-teks" id="progres-soal-teks">
+                Soal 1 dari 10
+              </p>
+              <div
+                class="progres-bar"
+                role="progressbar"
+                aria-labelledby="progres-soal-teks"
+                aria-valuemin="0"
+                aria-valuemax="10"
+                aria-valuenow="0"
+                id="progres-soal-bar"
+              >
+                <div class="progres-isi" id="progres-soal-isi"></div>
+              </div>
+            </div>
+
+            <!-- Materi soal (kecil, sebagai penanda topik) -->
+            <p class="topik-soal" id="topik-soal"></p>
+
+            <h2 class="teks-soal" id="teks-soal">Memuat soal...</h2>
+
+            <div
+              class="pilihan-soal"
+              id="pilihan-soal"
+              role="radiogroup"
+              aria-label="Pilihan jawaban"
+            ></div>
+
+            <div class="aksi-soal">
+              <button
+                type="button"
+                class="tombol tombol-utama"
+                id="tombol-berikutnya"
+                disabled
+              >
+                Berikutnya →
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== LAYAR SELESAI (fallback jika hasil.html belum ada) ==================== -->
+        <section class="bagian" id="layar-selesai" hidden>
+          <div class="kartu-pembuka">
+            <p class="pembuka-ikon" aria-hidden="true">🎉</p>
+            <h2>Evaluasi selesai!</h2>
+            <p class="pembuka-teks" id="pesan-selesai">
+              Jawabanmu sudah tersimpan.
+            </p>
+            <div class="aksi-selesai">
+              <a
+                class="tombol tombol-utama"
+                id="tombol-lihat-hasil"
+                href="hasil.html"
+                data-cek-halaman
+                data-nama="Hasil"
+                >🏆 Lihat Hasil</a
+              >
+              <a class="tombol tombol-garis" href="peta.html"
+                >← Kembali ke Peta</a
+              >
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p><strong>ZATOPIA</strong> - Petualangan Dunia Zat</p>
+      <p>IPAS Kelas IV SD, materi Wujud, Zat, dan Perubahannya</p>
+    </footer>
+
+    <!-- Pesan singkat untuk halaman yang belum dibuat -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript (urutan penting: main.js dan storage.js dulu, evaluasi.js terakhir) -->
+    <script src="../js/main.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/evaluasi.js"></script>
+  </body>
+</html>

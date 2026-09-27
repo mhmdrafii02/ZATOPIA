@@ -1,0 +1,337 @@
+/* =====================================================
+   ZATOPIA - Petualangan Dunia Zat
+   File: css/laboratorium.css
+   Tampilan khusus halaman Laboratorium Perubahan Wujud:
+   diagram tiga wujud + enam kartu panah, dan panel detail.
+   Dimuat SETELAH css/style.css dan css/materi.css.
+   ===================================================== */
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- 1. LEGENDA WARNA ---------- */
+.legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-top: 14px;
+}
+.legenda-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--teks-lembut);
+}
+.legenda-titik {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+.legenda-panas {
+  background: #ff8a3d;
+}
+.legenda-dingin {
+  background: #3d9bff;
+}
+
+/* ---------- 2. DIAGRAM ---------- */
+.diagram {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 1 / 0.92;
+  margin: 24px auto 0;
+  --ukuran-titik: clamp(64px, 12vw, 92px);
+}
+
+.diagram-garis {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Tiga wujud zat (Padat, Cair, Gas) */
+.wujud-titik {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+}
+.wujud-titik-ikon {
+  display: grid;
+  place-items: center;
+  width: var(--ukuran-titik);
+  height: var(--ukuran-titik);
+  border-radius: 50%;
+  background: var(--putih);
+  border: 5px solid var(--tema);
+  box-shadow:
+    0 6px 0 var(--tema-garis),
+    0 12px 18px rgba(0, 0, 0, 0.15);
+  font-size: calc(var(--ukuran-titik) * 0.46);
+  line-height: 1;
+}
+.wujud-titik-padat .wujud-titik-ikon {
+  border-color: #5a6fd0;
+}
+.wujud-titik-cair .wujud-titik-ikon {
+  border-color: #2384e0;
+}
+.wujud-titik-gas .wujud-titik-ikon {
+  border-color: #8e5be0;
+}
+
+.wujud-titik-nama {
+  padding: 2px 12px;
+  border-radius: 999px;
+  background: var(--tema-tua);
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: clamp(0.75rem, 1.6vw, 0.95rem);
+  letter-spacing: 0.03em;
+}
+
+/* Enam kartu panah perubahan */
+.kartu-panah {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: clamp(76px, 15vw, 108px);
+  padding: 8px 10px 7px;
+  border: 3px solid #ff8a3d;
+  border-radius: 16px;
+  background: var(--putih);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
+  font-family: var(--font-judul);
+  color: var(--teks);
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.kartu-panah.dingin {
+  border-color: #3d9bff;
+}
+.kartu-panah-ikon {
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  line-height: 1;
+}
+.kartu-panah-nama {
+  font-weight: 700;
+  font-size: clamp(0.72rem, 1.7vw, 0.92rem);
+  white-space: nowrap;
+}
+
+.kartu-panah:hover {
+  transform: translate(-50%, -50%) translateY(-3px) scale(1.05);
+}
+.kartu-panah:focus-visible {
+  outline: 4px solid var(--kuning);
+  outline-offset: 3px;
+}
+.kartu-panah:active {
+  transform: translate(-50%, -50%) scale(0.96);
+}
+
+/* Kartu yang sedang dipilih */
+.kartu-panah.aktif {
+  background: #fff4d6;
+  box-shadow:
+    0 0 0 5px rgba(255, 201, 60, 0.65),
+    0 4px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* Tanda centang kecil untuk kartu yang sudah pernah dibuka */
+.kartu-panah-selesai {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  display: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 3px solid var(--putih);
+  background: var(--hijau);
+  color: var(--putih);
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.kartu-panah.dipelajari .kartu-panah-selesai {
+  display: grid;
+}
+
+/* ---------- 3. PANEL DETAIL ---------- */
+.panel-detail {
+  margin-top: 22px;
+  padding: 22px clamp(16px, 4vw, 30px);
+  border: 3px solid var(--tema-garis);
+  border-radius: 26px;
+  background: var(--tema-muda);
+  min-height: 100px;
+}
+.panel-kosong {
+  text-align: center;
+  font-weight: 700;
+  color: var(--teks-lembut);
+}
+
+.panel-isi {
+  animation: panel-muncul 0.35s ease;
+}
+@keyframes panel-muncul {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.panel-atas {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* Ilustrasi ikon-ke-ikon dengan panah animasi kecil di tengah */
+.panel-ilustrasi {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+  font-size: clamp(2.4rem, 7vw, 3.2rem);
+  line-height: 1;
+}
+.panel-panah {
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  color: var(--tema);
+  animation: panah-gerak 1.4s ease-in-out infinite;
+}
+@keyframes panah-gerak {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+.panel-judul-grup {
+  flex: 1;
+  min-width: 180px;
+}
+.panel-judul {
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  color: var(--tema-tua);
+}
+.panel-arah {
+  margin-top: 2px;
+  font-weight: 700;
+  color: var(--teks-lembut);
+}
+.panel-tanda {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 12px;
+  border-radius: 999px;
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.panel-tanda.panas {
+  background: #ff8a3d;
+}
+.panel-tanda.dingin {
+  background: #3d9bff;
+}
+
+.panel-penjelasan {
+  margin-top: 16px;
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--teks);
+}
+
+.panel-contoh-judul {
+  margin-top: 14px;
+  font-family: var(--font-judul);
+  font-weight: 700;
+  color: var(--tema-tua);
+}
+.panel-contoh-daftar {
+  margin-top: 6px;
+  padding-left: 1.3em;
+  color: var(--teks);
+}
+.panel-contoh-daftar li {
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* ---------- 4. LAYAR KECIL ---------- */
+@media (max-width: 640px) {
+  .diagram {
+    aspect-ratio: 1 / 1.05;
+  }
+  .kartu-panah {
+    min-width: 0;
+    max-width: 84px;
+    padding: 6px 6px 6px;
+    border-radius: 12px;
+  }
+  .kartu-panah-nama {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.1;
+  }
+  .panel-atas {
+    justify-content: center;
+    text-align: center;
+  }
+  .panel-judul-grup {
+    text-align: center;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .diagram {
+    --ukuran-titik: 58px;
+  }
+  .kartu-panah-nama {
+    font-size: 0.68rem;
+  }
+}
+
+/* Hormati pengguna yang tidak nyaman dengan animasi */
+@media (prefers-reduced-motion: reduce) {
+  .panel-isi,
+  .panel-panah {
+    animation: none;
+  }
+  .kartu-panah {
+    transition: none;
+  }
+}

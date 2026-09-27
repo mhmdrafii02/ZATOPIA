@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Identitas Penjelajah - ZATOPIA</title>
+    <meta
+      name="description"
+      content="Tulis namamu dan pilih avatar Penjelajah Zat sebelum memulai petualangan di ZATOPIA."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌎</text></svg>"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Catatan: halaman ini ada di folder pages/, jadi alamat file memakai "../" -->
+    <!-- CSS umum ZATOPIA (sama dengan Beranda) -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- CSS khusus halaman Identitas -->
+    <link rel="stylesheet" href="../css/identitas.css" />
+  </head>
+  <body>
+    <!-- ==================== NAVIGASI (sama dengan Beranda) ==================== -->
+    <header class="navbar">
+      <a
+        class="navbar-logo"
+        href="../index.html"
+        aria-label="ZATOPIA, kembali ke Beranda"
+        >🌎 ZATOPIA</a
+      >
+
+      <nav aria-label="Menu utama">
+        <ul class="navbar-menu">
+          <li><a href="../index.html">Beranda</a></li>
+          <li><a href="../index.html#petunjuk">Petunjuk</a></li>
+          <!-- HAPUS data-placeholder setelah pages/tentang.html dibuat -->
+          <li>
+            <a href="tentang.html" data-placeholder="Tentang ZATOPIA"
+              >Tentang</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero hero-identitas">
+        <div class="hero-isi">
+          <!-- Judul halaman -->
+          <h1 class="judul-identitas">👋 SELAMAT DATANG, PENJELAJAH!</h1>
+
+          <!-- Kartu formulir -->
+          <div class="kartu-identitas">
+            <form id="form-identitas" novalidate>
+              <!-- 1. Nama -->
+              <label class="pertanyaan" for="input-nama">Siapa namamu?</label>
+              <input
+                id="input-nama"
+                class="input-nama"
+                type="text"
+                maxlength="20"
+                placeholder="Masukkan nama"
+                autocomplete="off"
+                enterkeyhint="done"
+              />
+
+              <!-- 2. Avatar -->
+              <fieldset class="avatar-set">
+                <legend class="pertanyaan">Pilih avatarmu!</legend>
+
+                <div class="avatar-pilihan">
+                  <!--
+                  AVATAR ZAKI
+                  Untuk mengganti placeholder dengan gambar Canva:
+                  simpan  assets/images/karakter/zaki.png  (otomatis terpakai).
+                -->
+                  <label class="avatar-kartu avatar-zaki">
+                    <input type="radio" name="avatar" value="zaki" />
+                    <span class="avatar-isi">
+                      <span class="avatar-gambar">
+                        <img src="../assets/images/karakter/zaki.png" alt="" />
+                        <span class="avatar-placeholder" aria-hidden="true"
+                          >👦</span
+                        >
+                      </span>
+                      <span class="avatar-nama">👦 Zaki</span>
+                      <span class="avatar-centang" aria-hidden="true">✓</span>
+                    </span>
+                  </label>
+
+                  <!-- AVATAR ZARA (gambar: assets/images/karakter/zara.png) -->
+                  <label class="avatar-kartu avatar-zara">
+                    <input type="radio" name="avatar" value="zara" />
+                    <span class="avatar-isi">
+                      <span class="avatar-gambar">
+                        <img src="../assets/images/karakter/zara.png" alt="" />
+                        <span class="avatar-placeholder" aria-hidden="true"
+                          >👧</span
+                        >
+                      </span>
+                      <span class="avatar-nama">👧 Zara</span>
+                      <span class="avatar-centang" aria-hidden="true">✓</span>
+                    </span>
+                  </label>
+                </div>
+
+                <!-- Sapaan dari karakter yang dipilih -->
+                <p
+                  class="sapaan-karakter"
+                  id="sapaan-karakter"
+                  aria-live="polite"
+                ></p>
+              </fieldset>
+
+              <!-- Pesan ramah (kalau nama kosong dll.) diisi oleh js/identitas.js -->
+              <p
+                class="pesan-form"
+                id="pesan-form"
+                role="status"
+                aria-live="polite"
+              ></p>
+
+              <!-- Tombol -->
+              <div class="aksi-form">
+                <button type="submit" class="tombol tombol-utama tombol-penuh">
+                  🚀 MULAI
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Tombol kembali -->
+          <div class="aksi-bawah">
+            <a class="tombol tombol-kedua" href="../index.html"
+              >← Kembali ke Beranda</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p><strong>ZATOPIA</strong> - Petualangan Dunia Zat</p>
+      <p>IPAS Kelas IV SD, materi Wujud, Zat, dan Perubahannya</p>
+    </footer>
+
+    <!-- Pesan singkat untuk link yang halamannya belum dibuat -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript (urutan penting: storage.js harus sebelum identitas.js) -->
+    <script src="../js/main.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/identitas.js"></script>
+  </body>
+</html>

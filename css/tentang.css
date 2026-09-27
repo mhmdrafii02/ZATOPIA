@@ -1,0 +1,152 @@
+/* =====================================================
+   ZATOPIA - Petualangan Dunia Zat
+   File: css/tentang.css
+   Halaman Tentang ZATOPIA: gaya lebih formal, bersih,
+   dan profesional dibandingkan halaman materi/game.
+   Dimuat SETELAH css/style.css.
+   ===================================================== */
+
+.halaman-tentang {
+  background: var(--putih);
+}
+
+/* ---------- 1. HERO SEDERHANA (tanpa gelombang/karakter) ---------- */
+.tentang-hero {
+  padding: 140px 20px 56px;
+  background: linear-gradient(135deg, var(--ungu), var(--biru));
+  color: var(--putih);
+  text-align: center;
+}
+.tentang-hero-isi {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.tentang-hero-isi .tautan-peta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 18px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+.tentang-hero-isi .tautan-peta:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+.tentang-hero-isi h1 {
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  letter-spacing: 0.02em;
+}
+.tentang-lead {
+  margin-top: 18px;
+  font-size: clamp(1rem, 2.6vw, 1.15rem);
+  line-height: 1.7;
+  opacity: 0.95;
+}
+
+/* ---------- 2. ISI: BAGIAN-BAGIAN ---------- */
+.tentang-isi {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 20px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.tentang-bagian h2 {
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--ungu-tua, var(--tema-tua));
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eceaf7;
+}
+
+/* ---------- 3. DAFTAR IDENTITAS (dl/dt/dd) ---------- */
+.daftar-identitas {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.daftar-identitas-baris {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 8px 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f0f8;
+}
+.daftar-identitas-baris:last-child {
+  border-bottom: none;
+}
+.daftar-identitas-baris dt {
+  font-weight: 700;
+  color: #6b6785;
+  font-size: 0.96rem;
+}
+.daftar-identitas-baris dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--teks);
+}
+
+/* ---------- 4. PETUNJUK PENGGUNAAN ---------- */
+/* ---------- 4. PETUNJUK PENGGUNAAN ---------- */
+.daftar-petunjuk {
+  counter-reset: langkah-petunjuk;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.daftar-petunjuk li {
+  counter-increment: langkah-petunjuk;
+  position: relative;
+  padding-left: 44px;
+  line-height: 1.65;
+  color: var(--teks);
+}
+.daftar-petunjuk li::before {
+  content: counter(langkah-petunjuk);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--tema, var(--ungu));
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* ---------- 5. LAYAR KECIL ---------- */
+@media (max-width: 560px) {
+  .tentang-hero {
+    padding-top: 120px;
+  }
+  .daftar-identitas-baris {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  .daftar-identitas-baris dt {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+}

@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Peta ZATOPIA - Petualangan Dunia Zat</title>
+    <meta
+      name="description"
+      content="Peta ZATOPIA: pilih lokasi petualanganmu, dari Hutan Zat sampai Balai Penghargaan."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌎</text></svg>"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS umum ZATOPIA -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- CSS khusus halaman Peta -->
+    <link rel="stylesheet" href="../css/peta.css" />
+  </head>
+  <body>
+    <!-- Gambar kecil yang dipakai ulang di peta (pohon, gunung, awan). Tidak tampil sendiri. -->
+    <svg
+      width="0"
+      height="0"
+      style="position: absolute"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <symbol id="s-pohon" viewBox="0 0 40 50">
+          <rect x="17" y="32" width="6" height="16" rx="2" fill="#8C6239" />
+          <circle cx="20" cy="20" r="17" fill="#2FA85F" />
+          <circle cx="13" cy="26" r="10" fill="#3FBF71" />
+        </symbol>
+        <symbol id="s-gunung" viewBox="0 0 100 70">
+          <polygon points="0,70 40,8 62,38 76,22 100,70" fill="#9DB6D9" />
+          <polygon points="40,8 29,29 36,26 42,32 49,25 53,30" fill="#ffffff" />
+        </symbol>
+        <symbol id="s-awan" viewBox="0 0 100 50">
+          <g fill="#ffffff">
+            <circle cx="30" cy="30" r="16" />
+            <circle cx="52" cy="22" r="20" />
+            <circle cx="74" cy="31" r="15" />
+            <rect x="18" y="30" width="68" height="16" rx="8" />
+          </g>
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- ==================== NAVIGASI (sama dengan halaman lain) ==================== -->
+    <header class="navbar">
+      <a
+        class="navbar-logo"
+        href="../index.html"
+        aria-label="ZATOPIA, kembali ke Beranda"
+        >🌎 ZATOPIA</a
+      >
+
+      <nav aria-label="Menu utama">
+        <ul class="navbar-menu">
+          <li><a href="../index.html">Beranda</a></li>
+          <li><a href="../index.html#petunjuk">Petunjuk</a></li>
+          <!-- HAPUS data-placeholder setelah pages/tentang.html dibuat -->
+          <li>
+            <a href="tentang.html" data-placeholder="Tentang ZATOPIA"
+              >Tentang</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero hero-peta">
+        <!-- data-avatar diisi oleh js/peta.js ("zaki" atau "zara") -->
+        <div class="peta-isi" id="peta-isi" data-avatar="zaki">
+          <h1 class="judul-peta">🗺️ PETA ZATOPIA</h1>
+
+          <!-- Sapaan + progress -->
+          <div class="peta-atas">
+            <div class="sapaan-peta">
+              <!-- Avatar siswa (gambar: assets/images/karakter/zaki.png / zara.png) -->
+              <div class="sapaan-avatar" data-karakter>
+                <img id="avatar-sapaan" alt="" />
+                <span
+                  class="emoji-karakter"
+                  id="emoji-sapaan"
+                  aria-hidden="true"
+                  >👦</span
+                >
+              </div>
+              <div class="sapaan-bubble">
+                <p class="sapaan-teks" id="sapaan-teks">
+                  Halo, Penjelajah! Siap melanjutkan petualangan?
+                </p>
+                <a
+                  class="tautan-isi-nama"
+                  id="tautan-isi-nama"
+                  href="identitas.html"
+                  hidden
+                  >✏️ Tulis namamu dulu</a
+                >
+              </div>
+            </div>
+
+            <div class="progress-peta">
+              <p class="progress-teks" id="progress-teks">
+                Progress Petualangan: <strong id="progress-angka">0%</strong>
+              </p>
+              <div
+                class="progress-bar"
+                id="progress-bar"
+                role="progressbar"
+                aria-labelledby="progress-teks"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              >
+                <div class="progress-isi" id="progress-isi"></div>
+              </div>
+              <p class="progress-info" id="progress-info">
+                0 dari 9 lokasi selesai
+              </p>
+            </div>
+          </div>
+
+          <p class="petunjuk-peta">
+            Ikuti jalan bertitik dan klik sebuah lokasi untuk mulai
+            berpetualang!
+          </p>
+
+          <!-- ==================== PETA ==================== -->
+          <div class="peta-bingkai" id="peta">
+            <!-- Latar peta (gambar). Ada dua versi: lebar (laptop/tablet) dan tegak (HP). -->
+            <div class="peta-latar" aria-hidden="true">
+              <!-- VERSI LEBAR -->
+              <svg
+                class="peta-svg peta-svg-lebar"
+                viewBox="0 0 1000 620"
+                preserveAspectRatio="none"
+                xmlns="http://www.w3.org/2000/svg"
+                focusable="false"
+              >
+                <defs>
+                  <linearGradient id="tanah-lebar" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#DDF5E4" />
+                    <stop offset="1" stop-color="#CDEEEE" />
+                  </linearGradient>
+                </defs>
+                <rect width="1000" height="620" fill="url(#tanah-lebar)" />
+
+                <!-- Hutan Zat -->
+                <ellipse cx="100" cy="486" rx="115" ry="105" fill="#BDE8C9" />
+                <use href="#s-pohon" x="6" y="410" width="38" height="48" />
+                <use href="#s-pohon" x="12" y="500" width="38" height="48" />
+                <use href="#s-pohon" x="158" y="405" width="38" height="48" />
+                <use href="#s-pohon" x="166" y="498" width="38" height="48" />
+                <use href="#s-pohon" x="62" y="366" width="38" height="48" />
+
+                <!-- Gunung Es -->
+                <ellipse cx="220" cy="200" rx="135" ry="100" fill="#E4F1FC" />
+                <use href="#s-gunung" x="80" y="110" width="100" height="70" />
+                <use href="#s-gunung" x="285" y="95" width="95" height="66" />
+                <use href="#s-gunung" x="300" y="190" width="70" height="49" />
+                <use href="#s-gunung" x="92" y="206" width="60" height="42" />
+
+                <!-- Danau Cair -->
+                <ellipse cx="380" cy="388" rx="125" ry="88" fill="#6FBBFF" />
+                <ellipse cx="380" cy="388" rx="106" ry="70" fill="#8BCBFF" />
+                <g
+                  fill="none"
+                  stroke="#ffffff"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  opacity="0.85"
+                >
+                  <path d="M282 384 q11 -9 22 0 t22 0" />
+                  <path d="M436 352 q11 -9 22 0 t22 0" />
+                  <path d="M300 432 q11 -9 22 0 t22 0" />
+                </g>
+
+                <!-- Negeri Uap -->
+                <ellipse cx="460" cy="128" rx="125" ry="75" fill="#D8ECFF" />
+                <use href="#s-awan" x="316" y="46" width="90" height="45" />
+                <use href="#s-awan" x="545" y="40" width="80" height="40" />
+                <use href="#s-awan" x="560" y="125" width="72" height="36" />
+                <use href="#s-awan" x="338" y="140" width="70" height="35" />
+
+                <!-- Pusat sains (Laboratorium & Zona Eksperimen) -->
+                <ellipse cx="630" cy="410" rx="160" ry="160" fill="#E9DFFB" />
+                <g fill="#ffffff" opacity="0.9">
+                  <circle cx="520" cy="380" r="5" />
+                  <circle cx="740" cy="430" r="4" />
+                  <circle cx="600" cy="540" r="5" />
+                  <circle cx="690" cy="300" r="4" />
+                </g>
+
+                <!-- Petualangan seru (Game, Misi Akhir, Balai Penghargaan) -->
+                <ellipse cx="850" cy="290" rx="135" ry="200" fill="#FFF1C7" />
+                <g fill="#FFC93C">
+                  <circle cx="800" cy="120" r="5" />
+                  <circle cx="960" cy="330" r="4" />
+                  <circle cx="770" cy="380" r="4" />
+                  <circle cx="950" cy="70" r="5" />
+                </g>
+
+                <!-- Pohon pelengkap -->
+                <use href="#s-pohon" x="472" y="545" width="34" height="43" />
+                <use href="#s-pohon" x="508" y="562" width="34" height="43" />
+                <use href="#s-pohon" x="940" y="540" width="38" height="48" />
+
+                <!-- Jalur perjalanan: jalan putih + titik ungu -->
+                <path
+                  d="M100 484 C120 436 173 215 220 198 C267 182 340 397 380 384 C420 372 427 134 460 124 C493 114 543 260 580 322 C617 384 647 506 680 496 C713 486 747 269 780 260 C813 252 860 467 880 446 C900 426 897 188 900 136"
+                  fill="none"
+                  stroke="#ffffff"
+                  stroke-width="18"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  opacity="0.95"
+                />
+                <path
+                  d="M100 484 C120 436 173 215 220 198 C267 182 340 397 380 384 C420 372 427 134 460 124 C493 114 543 260 580 322 C617 384 647 506 680 496 C713 486 747 269 780 260 C813 252 860 467 880 446 C900 426 897 188 900 136"
+                  fill="none"
+                  stroke="#6C3FC5"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  stroke-dasharray="1 14"
+                />
+              </svg>
+
+              <!-- VERSI TEGAK (HP) -->
+              <svg
+                class="peta-svg peta-svg-tegak"
+                viewBox="0 0 400 1100"
+                preserveAspectRatio="none"
+                xmlns="http://www.w3.org/2000/svg"
+                focusable="false"
+              >
+                <defs>
+                  <linearGradient id="tanah-tegak" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#DDF5E4" />
+                    <stop offset="1" stop-color="#CDEEEE" />
+                  </linearGradient>
+                </defs>
+                <rect width="400" height="1100" fill="url(#tanah-tegak)" />
+
+                <!-- Hutan Zat -->
+                <ellipse cx="110" cy="95" rx="125" ry="80" fill="#BDE8C9" />
+                <use href="#s-pohon" x="8" y="36" width="34" height="43" />
+                <use href="#s-pohon" x="14" y="112" width="34" height="43" />
+                <use href="#s-pohon" x="184" y="48" width="34" height="43" />
+                <use href="#s-pohon" x="196" y="112" width="34" height="43" />
+
+                <!-- Gunung Es -->
+                <ellipse cx="290" cy="205" rx="118" ry="78" fill="#E4F1FC" />
+                <use href="#s-gunung" x="332" y="132" width="58" height="41" />
+                <use href="#s-gunung" x="204" y="214" width="62" height="44" />
+
+                <!-- Danau Cair -->
+                <ellipse cx="108" cy="318" rx="100" ry="62" fill="#6FBBFF" />
+                <ellipse cx="108" cy="318" rx="84" ry="48" fill="#8BCBFF" />
+                <g
+                  fill="none"
+                  stroke="#ffffff"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  opacity="0.85"
+                >
+                  <path d="M34 316 q10 -8 20 0 t20 0" />
+                  <path d="M150 336 q10 -8 20 0 t20 0" />
+                </g>
+
+                <!-- Negeri Uap -->
+                <ellipse cx="292" cy="430" rx="108" ry="66" fill="#D8ECFF" />
+                <use href="#s-awan" x="196" y="372" width="62" height="31" />
+                <use href="#s-awan" x="338" y="384" width="54" height="27" />
+                <use href="#s-awan" x="330" y="470" width="56" height="28" />
+                <use href="#s-awan" x="196" y="456" width="50" height="25" />
+
+                <!-- Pusat sains -->
+                <ellipse cx="200" cy="596" rx="190" ry="122" fill="#E9DFFB" />
+                <g fill="#ffffff" opacity="0.9">
+                  <circle cx="40" cy="600" r="4" />
+                  <circle cx="360" cy="560" r="4" />
+                  <circle cx="190" cy="700" r="4" />
+                  <circle cx="230" cy="520" r="4" />
+                </g>
+
+                <!-- Petualangan seru -->
+                <ellipse cx="200" cy="885" rx="190" ry="170" fill="#FFF1C7" />
+                <g fill="#FFC93C">
+                  <circle cx="30" cy="820" r="4" />
+                  <circle cx="370" cy="960" r="4" />
+                  <circle cx="210" cy="800" r="4" />
+                  <circle cx="220" cy="1040" r="4" />
+                </g>
+
+                <!-- Pohon pelengkap -->
+                <use href="#s-pohon" x="340" y="770" width="34" height="43" />
+                <use href="#s-pohon" x="14" y="1030" width="34" height="43" />
+
+                <!-- Jalur perjalanan -->
+                <path
+                  d="M108 88 C139 106 292 160 292 195 C292 231 108 267 108 302 C108 338 292 374 292 410 C292 446 108 481 108 517 C108 553 292 588 292 624 C292 660 108 696 108 732 C108 767 292 803 292 839 C292 874 139 928 108 946"
+                  fill="none"
+                  stroke="#ffffff"
+                  stroke-width="16"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  opacity="0.95"
+                />
+                <path
+                  d="M108 88 C139 106 292 160 292 195 C292 231 108 267 108 302 C108 338 292 374 292 410 C292 446 108 481 108 517 C108 553 292 588 292 624 C292 660 108 696 108 732 C108 767 292 803 292 839 C292 874 139 928 108 946"
+                  fill="none"
+                  stroke="#6C3FC5"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  stroke-dasharray="1 14"
+                />
+              </svg>
+            </div>
+
+            <!--
+            LOKASI PETA (9 lokasi, berurutan dari awal sampai akhir)
+            - href       : nama file halaman tujuan (akan kita buat di halaman berikutnya)
+            - data-id    : kode lokasi untuk progress (jangan diubah)
+            - --x, --y   : posisi di layar laptop/tablet
+            - --mx, --my : posisi di layar HP
+            Link ke halaman yang belum ada aman: js/peta.js menampilkan pesan, bukan halaman error.
+          -->
+
+            <a
+              class="lokasi lokasi-hutan"
+              href="hutan-zat.html"
+              data-id="hutan-zat"
+              data-nama="Hutan Zat"
+              style="--x: 10%; --y: 78%; --mx: 27%; --my: 8%"
+            >
+              <span class="lokasi-ikon"
+                ><span aria-hidden="true">🌳</span
+                ><span class="lokasi-selesai" aria-hidden="true">✓</span></span
+              >
+              <span class="lokasi-label"
+                >Hutan Zat<small>Kenalan dengan zat</small></span
+              >
+            </a>
+
+            <a
+              class="lokasi lokasi-gunung"
+              href="dunia-padat.html"
+              data-id="gunung-es"
+              data-nama="Gunung Es"
+              style="--x: 22%; --y: 32%; --mx: 73%; --my: 17.75%"
+            >
+              <span class="lokasi-ikon"
+                ><span aria-hidden="true">🧊</span
+                ><span class="lokasi-selesai" aria-hidden="true">✓</span></span
+              >
+              <span class="lokasi-label"
+                >Gunung Es<small>Zat padat</small></span
+              >
+            </a>
+
+            <a
+              class="lokasi lokasi-danau"
+              href="dunia-cair.html"
+              data-id="danau-cair"
+              data-nama="Danau Cair"
+              style="--x: 38%; --y: 62%; --mx: 27%; --my: 27.5%"
+            >
+              <span class="lokasi-ikon"
+                ><span aria-hidden="true">💧</span
+                ><span class="lokasi-selesai" aria-hidden="true">✓</span></span
+              >
+              <span class="lokasi-label"
+                >Danau Cair<small>Zat cair</small></span
+              >
+            </a>
+
+            <a
+              class="lokasi lokasi-uap"
+              href="dunia-gas.html"
+              data-id="negeri-uap"
+              data-nama="Negeri Uap"
+              style="--x: 46%; --y: 20%; --mx: 73%; --my: 37.25%"
+            >
+              <span class="lokasi-ikon"
+                ><span aria-hidden="true">☁️</span
+                ><span class="lokasi-selesai" aria-hidden="true">✓</span></span
+              >
+              <span class="lokasi-label">Negeri Uap<small>Zat gas</small></span>
+            </a>
+
+            <a
+              class="lokasi lokasi-lab"
+              href="laboratorium.html"
+              data-id="laboratorium"
+              data-nama="Laboratorium"
+              style="--x: 58%; --y: 52%; --mx: 27%; --my: 47%"
+            >
+              <span class="lokasi-ikon"
+                ><span aria-hidden="true">🔬</span
+                ><span class="lokasi-selesai" aria-hidden="true">✓</span></span
+              >
+              <span class="lokasi-label"
+                >Laboratorium<small>Perubahan wujud</small></span
+              >
+            </a>
+
+            <a
+              class="lokasi lokasi-eksperimen"
+              href="eksperimen.html"
+              data-id="zona-eksperimen"
+              data-nama="Zona Eksperimen"
+              style="--x: 68%; --y: 80%; --mx: 73%; --my: 56.75%"
+            >
+              <span class="lokasi-ikon"
+                ><span aria-hidden="true">🧪</span
+                ><span class="lokasi-selesai" aria-hidden="true">✓</span></span
+              >
+              <span class="lokasi-label"
+                >Zona Eksperimen<small>Coba sendiri</small></span
+              >
+            </a>
+
+            <a
+              class="lokasi lokasi-game"
+              href="game.html"
+              data-id="arena-game"
+              data-nama="Arena Game"
+              style="--x: 78%; --y: 42%; --mx: 27%; --my: 66.5%"
+            >
+              <span class="lokasi-ikon"
+                ><span aria-hidden="true">🎮</span
+                ><span class="lokasi-selesai" aria-hidden="true">✓</span></span
+              >
+              <span class="lokasi-label"
+                >Arena Game<small>Main game</small></span
+              >
+            </a>
+
+            <a
+              class="lokasi lokasi-misi"
+              href="evaluasi.html"
+              data-id="misi-akhir"
+              data-nama="Misi Akhir"
+              style="--x: 88%; --y: 72%; --mx: 73%; --my: 76.25%"
+            >
+              <span class="lokasi-ikon"
+                ><span aria-hidden="true">📝</span
+                ><span class="lokasi-selesai" aria-hidden="true">✓</span></span
+              >
+              <span class="lokasi-label"
+                >Misi Akhir<small>Kerjakan evaluasi</small></span
+              >
+            </a>
+
+            <a
+              class="lokasi lokasi-balai"
+              href="hasil.html"
+              data-id="balai-penghargaan"
+              data-nama="Balai Penghargaan"
+              style="--x: 90%; --y: 22%; --mx: 27%; --my: 86%"
+            >
+              <span class="lokasi-ikon"
+                ><span aria-hidden="true">🏆</span
+                ><span class="lokasi-selesai" aria-hidden="true">✓</span></span
+              >
+              <span class="lokasi-label"
+                >Balai Penghargaan<small>Hasil dan penghargaan</small></span
+              >
+            </a>
+
+            <!-- Penanda posisi siswa di peta. Dipindahkan oleh js/peta.js ke lokasi berikutnya. -->
+            <span
+              class="pion"
+              id="pion"
+              data-karakter
+              aria-hidden="true"
+              hidden
+            >
+              <img id="avatar-pion" alt="" />
+              <span class="emoji-karakter" id="emoji-pion">👦</span>
+            </span>
+          </div>
+
+          <!-- Tombol di bawah peta -->
+          <div class="aksi-bawah aksi-peta">
+            <a class="tombol tombol-kedua" href="identitas.html"
+              >✏️ Ganti Nama atau Avatar</a
+            >
+            <a class="tombol tombol-kedua" href="../index.html"
+              >← Kembali ke Beranda</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p><strong>ZATOPIA</strong> - Petualangan Dunia Zat</p>
+      <p>IPAS Kelas IV SD, materi Wujud, Zat, dan Perubahannya</p>
+    </footer>
+
+    <!-- Pesan singkat untuk lokasi/halaman yang belum dibuat -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript (urutan penting: main.js dan storage.js dulu, peta.js terakhir) -->
+    <script src="../js/main.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/peta.js"></script>
+  </body>
+</html>

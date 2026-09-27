@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ZATOPIA - Petualangan Dunia Zat</title>
+    <meta
+      name="description"
+      content="ZATOPIA: multimedia pembelajaran interaktif IPAS kelas IV SD tentang wujud zat dan perubahannya."
+    />
+
+    <!-- Ikon tab browser (emoji bumi), tanpa perlu file gambar -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌎</text></svg>"
+    />
+
+    <!-- Font ramah anak dari Google Fonts (butuh internet).
+       Kalau offline, browser otomatis memakai font cadangan di style.css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS utama ZATOPIA -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ==================== NAVIGASI ==================== -->
+    <header class="navbar">
+      <a
+        class="navbar-logo"
+        href="index.html"
+        aria-label="ZATOPIA, kembali ke Beranda"
+        >🌎 ZATOPIA</a
+      >
+
+      <nav aria-label="Menu utama">
+        <ul class="navbar-menu">
+          <li>
+            <a href="index.html" class="aktif" aria-current="page">Beranda</a>
+          </li>
+          <li><a href="#petunjuk">Petunjuk</a></li>
+          <!-- data-placeholder = halaman belum dibuat.
+             Setelah pages/tentang.html jadi, HAPUS atribut data-placeholder pada link ini. -->
+          <li>
+            <a href="pages/tentang.html">Tentang</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ==================== HERO ==================== -->
+      <section class="hero">
+        <div class="hero-isi">
+          <!-- Kolom kiri: teks -->
+          <div class="hero-teks">
+            <h1 class="logo-besar">🌎 ZATOPIA</h1>
+            <p class="subjudul">PETUALANGAN DUNIA ZAT</p>
+
+            <h2 class="salam">Selamat datang di ZATOPIA!</h2>
+            <p class="pengantar">
+              Ayo menjadi Penjelajah Zat dan temukan rahasia wujud serta
+              perubahan zat!
+            </p>
+
+            <div class="tombol-grup">
+              <!-- Tombol utama -> halaman Identitas Siswa (Halaman 2) -->
+              <a class="tombol tombol-utama" href="pages/identitas.html"
+                >🚀 MULAI PETUALANGAN</a
+              >
+
+              <!-- Tombol sekunder -> halaman Tentang (Halaman 13). -->
+              <a class="tombol tombol-kedua" href="pages/tentang.html"
+                >ℹ️ TENTANG ZATOPIA</a
+              >
+            </div>
+          </div>
+
+          <!-- Kolom kanan: ilustrasi dunia ZATOPIA -->
+          <div
+            class="ilustrasi"
+            role="img"
+            aria-label="Dunia kecil ZATOPIA dengan daerah padat, cair, dan gas, bersama Zaki dan Zara"
+          >
+            <!-- Dunia ZATOPIA (gambar SVG, bisa diganti dengan gambar Canva) -->
+            <svg
+              class="dunia"
+              viewBox="0 0 400 400"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <clipPath id="klip-dunia">
+                  <circle cx="200" cy="200" r="140" />
+                </clipPath>
+              </defs>
+
+              <!-- cahaya lembut di belakang dunia -->
+              <circle cx="200" cy="200" r="168" fill="rgba(255,255,255,0.12)" />
+
+              <!-- garis orbit + matahari kecil -->
+              <ellipse
+                cx="200"
+                cy="200"
+                rx="188"
+                ry="48"
+                transform="rotate(-18 200 200)"
+                fill="none"
+                stroke="#FFC93C"
+                stroke-width="4"
+                stroke-dasharray="2 12"
+                stroke-linecap="round"
+              />
+              <circle cx="379" cy="142" r="12" fill="#FFC93C" />
+
+              <!-- isi dunia (dipotong berbentuk bulat) -->
+              <g clip-path="url(#klip-dunia)">
+                <!-- GAS: langit di bagian atas -->
+                <rect x="60" y="60" width="280" height="150" fill="#CFE9FF" />
+                <g fill="#fff">
+                  <circle cx="130" cy="122" r="20" />
+                  <circle cx="156" cy="110" r="26" />
+                  <circle cx="186" cy="124" r="18" />
+                  <rect x="112" y="124" width="88" height="20" rx="10" />
+                </g>
+                <g fill="#fff">
+                  <circle cx="256" cy="92" r="14" />
+                  <circle cx="276" cy="86" r="18" />
+                  <rect x="244" y="92" width="52" height="14" rx="7" />
+                </g>
+                <g fill="none" stroke="#fff" stroke-width="3">
+                  <circle cx="232" cy="160" r="9" />
+                  <circle cx="254" cy="140" r="6" />
+                  <circle cx="214" cy="186" r="5" />
+                </g>
+
+                <!-- PADAT: tanah dan batu di kiri bawah -->
+                <rect x="60" y="210" width="140" height="140" fill="#B98555" />
+                <polygon
+                  points="88,262 118,236 152,262 144,292 98,294"
+                  fill="#8C6239"
+                />
+                <rect
+                  x="150"
+                  y="232"
+                  width="32"
+                  height="32"
+                  rx="6"
+                  fill="#DFF3FF"
+                  stroke="#7CC4FF"
+                  stroke-width="3"
+                  transform="rotate(-10 166 248)"
+                />
+
+                <!-- CAIR: air di kanan bawah -->
+                <rect x="200" y="210" width="140" height="140" fill="#2F9BFF" />
+                <g
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  opacity="0.85"
+                >
+                  <path d="M206 258 q15 -12 30 0 t30 0 t30 0 t30 0" />
+                  <path d="M206 292 q15 -12 30 0 t30 0 t30 0 t30 0" />
+                </g>
+                <path
+                  d="M300 222 c-10 14 -14 20 -14 26 a14 14 0 0 0 28 0 c0 -6 -4 -12 -14 -26z"
+                  fill="#fff"
+                  opacity="0.9"
+                />
+
+                <!-- garis pemisah tiga daerah -->
+                <path
+                  d="M60 210 H340 M200 210 V340"
+                  stroke="#fff"
+                  stroke-width="4"
+                />
+              </g>
+
+              <!-- tepi dunia -->
+              <circle
+                cx="200"
+                cy="200"
+                r="140"
+                fill="none"
+                stroke="#3B1F87"
+                stroke-width="6"
+              />
+            </svg>
+
+            <!-- Kartu zat yang melayang -->
+            <div class="kartu-zat kartu-gas">
+              <span aria-hidden="true">☁️</span> Gas
+            </div>
+            <div class="kartu-zat kartu-padat">
+              <span aria-hidden="true">🧊</span> Padat
+            </div>
+            <div class="kartu-zat kartu-cair">
+              <span aria-hidden="true">💧</span> Cair
+            </div>
+
+            <!--
+            KARAKTER ZAKI & ZARA (placeholder)
+            Cara mengganti dengan gambar Canva:
+            1. Simpan gambar (PNG transparan) di folder  assets/images/karakter/
+            2. Beri nama  zaki.png  dan  zara.png
+            3. Selesai. Placeholder otomatis diganti gambar (tidak perlu ubah kode).
+          -->
+            <figure class="karakter karakter-zaki">
+              <img
+                src="assets/images/karakter/zaki.png"
+                alt="Zaki, penjelajah laki-laki"
+              />
+              <div class="karakter-placeholder" aria-hidden="true">
+                <span class="karakter-emoji">👦</span>
+              </div>
+              <figcaption>Zaki <small>gambar sementara</small></figcaption>
+            </figure>
+
+            <figure class="karakter karakter-zara">
+              <img
+                src="assets/images/karakter/zara.png"
+                alt="Zara, penjelajah perempuan"
+              />
+              <div class="karakter-placeholder" aria-hidden="true">
+                <span class="karakter-emoji">👧</span>
+              </div>
+              <figcaption>Zara <small>gambar sementara</small></figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <!-- Gelombang pemisah menuju area putih -->
+        <svg
+          class="gelombang"
+          viewBox="0 0 1440 80"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,30 L1440,80 L0,80 Z"
+            fill="#ffffff"
+          />
+        </svg>
+      </section>
+
+      <!-- ==================== PETUNJUK ==================== -->
+      <section class="petunjuk" id="petunjuk">
+        <h2>Cara bermain di ZATOPIA</h2>
+        <p class="petunjuk-intro">
+          Ikuti empat langkah ini untuk menyelesaikan petualanganmu.
+        </p>
+
+        <ol class="langkah-daftar">
+          <li class="langkah langkah-1">
+            <span class="nomor">1</span>
+            <h3>Kenalan dulu</h3>
+            <p>Tulis namamu dan pilih Penjelajah Zat yang menemanimu.</p>
+          </li>
+          <li class="langkah langkah-2">
+            <span class="nomor">2</span>
+            <h3>Jelajahi tiga dunia</h3>
+            <p>
+              Kunjungi Dunia Padat, Dunia Cair, dan Dunia Gas di peta ZATOPIA.
+            </p>
+          </li>
+          <li class="langkah langkah-3">
+            <span class="nomor">3</span>
+            <h3>Coba dan bermain</h3>
+            <p>
+              Lakukan eksperimen di laboratorium, lalu tantang dirimu di arena
+              game.
+            </p>
+          </li>
+          <li class="langkah langkah-4">
+            <span class="nomor">4</span>
+            <h3>Cek dan kumpulkan</h3>
+            <p>Kerjakan evaluasi, lihat hasilmu, dan kumpulkan penghargaan.</p>
+          </li>
+        </ol>
+
+        <div class="petunjuk-aksi">
+          <a class="tombol tombol-utama" href="pages/identitas.html"
+            >🚀 MULAI PETUALANGAN</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p><strong>ZATOPIA</strong> - Petualangan Dunia Zat</p>
+      <p>IPAS Kelas IV SD, materi Wujud, Zat, dan Perubahannya</p>
+    </footer>
+
+    <!-- Pesan singkat untuk link yang halamannya belum dibuat -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript utama -->
+    <script src="js/main.js"></script>
+  </body>
+</html>

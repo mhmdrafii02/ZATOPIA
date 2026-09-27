@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Misi 3: Negeri Uap - ZATOPIA</title>
+    <meta
+      name="description"
+      content="Misi 3 ZATOPIA: kenali zat gas, tiup balon, lalu jawab pertanyaannya."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌎</text></svg>"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS umum ZATOPIA -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- CSS halaman materi (sama dipakai Dunia Padat & Dunia Cair) -->
+    <link rel="stylesheet" href="../css/materi.css" />
+    <!-- CSS khusus Dunia Gas (animasi balon + kuis) -->
+    <link rel="stylesheet" href="../css/dunia-gas.css" />
+  </head>
+  <body>
+    <!-- ==================== NAVIGASI (sama dengan halaman lain) ==================== -->
+    <header class="navbar">
+      <a
+        class="navbar-logo"
+        href="../index.html"
+        aria-label="ZATOPIA, kembali ke Beranda"
+        >🌎 ZATOPIA</a
+      >
+
+      <nav aria-label="Menu utama">
+        <ul class="navbar-menu">
+          <li><a href="../index.html">Beranda</a></li>
+          <li><a href="../index.html#petunjuk">Petunjuk</a></li>
+          <!-- HAPUS data-placeholder setelah pages/tentang.html dibuat -->
+          <li>
+            <a href="tentang.html" data-placeholder="Tentang ZATOPIA"
+              >Tentang</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!--
+    data-tema     : warna halaman ("gas")
+    data-lokasi   : kode lokasi di peta, dipakai untuk menyimpan progress
+    data-avatar   : diisi otomatis oleh js/dunia-gas.js ("zaki" atau "zara")
+  -->
+    <main
+      class="halaman-materi"
+      id="halaman-materi"
+      data-tema="gas"
+      data-lokasi="negeri-uap"
+      data-avatar="zaki"
+    >
+      <!-- ==================== HERO ==================== -->
+      <section class="hero hero-materi">
+        <div class="hero-isi">
+          <a class="tautan-peta" href="peta.html">← Peta ZATOPIA</a>
+
+          <h1 class="judul-materi">☁️ MISI 3 — NEGERI UAP</h1>
+
+          <!-- Karakter teman belajar (gambar: assets/images/karakter/zaki.png / zara.png) -->
+          <div class="teman">
+            <div class="teman-avatar" data-karakter>
+              <img id="avatar-teman" alt="" />
+              <span class="emoji-karakter" id="emoji-teman" aria-hidden="true"
+                >👦</span
+              >
+            </div>
+            <div class="teman-bubble">
+              <p
+                class="teman-teks"
+                id="teman-teks"
+                data-sapa-awal="Ayo jelajahi zat gas bersama"
+              >
+                Ayo jelajahi zat gas bersama!
+              </p>
+            </div>
+          </div>
+
+          <!-- Progress kecil di halaman ini -->
+          <div class="progres-mini" id="progres-mini">
+            <p class="progres-mini-teks">
+              Progress Petualangan: <strong id="progres-mini-angka">0/9</strong>
+            </p>
+            <div
+              class="progres-mini-bar"
+              id="progres-mini-bar"
+              role="progressbar"
+              aria-label="Progress Petualangan"
+              aria-valuemin="0"
+              aria-valuemax="9"
+              aria-valuenow="0"
+            >
+              <div class="progres-mini-isi" id="progres-mini-isi"></div>
+            </div>
+          </div>
+        </div>
+
+        <svg
+          class="gelombang"
+          viewBox="0 0 1440 80"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,30 L1440,80 L0,80 Z"
+            fill="#ffffff"
+          />
+        </svg>
+      </section>
+
+      <div class="materi-isi">
+        <!-- 1. Materi -->
+        <section class="bagian" aria-labelledby="judul-materi-gas">
+          <h2 id="judul-materi-gas">Apa itu zat gas?</h2>
+
+          <div class="materi-kartu">
+            <p class="materi-inti">
+              Zat gas tidak memiliki bentuk dan volume yang tetap.
+            </p>
+          </div>
+
+          <div class="ciri-daftar">
+            <div class="ciri">
+              <span class="ciri-ikon" aria-hidden="true">🌬️</span>
+              <h3>Bentuk berubah-ubah</h3>
+              <p>Zat gas mengisi seluruh ruang wadahnya, apa pun bentuknya.</p>
+            </div>
+            <div class="ciri">
+              <span class="ciri-ikon" aria-hidden="true">🎈</span>
+              <h3>Volume berubah-ubah</h3>
+              <p>
+                Zat gas dapat memampat atau melebar mengisi ruang yang tersedia.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Contoh -->
+        <section class="bagian" aria-labelledby="judul-contoh-gas">
+          <h2 id="judul-contoh-gas">Contoh zat gas</h2>
+
+          <ul class="contoh-daftar">
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">💨</span
+              ><span class="contoh-nama">Udara</span>
+            </li>
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">🎈</span
+              ><span class="contoh-nama">Udara dalam balon</span>
+            </li>
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">☁️</span
+              ><span class="contoh-nama">Uap air</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 3. Animasi balon -->
+        <section class="bagian">
+          <div class="aktivitas" id="aktivitas-balon">
+            <h2 id="judul-balon">🎈 Tiup Balonnya!</h2>
+            <p class="aktivitas-petunjuk">
+              Ketuk tombol TIUP beberapa kali dan lihat balonnya membesar.
+            </p>
+
+            <!-- Panggung balon -->
+            <div class="panggung-balon" id="panggung-balon">
+              <!-- Bintang kecil yang muncul saat balon penuh -->
+              <div class="kilau" id="kilau" aria-hidden="true">
+                <span class="bintang b1">✨</span>
+                <span class="bintang b2">✨</span>
+                <span class="bintang b3">✨</span>
+                <span class="bintang b4">✨</span>
+              </div>
+
+              <svg
+                class="balon-svg"
+                id="balon-svg"
+                viewBox="0 0 200 260"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <!-- tali -->
+                <path
+                  d="M100 195 C 90 215, 110 225, 100 245 C 90 260, 110 258, 103 260"
+                  fill="none"
+                  stroke="#8C6239"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                />
+                <!-- simpul -->
+                <polygon points="94,190 106,190 100,200" fill="#E0538A" />
+                <!-- badan balon -->
+                <ellipse
+                  id="balon-badan"
+                  cx="100"
+                  cy="115"
+                  rx="62"
+                  ry="76"
+                  fill="#F2699C"
+                />
+                <!-- kilau cahaya di balon -->
+                <ellipse
+                  cx="76"
+                  cy="80"
+                  rx="14"
+                  ry="20"
+                  fill="#ffffff"
+                  opacity="0.35"
+                />
+              </svg>
+
+              <p class="ukuran-balon" id="ukuran-balon">
+                Balon masih kempis. Ketuk TIUP!
+              </p>
+            </div>
+
+            <div class="aksi-balon">
+              <button
+                type="button"
+                class="tombol tombol-utama"
+                id="tombol-tiup"
+              >
+                🎈 TIUP
+              </button>
+              <button
+                type="button"
+                class="tombol tombol-garis"
+                id="tombol-kempiskan"
+                hidden
+              >
+                🔄 Kempiskan lagi
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Pertanyaan (muncul setelah balon penuh ditiup) -->
+        <section class="bagian" id="bagian-kuis" hidden>
+          <!-- Pesan umpan balik ada di atribut di bawah ini -->
+          <div
+            class="aktivitas"
+            id="aktivitas-kuis"
+            data-pesan-benar="🎉 Betul! Udara memenuhi seluruh ruang balon dan mendorong dindingnya ke segala arah, sehingga balon mengembang."
+            data-pesan-salah-b="Coba perhatikan lagi. Kalau udaranya diam saja, balon tidak akan mengembang saat ditiup."
+            data-pesan-salah-c="Udara tidak berubah menjadi cair di dalam balon. Udara tetap berupa gas, hanya memenuhi ruang balon."
+          >
+            <div class="aktivitas-kepala">
+              <h2 id="judul-kuis">
+                ❓ Apa yang dilakukan udara di dalam balon?
+              </h2>
+              <span class="lencana-selesai" id="lencana-selesai" hidden
+                >✓ Sudah selesai</span
+              >
+            </div>
+
+            <p class="aktivitas-petunjuk">
+              Pilih salah satu jawaban di bawah ini.
+            </p>
+
+            <div
+              class="pilihan-kuis"
+              id="pilihan-kuis"
+              role="radiogroup"
+              aria-labelledby="judul-kuis"
+            >
+              <button
+                type="button"
+                class="opsi-kuis"
+                data-jawaban="a"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="opsi-huruf">A</span
+                ><span class="opsi-teks"
+                  >Memenuhi ruang balon dan mendorong dindingnya</span
+                >
+              </button>
+              <button
+                type="button"
+                class="opsi-kuis"
+                data-jawaban="b"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="opsi-huruf">B</span
+                ><span class="opsi-teks">Diam saja tanpa bergerak</span>
+              </button>
+              <button
+                type="button"
+                class="opsi-kuis"
+                data-jawaban="c"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="opsi-huruf">C</span
+                ><span class="opsi-teks">Berubah menjadi cair</span>
+              </button>
+            </div>
+
+            <!-- Umpan balik langsung (diisi oleh js/dunia-gas.js) -->
+            <p
+              class="umpan-balik"
+              id="umpan-balik"
+              role="status"
+              aria-live="polite"
+            ></p>
+
+            <!-- Muncul setelah menjawab benar -->
+            <div class="kotak-selesai" id="kotak-selesai" hidden>
+              <p class="selesai-judul">🌟 Misi 3 selesai!</p>
+              <p>Kamu sudah memahami sifat zat gas.</p>
+              <p class="selesai-info" id="selesai-info"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Navigasi -->
+        <nav class="navigasi-materi" aria-label="Navigasi misi">
+          <a class="tombol tombol-garis" href="peta.html">← Kembali ke Peta</a>
+          <!-- Halaman Laboratorium dibuat di langkah berikutnya. data-cek-halaman: js/dunia-gas.js memeriksa dulu apakah halamannya ada. -->
+          <a
+            class="tombol tombol-utama"
+            id="tombol-berikutnya"
+            href="laboratorium.html"
+            data-cek-halaman
+            data-nama="Laboratorium"
+            >Materi berikutnya →</a
+          >
+        </nav>
+      </div>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p><strong>ZATOPIA</strong> - Petualangan Dunia Zat</p>
+      <p>IPAS Kelas IV SD, materi Wujud, Zat, dan Perubahannya</p>
+    </footer>
+
+    <!-- Pesan singkat untuk halaman yang belum dibuat -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript (urutan penting: main.js dan storage.js dulu, dunia-gas.js terakhir) -->
+    <script src="../js/main.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/dunia-gas.js"></script>
+  </body>
+</html>

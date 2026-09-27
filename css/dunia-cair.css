@@ -1,0 +1,305 @@
+/* =====================================================
+   ZATOPIA - Petualangan Dunia Zat
+   File: css/dunia-cair.css
+   Tampilan khusus Halaman 6 (Dunia Cair): simulasi wadah
+   dan kuis pilihan ganda. Dimuat SETELAH css/style.css
+   dan css/materi.css, jadi hero, kartu materi, tombol, dan
+   umpan balik memakai yang sudah ada.
+   ===================================================== */
+
+/* Elemen dengan atribut hidden harus benar-benar hilang */
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- 1. PILIHAN WADAH ---------- */
+.wadah-pilihan {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.wadah-tombol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 108px;
+  padding: 16px 18px 12px;
+  border: 4px solid var(--tema-muda);
+  border-radius: 22px;
+  background: var(--putih);
+  box-shadow: 0 5px 0 var(--tema-muda);
+  font-family: var(--font-judul);
+  color: var(--tema-tua);
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.wadah-tombol-ikon {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+.wadah-tombol-nama {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.wadah-tombol:hover {
+  transform: translateY(-3px);
+  border-color: var(--tema);
+}
+.wadah-tombol:focus-visible {
+  outline: 4px solid var(--kuning);
+  outline-offset: 3px;
+}
+.wadah-tombol[aria-pressed="true"] {
+  border-color: var(--tema);
+  background: var(--tema-muda);
+  box-shadow:
+    0 0 0 5px rgba(255, 201, 60, 0.6),
+    0 5px 0 var(--tema-garis);
+  transform: translateY(-3px);
+}
+
+/* ---------- 2. PANGGUNG SIMULASI ---------- */
+.panggung-air {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  margin-top: 22px;
+  padding: 20px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #eaf6ff, #d9edff);
+  border: 3px solid var(--tema-garis);
+  overflow: hidden;
+}
+
+.panggung-kosong {
+  max-width: 26em;
+  text-align: center;
+  font-weight: 700;
+  color: var(--teks-lembut);
+}
+
+.wadah-svg {
+  width: auto;
+  height: clamp(190px, 34vw, 240px);
+  animation: muncul-wadah 0.4s ease;
+}
+
+@keyframes muncul-wadah {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Permukaan air "bergoyang" pelan supaya terasa cair */
+#air-gelas,
+#air-mangkuk,
+#air-botol {
+  animation: goyang-air 2.6s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+@keyframes goyang-air {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Efek "menuang": beberapa tetes air jatuh sesaat saat wadah berganti */
+.tuang {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  pointer-events: none;
+}
+.tetes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 14px;
+  border-radius: 50% 50% 50% 0;
+  background: #4fa6f7;
+  opacity: 0;
+  transform: rotate(45deg);
+}
+/* Kelas ".menuang" dipasang sebentar oleh JavaScript untuk memutar animasi */
+.tuang.menuang .t1 {
+  animation: jatuh 0.5s ease-in 0s;
+}
+.tuang.menuang .t2 {
+  animation: jatuh 0.5s ease-in 0.08s;
+  left: 10px;
+}
+.tuang.menuang .t3 {
+  animation: jatuh 0.5s ease-in 0.16s;
+  left: -10px;
+}
+
+@keyframes jatuh {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) rotate(45deg);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(120px) rotate(45deg);
+  }
+}
+
+/* ---------- 3. KUIS ---------- */
+.pilihan-kuis {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 480px;
+  margin: 18px auto 0;
+}
+
+.opsi-kuis {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  border: 3px solid var(--tema-muda);
+  border-radius: 18px;
+  background: var(--putih);
+  box-shadow: 0 4px 0 var(--tema-muda);
+  font-family: var(--font-judul);
+  font-size: 1.15rem;
+  color: var(--teks);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.opsi-huruf {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--tema-muda);
+  color: var(--tema-tua);
+  font-weight: 700;
+}
+.opsi-kuis:hover {
+  transform: translateY(-2px);
+  border-color: var(--tema);
+}
+.opsi-kuis:focus-visible {
+  outline: 4px solid var(--kuning);
+  outline-offset: 3px;
+}
+
+/* Opsi yang sudah dipilih tidak bisa dipilih lagi setelah benar */
+.opsi-kuis[aria-disabled="true"] {
+  cursor: default;
+}
+.opsi-kuis[aria-disabled="true"]:hover {
+  transform: none;
+}
+
+/* Jawaban benar: hijau + centang */
+.opsi-kuis.benar {
+  border-color: var(--hijau);
+  background: #e6f8ee;
+}
+.opsi-kuis.benar .opsi-huruf {
+  background: var(--hijau);
+  color: var(--putih);
+}
+.opsi-kuis.benar::after {
+  content: "✓";
+  margin-left: auto;
+  color: var(--hijau);
+  font-weight: 800;
+  font-size: 1.3rem;
+}
+
+/* Jawaban yang sedang dicoba dan belum tepat (kuning lembut, ramah) */
+.opsi-kuis.salah {
+  border-color: var(--kuning-tua);
+  background: #fff4d6;
+  animation: goyang-opsi 0.4s ease;
+}
+.opsi-kuis.salah::after {
+  content: "✕";
+  margin-left: auto;
+  color: var(--kuning-tua);
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+@keyframes goyang-opsi {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* ---------- 4. LAYAR KECIL ---------- */
+@media (max-width: 560px) {
+  .wadah-tombol {
+    min-width: 96px;
+    padding: 14px 12px 10px;
+  }
+  .panggung-air {
+    min-height: 240px;
+  }
+  .opsi-kuis {
+    font-size: 1.05rem;
+    padding: 12px 16px;
+  }
+}
+
+/* Hormati pengguna yang tidak nyaman dengan animasi */
+@media (prefers-reduced-motion: reduce) {
+  .wadah-svg,
+  #air-gelas,
+  #air-mangkuk,
+  #air-botol,
+  .tuang.menuang .t1,
+  .tuang.menuang .t2,
+  .tuang.menuang .t3,
+  .opsi-kuis.salah {
+    animation: none;
+  }
+  .wadah-tombol,
+  .opsi-kuis {
+    transition: none;
+  }
+}

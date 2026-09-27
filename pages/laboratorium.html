@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Laboratorium Perubahan Wujud - ZATOPIA</title>
+    <meta
+      name="description"
+      content="Laboratorium ZATOPIA: pelajari enam perubahan wujud zat lewat diagram interaktif — mencair, membeku, menguap, mengembun, menyublim, dan mengkristal."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌎</text></svg>"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS umum ZATOPIA -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- CSS halaman materi (hero, kartu, tombol, umpan balik) -->
+    <link rel="stylesheet" href="../css/materi.css" />
+    <!-- CSS khusus Laboratorium (diagram perubahan wujud) -->
+    <link rel="stylesheet" href="../css/laboratorium.css" />
+  </head>
+  <body>
+    <!-- ==================== NAVIGASI (sama dengan halaman lain) ==================== -->
+    <header class="navbar">
+      <a
+        class="navbar-logo"
+        href="../index.html"
+        aria-label="ZATOPIA, kembali ke Beranda"
+        >🌎 ZATOPIA</a
+      >
+
+      <nav aria-label="Menu utama">
+        <ul class="navbar-menu">
+          <li><a href="../index.html">Beranda</a></li>
+          <li><a href="../index.html#petunjuk">Petunjuk</a></li>
+          <!-- HAPUS data-placeholder setelah pages/tentang.html dibuat -->
+          <li>
+            <a href="tentang.html" data-placeholder="Tentang ZATOPIA"
+              >Tentang</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!--
+    data-tema     : warna halaman ("lab")
+    data-lokasi   : kode lokasi di peta, dipakai untuk menyimpan progress
+    data-avatar   : diisi otomatis oleh js/laboratorium.js ("zaki" atau "zara")
+  -->
+    <main
+      class="halaman-materi"
+      id="halaman-materi"
+      data-tema="lab"
+      data-lokasi="laboratorium"
+      data-avatar="zaki"
+    >
+      <!-- ==================== HERO ==================== -->
+      <section class="hero hero-materi">
+        <div class="hero-isi">
+          <a class="tautan-peta" href="peta.html">← Peta ZATOPIA</a>
+
+          <h1 class="judul-materi">🔬 LABORATORIUM PERUBAHAN WUJUD</h1>
+
+          <!-- Karakter pemandu. Teksnya berubah mengikuti kartu yang diklik (js/laboratorium.js) -->
+          <div class="teman">
+            <div class="teman-avatar" data-karakter>
+              <img id="avatar-teman" alt="" />
+              <span class="emoji-karakter" id="emoji-teman" aria-hidden="true"
+                >👦</span
+              >
+            </div>
+            <div class="teman-bubble">
+              <p
+                class="teman-teks"
+                id="teman-teks"
+                data-sapa-awal="Selamat datang di laboratorium"
+              >
+                Selamat datang di laboratorium!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <svg
+          class="gelombang"
+          viewBox="0 0 1440 80"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,30 L1440,80 L0,80 Z"
+            fill="#ffffff"
+          />
+        </svg>
+      </section>
+
+      <div class="materi-isi">
+        <!-- 1. Pengantar -->
+        <section class="bagian" aria-labelledby="judul-pengantar">
+          <h2 id="judul-pengantar">Mengapa zat bisa berubah wujud?</h2>
+          <div class="materi-kartu">
+            <p class="materi-inti">
+              Zat dapat mengalami perubahan wujud karena adanya perubahan
+              kondisi, misalnya pemanasan atau pendinginan.
+            </p>
+          </div>
+
+          <!-- Keterangan warna kartu -->
+          <div class="legenda">
+            <span class="legenda-item"
+              ><span class="legenda-titik legenda-panas"></span> 🔥 Karena
+              dipanaskan</span
+            >
+            <span class="legenda-item"
+              ><span class="legenda-titik legenda-dingin"></span> ❄️ Karena
+              didinginkan</span
+            >
+          </div>
+        </section>
+
+        <!-- 2. Diagram perubahan wujud -->
+        <section class="bagian">
+          <div class="aktivitas" id="aktivitas-diagram">
+            <h2 id="judul-diagram">🧭 Diagram Perubahan Wujud</h2>
+            <p class="aktivitas-petunjuk">
+              Ketuk salah satu panah untuk mempelajari perubahannya.
+            </p>
+            <p class="hitung-temuan" id="hitung-dipelajari">
+              Sudah dipelajari: 0 dari 6
+            </p>
+
+            <!-- Diagram: tiga wujud + enam kartu panah perubahan -->
+            <div class="diagram" id="diagram">
+              <!-- Garis penghubung (hiasan, tidak bisa diklik) -->
+              <svg
+                class="diagram-garis"
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <line
+                  x1="14"
+                  y1="84"
+                  x2="50"
+                  y2="10"
+                  stroke="#c9d6e6"
+                  stroke-width="1.6"
+                  stroke-dasharray="2 2.4"
+                />
+                <line
+                  x1="50"
+                  y1="10"
+                  x2="86"
+                  y2="84"
+                  stroke="#c9d6e6"
+                  stroke-width="1.6"
+                  stroke-dasharray="2 2.4"
+                />
+                <line
+                  x1="14"
+                  y1="84"
+                  x2="86"
+                  y2="84"
+                  stroke="#c9d6e6"
+                  stroke-width="1.6"
+                  stroke-dasharray="2 2.4"
+                />
+              </svg>
+
+              <!-- Tiga wujud zat -->
+              <div
+                class="wujud-titik wujud-titik-padat"
+                style="--x: 14%; --y: 84%"
+              >
+                <span class="wujud-titik-ikon" aria-hidden="true">🧊</span
+                ><span class="wujud-titik-nama">PADAT</span>
+              </div>
+              <div
+                class="wujud-titik wujud-titik-cair"
+                style="--x: 50%; --y: 10%"
+              >
+                <span class="wujud-titik-ikon" aria-hidden="true">💧</span
+                ><span class="wujud-titik-nama">CAIR</span>
+              </div>
+              <div
+                class="wujud-titik wujud-titik-gas"
+                style="--x: 86%; --y: 84%"
+              >
+                <span class="wujud-titik-ikon" aria-hidden="true">☁️</span
+                ><span class="wujud-titik-nama">GAS</span>
+              </div>
+
+              <!--
+              Enam kartu perubahan. data-id dipakai untuk menghitung "sudah dipelajari".
+              Detail lengkap (penjelasan, contoh, kalimat karakter) ada di js/laboratorium.js
+              supaya HTML tetap ringkas — cari DATA_PERUBAHAN di file itu untuk mengubah teksnya.
+            -->
+              <button
+                type="button"
+                class="kartu-panah panas"
+                data-id="mencair"
+                style="--x: 24%; --y: 40%"
+              >
+                <span class="kartu-panah-ikon" aria-hidden="true">🧊➜💧</span>
+                <span class="kartu-panah-nama">Mencair</span>
+                <span class="kartu-panah-selesai" aria-hidden="true">✓</span>
+              </button>
+
+              <button
+                type="button"
+                class="kartu-panah dingin"
+                data-id="membeku"
+                style="--x: 36%; --y: 58%"
+              >
+                <span class="kartu-panah-ikon" aria-hidden="true">💧➜🧊</span>
+                <span class="kartu-panah-nama">Membeku</span>
+                <span class="kartu-panah-selesai" aria-hidden="true">✓</span>
+              </button>
+
+              <button
+                type="button"
+                class="kartu-panah panas"
+                data-id="menguap"
+                style="--x: 76%; --y: 40%"
+              >
+                <span class="kartu-panah-ikon" aria-hidden="true">💧➜☁️</span>
+                <span class="kartu-panah-nama">Menguap</span>
+                <span class="kartu-panah-selesai" aria-hidden="true">✓</span>
+              </button>
+
+              <button
+                type="button"
+                class="kartu-panah dingin"
+                data-id="mengembun"
+                style="--x: 64%; --y: 58%"
+              >
+                <span class="kartu-panah-ikon" aria-hidden="true">☁️➜💧</span>
+                <span class="kartu-panah-nama">Mengembun</span>
+                <span class="kartu-panah-selesai" aria-hidden="true">✓</span>
+              </button>
+
+              <button
+                type="button"
+                class="kartu-panah panas"
+                data-id="menyublim"
+                style="--x: 38%; --y: 92%"
+              >
+                <span class="kartu-panah-ikon" aria-hidden="true">🧊➜☁️</span>
+                <span class="kartu-panah-nama">Menyublim</span>
+                <span class="kartu-panah-selesai" aria-hidden="true">✓</span>
+              </button>
+
+              <button
+                type="button"
+                class="kartu-panah dingin"
+                data-id="mengkristal"
+                style="--x: 62%; --y: 92%"
+              >
+                <span class="kartu-panah-ikon" aria-hidden="true">☁️➜🧊</span>
+                <span class="kartu-panah-nama">Mengkristal</span>
+                <span class="kartu-panah-selesai" aria-hidden="true">✓</span>
+              </button>
+            </div>
+
+            <!-- Panel detail (diisi oleh js/laboratorium.js saat kartu diklik) -->
+            <div class="panel-detail" id="panel-detail">
+              <p class="panel-kosong" id="panel-kosong">
+                👆 Pilih salah satu panah di diagram untuk melihat
+                penjelasannya.
+              </p>
+            </div>
+
+            <!-- Muncul setelah keenam perubahan dipelajari -->
+            <div class="kotak-selesai" id="kotak-selesai" hidden>
+              <p class="selesai-judul">
+                🌟 Kamu sudah mempelajari semua perubahan wujud!
+              </p>
+              <p class="selesai-info" id="selesai-info"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Navigasi -->
+        <nav class="navigasi-materi" aria-label="Navigasi laboratorium">
+          <a class="tombol tombol-garis" href="peta.html">← Kembali ke Peta</a>
+          <!-- Halaman Eksperimen dibuat di langkah berikutnya. data-cek-halaman: js/laboratorium.js memeriksa dulu apakah halamannya ada. -->
+          <a
+            class="tombol tombol-utama"
+            id="tombol-berikutnya"
+            href="eksperimen.html"
+            data-cek-halaman
+            data-nama="Zona Eksperimen"
+            >Lanjut ke Eksperimen →</a
+          >
+        </nav>
+      </div>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p><strong>ZATOPIA</strong> - Petualangan Dunia Zat</p>
+      <p>IPAS Kelas IV SD, materi Wujud, Zat, dan Perubahannya</p>
+    </footer>
+
+    <!-- Pesan singkat untuk halaman yang belum dibuat -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript (urutan penting: main.js dan storage.js dulu, laboratorium.js terakhir) -->
+    <script src="../js/main.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/laboratorium.js"></script>
+  </body>
+</html>

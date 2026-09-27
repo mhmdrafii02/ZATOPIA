@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hutan Zat - ZATOPIA</title>
+    <meta
+      name="description"
+      content="Hutan Zat: kenali zat di sekitarmu, temukan benda yang termasuk zat, dan kelompokkan zat padat, cair, dan gas."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌎</text></svg>"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS umum ZATOPIA -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- CSS halaman materi (kartu, aktivitas, umpan balik) -->
+    <link rel="stylesheet" href="../css/materi.css" />
+    <!-- CSS khusus Hutan Zat -->
+    <link rel="stylesheet" href="../css/hutan-zat.css" />
+  </head>
+  <body>
+    <!-- Gambar kecil yang dipakai ulang di hutan (pohon, awan). Tidak tampil sendiri. -->
+    <svg
+      width="0"
+      height="0"
+      style="position: absolute"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <symbol id="s-pohon" viewBox="0 0 40 50">
+          <rect x="17" y="32" width="6" height="16" rx="2" fill="#8C6239" />
+          <circle cx="20" cy="20" r="17" fill="#2FA85F" />
+          <circle cx="13" cy="26" r="10" fill="#3FBF71" />
+        </symbol>
+        <symbol id="s-awan" viewBox="0 0 100 50">
+          <g fill="#ffffff">
+            <circle cx="30" cy="30" r="16" />
+            <circle cx="52" cy="22" r="20" />
+            <circle cx="74" cy="31" r="15" />
+            <rect x="18" y="30" width="68" height="16" rx="8" />
+          </g>
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- ==================== NAVIGASI (sama dengan halaman lain) ==================== -->
+    <header class="navbar">
+      <a
+        class="navbar-logo"
+        href="../index.html"
+        aria-label="ZATOPIA, kembali ke Beranda"
+        >🌎 ZATOPIA</a
+      >
+
+      <nav aria-label="Menu utama">
+        <ul class="navbar-menu">
+          <li><a href="../index.html">Beranda</a></li>
+          <li><a href="../index.html#petunjuk">Petunjuk</a></li>
+          <!-- HAPUS data-placeholder setelah pages/tentang.html dibuat -->
+          <li>
+            <a href="tentang.html" data-placeholder="Tentang ZATOPIA"
+              >Tentang</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!--
+    data-tema   : warna halaman ("hutan" = hijau)
+    data-lokasi : kode lokasi di peta, dipakai untuk menyimpan progress
+  -->
+    <main
+      class="halaman-materi"
+      id="halaman-materi"
+      data-tema="hutan"
+      data-lokasi="hutan-zat"
+    >
+      <!-- ==================== BAGIAN 1 + 2: HEADER & HERO ==================== -->
+      <section class="hero hero-hutan">
+        <!-- Header halaman: tombol kembali, sapaan, progress -->
+        <div class="kepala-halaman">
+          <a class="tombol-kecil" href="peta.html">🗺️ Kembali ke Peta</a>
+          <p class="sapaan-siswa" id="sapaan-siswa">Halo, Penjelajah! 🌟</p>
+          <div class="progres-kepala">
+            <p class="progres-kepala-teks">
+              Progress ZATOPIA: <strong id="progres-kepala-angka">0/9</strong>
+            </p>
+            <div
+              class="progres-bar progres-bar-kecil"
+              id="progres-kepala-bar"
+              role="progressbar"
+              aria-label="Progress ZATOPIA"
+              aria-valuemin="0"
+              aria-valuemax="9"
+              aria-valuenow="0"
+            >
+              <div class="progres-isi" id="progres-kepala-isi"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-isi">
+          <div class="hero-teks">
+            <h1 class="judul-hutan">🌳 HUTAN ZAT</h1>
+            <p class="subjudul">Yuk, kenali zat yang ada di sekitarmu!</p>
+            <p class="salam-hutan">Selamat datang di Hutan Zat!</p>
+
+            <!-- Dialog Zaki -->
+            <div class="dialog">
+              <p class="dialog-nama">👦 Zaki</p>
+              <p class="dialog-teks">
+                Hai, Penjelajah! Sebelum melanjutkan perjalanan, yuk kita kenali
+                dulu apa itu zat!
+              </p>
+            </div>
+
+            <!-- Menggulir halus ke bagian materi -->
+            <a class="tombol tombol-utama" href="#bagian-materi"
+              >🌿 MULAI MENJELAJAH</a
+            >
+          </div>
+
+          <!-- Ilustrasi Hutan Zat dengan Zaki dan Zara -->
+          <div
+            class="panggung"
+            role="img"
+            aria-label="Hutan Zat: Zaki dan Zara berdiri di hutan yang penuh benda seperti balon, awan, buah, es, dan botol"
+          >
+            <div class="panggung-latar" aria-hidden="true">
+              <svg
+                viewBox="0 0 500 400"
+                preserveAspectRatio="none"
+                xmlns="http://www.w3.org/2000/svg"
+                focusable="false"
+              >
+                <defs>
+                  <linearGradient
+                    id="langit-panggung"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop offset="0" stop-color="#BFE3FF" />
+                    <stop offset="1" stop-color="#EAF7FF" />
+                  </linearGradient>
+                </defs>
+                <rect width="500" height="400" fill="url(#langit-panggung)" />
+                <circle cx="440" cy="60" r="46" fill="#FFE08A" opacity="0.55" />
+                <circle cx="440" cy="60" r="30" fill="#FFD25A" />
+                <use href="#s-awan" x="150" y="40" width="90" height="45" />
+                <path
+                  d="M0 210 Q100 150 200 200 T400 190 T500 170 L500 400 L0 400 Z"
+                  fill="#A6E3BC"
+                />
+                <path
+                  d="M0 260 Q140 220 270 255 T500 240 L500 400 L0 400 Z"
+                  fill="#6FCB8F"
+                />
+                <path
+                  d="M0 320 Q150 290 300 315 T500 305 L500 400 L0 400 Z"
+                  fill="#58BD7B"
+                />
+                <path
+                  d="M180 410 C210 360 300 350 330 320 S430 300 520 290"
+                  fill="none"
+                  stroke="#5BB0F5"
+                  stroke-width="44"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M180 410 C210 360 300 350 330 320 S430 300 520 290"
+                  fill="none"
+                  stroke="#8BCBFF"
+                  stroke-width="30"
+                  stroke-linecap="round"
+                />
+                <use href="#s-pohon" x="40" y="170" width="60" height="75" />
+                <use href="#s-pohon" x="130" y="200" width="46" height="58" />
+                <use href="#s-pohon" x="390" y="160" width="64" height="80" />
+                <use href="#s-pohon" x="330" y="215" width="44" height="55" />
+                <ellipse cx="250" cy="372" rx="26" ry="14" fill="#9AA3B5" />
+              </svg>
+            </div>
+
+            <!-- Benda-benda yang melayang pelan -->
+            <span class="melayang melayang-1" aria-hidden="true">🎈</span>
+            <span class="melayang melayang-2" aria-hidden="true">☁️</span>
+            <span class="melayang melayang-3" aria-hidden="true">🍎</span>
+            <span class="melayang melayang-4" aria-hidden="true">🧊</span>
+            <span class="melayang melayang-5" aria-hidden="true">🧴</span>
+
+            <!--
+            KARAKTER ZAKI & ZARA (placeholder)
+            Untuk mengganti dengan gambar Canva, simpan di assets/images/karakter/
+            dengan nama zaki.png dan zara.png. Placeholder otomatis diganti.
+          -->
+            <figure class="karakter karakter-zaki">
+              <img
+                src="../assets/images/karakter/zaki.png"
+                alt="Zaki, penjelajah laki-laki"
+              />
+              <div class="karakter-placeholder" aria-hidden="true">
+                <span class="karakter-emoji">👦</span>
+              </div>
+              <figcaption>Zaki <small>gambar sementara</small></figcaption>
+            </figure>
+            <figure class="karakter karakter-zara">
+              <img
+                src="../assets/images/karakter/zara.png"
+                alt="Zara, penjelajah perempuan"
+              />
+              <div class="karakter-placeholder" aria-hidden="true">
+                <span class="karakter-emoji">👧</span>
+              </div>
+              <figcaption>Zara <small>gambar sementara</small></figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <svg
+          class="gelombang"
+          viewBox="0 0 1440 80"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,30 L1440,80 L0,80 Z"
+            fill="#ffffff"
+          />
+        </svg>
+      </section>
+
+      <div class="materi-isi">
+        <!-- ==================== BAGIAN 3: APA ITU ZAT? ==================== -->
+        <section
+          class="bagian"
+          id="bagian-materi"
+          aria-labelledby="judul-materi"
+        >
+          <h2 id="judul-materi">🔬 APA ITU ZAT?</h2>
+
+          <div class="materi-kartu">
+            <p class="materi-inti">
+              Zat adalah sesuatu yang memiliki massa dan menempati ruang.
+            </p>
+          </div>
+          <p class="penjelasan-zat">
+            Benda yang ada di sekitar kita dapat tersusun dari zat. Zat memiliki
+            massa dan membutuhkan tempat.
+          </p>
+
+          <ul class="contoh-daftar contoh-daftar-hutan">
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">🪨</span
+              ><span class="contoh-nama">Batu</span>
+            </li>
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">💧</span
+              ><span class="contoh-nama">Air</span>
+            </li>
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">📚</span
+              ><span class="contoh-nama">Buku</span>
+            </li>
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">🧊</span
+              ><span class="contoh-nama">Es</span>
+            </li>
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">🌬️</span
+              ><span class="contoh-nama">Udara</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- ==================== BAGIAN 4: JELAJAHI HUTAN ==================== -->
+        <section class="bagian">
+          <div class="aktivitas" id="aktivitas-hutan">
+            <h2 id="judul-hutan">🔎 JELAJAHI HUTAN</h2>
+            <p class="aktivitas-petunjuk">
+              Klik benda-benda di hutan untuk mengetahui informasinya.
+            </p>
+            <p class="hitung-temuan" id="hitung-hutan">
+              Sudah dilihat: 0 dari 6
+            </p>
+
+            <!--
+            Setiap benda punya:
+              data-emoji, data-nama : tampilan pada kartu info
+              data-teks             : informasi yang muncul saat diklik (boleh kamu ubah)
+              --x, --y              : posisi benda di hutan
+          -->
+            <div class="hutan" role="group" aria-labelledby="judul-hutan">
+              <svg
+                class="hutan-svg"
+                viewBox="0 0 1000 800"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+                focusable="false"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient id="langit-hutan" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#BFE3FF" />
+                    <stop offset="1" stop-color="#EAF7FF" />
+                  </linearGradient>
+                </defs>
+                <rect width="1000" height="800" fill="url(#langit-hutan)" />
+                <circle cx="910" cy="90" r="70" fill="#FFE08A" opacity="0.55" />
+                <circle cx="910" cy="90" r="46" fill="#FFD25A" />
+                <use href="#s-awan" x="500" y="50" width="110" height="55" />
+                <use href="#s-awan" x="720" y="190" width="90" height="45" />
+                <path
+                  d="M0 400 Q150 300 300 380 T600 360 T1000 340 L1000 800 L0 800 Z"
+                  fill="#A6E3BC"
+                />
+                <path
+                  d="M0 470 Q250 420 500 460 T1000 440 L1000 800 L0 800 Z"
+                  fill="#6FCB8F"
+                />
+                <path
+                  d="M0 620 Q250 570 520 610 T1000 600 L1000 800 L0 800 Z"
+                  fill="#58BD7B"
+                />
+                <path
+                  d="M540 830 C600 720 720 730 780 660 S 920 590 1030 570"
+                  fill="none"
+                  stroke="#5BB0F5"
+                  stroke-width="96"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M540 830 C600 720 720 730 780 660 S 920 590 1030 570"
+                  fill="none"
+                  stroke="#8BCBFF"
+                  stroke-width="66"
+                  stroke-linecap="round"
+                />
+                <use href="#s-pohon" x="110" y="330" width="80" height="100" />
+                <use href="#s-pohon" x="330" y="380" width="66" height="82" />
+                <use href="#s-pohon" x="600" y="400" width="60" height="75" />
+                <use href="#s-pohon" x="880" y="330" width="84" height="105" />
+                <use href="#s-pohon" x="20" y="600" width="64" height="80" />
+                <g fill="#FFFFFF">
+                  <circle cx="380" cy="600" r="7" />
+                  <circle cx="130" cy="560" r="7" />
+                  <circle cx="640" cy="700" r="7" />
+                </g>
+                <g fill="#FFC93C">
+                  <circle cx="400" cy="610" r="6" />
+                  <circle cx="150" cy="570" r="6" />
+                  <circle cx="620" cy="710" r="6" />
+                </g>
+              </svg>
+
+              <button
+                type="button"
+                class="objek"
+                style="--x: 26%; --y: 16%"
+                data-emoji="🎈"
+                data-nama="Balon"
+                data-teks="Di dalam balon ada udara. Udara tidak terlihat, tetapi udara juga menempati ruang."
+              >
+                <span class="objek-ikon" aria-hidden="true">🎈</span
+                ><span class="objek-label">Balon</span
+                ><span class="objek-centang" aria-hidden="true">✓</span>
+              </button>
+
+              <button
+                type="button"
+                class="objek"
+                style="--x: 40%; --y: 50%"
+                data-emoji="🍎"
+                data-nama="Buah"
+                data-teks="Buah termasuk zat. Buah memiliki massa dan menempati ruang."
+              >
+                <span class="objek-ikon" aria-hidden="true">🍎</span
+                ><span class="objek-label">Buah</span
+                ><span class="objek-centang" aria-hidden="true">✓</span>
+              </button>
+
+              <button
+                type="button"
+                class="objek"
+                style="--x: 84%; --y: 44%"
+                data-emoji="🧊"
+                data-nama="Es"
+                data-teks="Es termasuk zat. Es adalah air yang membeku, dan es menempati ruang."
+              >
+                <span class="objek-ikon" aria-hidden="true">🧊</span
+                ><span class="objek-label">Es</span
+                ><span class="objek-centang" aria-hidden="true">✓</span>
+              </button>
+
+              <button
+                type="button"
+                class="objek"
+                style="--x: 22%; --y: 80%"
+                data-emoji="🪨"
+                data-nama="Batu"
+                data-teks="Batu termasuk zat. Batu memiliki massa dan menempati ruang."
+              >
+                <span class="objek-ikon" aria-hidden="true">🪨</span
+                ><span class="objek-label">Batu</span
+                ><span class="objek-centang" aria-hidden="true">✓</span>
+              </button>
+
+              <button
+                type="button"
+                class="objek"
+                style="--x: 52%; --y: 78%"
+                data-emoji="📖"
+                data-nama="Buku"
+                data-teks="Buku termasuk zat. Buku memiliki massa dan menempati ruang."
+              >
+                <span class="objek-ikon" aria-hidden="true">📖</span
+                ><span class="objek-label">Buku</span
+                ><span class="objek-centang" aria-hidden="true">✓</span>
+              </button>
+
+              <button
+                type="button"
+                class="objek"
+                style="--x: 80%; --y: 80%"
+                data-emoji="💧"
+                data-nama="Air"
+                data-teks="Air termasuk zat dan menempati ruang."
+              >
+                <span class="objek-ikon" aria-hidden="true">💧</span
+                ><span class="objek-label">Air</span
+                ><span class="objek-centang" aria-hidden="true">✓</span>
+              </button>
+            </div>
+
+            <!-- Kartu info yang muncul saat benda diklik (diisi oleh js/hutan-zat.js) -->
+            <div
+              class="kartu-info"
+              id="kartu-info"
+              role="status"
+              aria-live="polite"
+            >
+              <p class="kartu-info-kosong">
+                👆 Ketuk salah satu benda di hutan untuk melihat informasinya.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== BAGIAN 5: TEMUKAN ZAT! ==================== -->
+        <section class="bagian">
+          <!-- Pesan umpan balik ada di atribut di bawah ini (boleh kamu ubah) -->
+          <div
+            class="aktivitas"
+            id="aktivitas-temukan"
+            data-pesan-benar="🎉 Hebat! Jawabanmu benar!"
+            data-pesan-salah="💡 Coba lagi! Ingat, zat memiliki massa dan menempati ruang."
+          >
+            <div class="aktivitas-kepala">
+              <h2 id="judul-temukan">🎯 TEMUKAN ZAT!</h2>
+              <span class="lencana-selesai" id="lencana-temukan" hidden
+                >✓ Selesai</span
+              >
+            </div>
+            <p class="aktivitas-petunjuk">Klik benda yang termasuk zat!</p>
+            <p class="pengingat">
+              <span aria-hidden="true">💡</span> Ingat: zat memiliki massa dan
+              menempati ruang.
+            </p>
+            <p class="hitung-temuan" id="hitung-temukan">
+              Zat ditemukan: 0 dari 4
+            </p>
+
+            <!-- data-benar="true" = termasuk zat -->
+            <div
+              class="daftar-benda"
+              id="daftar-temukan"
+              role="group"
+              aria-labelledby="judul-temukan"
+            >
+              <button
+                type="button"
+                class="benda"
+                data-benar="true"
+                data-nama="Batu"
+              >
+                <span class="benda-ikon" aria-hidden="true">🪨</span
+                ><span class="benda-nama">Batu</span>
+              </button>
+              <button
+                type="button"
+                class="benda"
+                data-benar="false"
+                data-nama="Cahaya"
+              >
+                <span class="benda-ikon" aria-hidden="true">💡</span
+                ><span class="benda-nama">Cahaya</span>
+              </button>
+              <button
+                type="button"
+                class="benda"
+                data-benar="true"
+                data-nama="Air"
+              >
+                <span class="benda-ikon" aria-hidden="true">💧</span
+                ><span class="benda-nama">Air</span>
+              </button>
+              <button
+                type="button"
+                class="benda"
+                data-benar="false"
+                data-nama="Suara"
+              >
+                <span class="benda-ikon" aria-hidden="true">🔔</span
+                ><span class="benda-nama">Suara</span>
+              </button>
+              <button
+                type="button"
+                class="benda"
+                data-benar="true"
+                data-nama="Buku"
+              >
+                <span class="benda-ikon" aria-hidden="true">📚</span
+                ><span class="benda-nama">Buku</span>
+              </button>
+              <button
+                type="button"
+                class="benda"
+                data-benar="true"
+                data-nama="Udara"
+              >
+                <span class="benda-ikon" aria-hidden="true">🌬️</span
+                ><span class="benda-nama">Udara</span>
+              </button>
+            </div>
+
+            <p
+              class="umpan-balik"
+              id="umpan-temukan"
+              role="status"
+              aria-live="polite"
+            ></p>
+
+            <div class="kotak-selesai" id="selesai-temukan" hidden>
+              <p class="selesai-judul">🌟 Semua zat sudah kamu temukan!</p>
+              <p>
+                Cahaya dan suara bukan zat, karena keduanya tidak memiliki massa
+                dan tidak menempati ruang.
+              </p>
+              <button
+                type="button"
+                class="tombol tombol-garis"
+                id="ulang-temukan"
+              >
+                🔄 Main lagi
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== BAGIAN 6: TIGA WUJUD ZAT ==================== -->
+        <section class="bagian" aria-labelledby="judul-wujud">
+          <h2 id="judul-wujud">✨ ZAT MEMILIKI BERBAGAI WUJUD</h2>
+          <p class="penjelasan-zat">
+            Zat yang ada di sekitar kita dapat ditemukan dalam berbagai wujud.
+          </p>
+
+          <!-- Tiga kartu (bisa diklik). Isi informasi ada di atribut data-judul dan data-info. -->
+          <div class="wujud-daftar">
+            <button
+              type="button"
+              class="wujud wujud-padat"
+              aria-pressed="false"
+              data-judul="🧊 Zat Padat"
+              data-info="Zat padat, seperti batu dan buku, biasanya bisa kamu pegang dan bentuknya tidak mudah berubah."
+            >
+              <span class="wujud-judul">🧊 PADAT</span>
+              <span class="wujud-contoh">batu, buku, pensil, es</span>
+            </button>
+            <button
+              type="button"
+              class="wujud wujud-cair"
+              aria-pressed="false"
+              data-judul="💧 Zat Cair"
+              data-info="Zat cair, seperti air dan susu, dapat mengalir dan bisa dituang."
+            >
+              <span class="wujud-judul">💧 CAIR</span>
+              <span class="wujud-contoh">air, susu, jus, minyak</span>
+            </button>
+            <button
+              type="button"
+              class="wujud wujud-gas"
+              aria-pressed="false"
+              data-judul="💨 Zat Gas"
+              data-info="Zat gas, seperti udara, ada di sekitar kita dan sering tidak terlihat."
+            >
+              <span class="wujud-judul">💨 GAS</span>
+              <span class="wujud-contoh"
+                >udara, uap air, udara dalam balon</span
+              >
+            </button>
+          </div>
+
+          <div
+            class="wujud-info"
+            id="wujud-info"
+            role="status"
+            aria-live="polite"
+          >
+            <p class="kartu-info-kosong">
+              👆 Ketuk salah satu kartu untuk melihat informasinya.
+            </p>
+          </div>
+          <p class="catatan-wujud">
+            Karakteristik tiap wujud akan kita pelajari di Dunia Padat, Dunia
+            Cair, dan Dunia Gas.
+          </p>
+        </section>
+
+        <!-- ==================== BAGIAN 7: KELOMPOKKAN ZAT ==================== -->
+        <section class="bagian">
+          <!-- Pesan umpan balik ada di atribut di bawah ini. {nama} dan {wujud} diisi otomatis. -->
+          <div
+            class="aktivitas"
+            id="aktivitas-kelompok"
+            data-pesan-benar="✅ Benar! {nama} termasuk zat {wujud}."
+            data-pesan-salah="❌ Belum tepat. Coba lagi!"
+            data-pesan-pilih="👆 Pilih dulu sebuah benda, lalu ketuk kelompoknya."
+          >
+            <div class="aktivitas-kepala">
+              <h2 id="judul-kelompok">🧩 KELOMPOKKAN ZAT</h2>
+              <span class="lencana-selesai" id="lencana-kelompok" hidden
+                >✓ Selesai</span
+              >
+            </div>
+            <p class="aktivitas-petunjuk">
+              Kelompokkan benda sesuai wujudnya! Ketuk benda lalu ketuk
+              kelompoknya. Di komputer, kamu juga bisa menyeret benda ke
+              kelompoknya.
+            </p>
+
+            <div class="info-baris">
+              <p class="hitung-temuan" id="hitung-kelompok">
+                Sudah dikelompokkan: 0 dari 8
+              </p>
+              <p class="skor-kelompok">
+                ⭐ Skor: <strong id="skor-kelompok">0</strong>
+              </p>
+            </div>
+
+            <!-- data-wujud = jawaban yang benar -->
+            <div
+              class="kolam-benda"
+              id="kolam-benda"
+              role="group"
+              aria-labelledby="judul-kelompok"
+            >
+              <button
+                type="button"
+                class="item"
+                data-wujud="padat"
+                data-nama="Batu"
+              >
+                <span class="item-ikon" aria-hidden="true">🪨</span
+                ><span class="item-nama">Batu</span>
+              </button>
+              <button
+                type="button"
+                class="item"
+                data-wujud="cair"
+                data-nama="Air"
+              >
+                <span class="item-ikon" aria-hidden="true">💧</span
+                ><span class="item-nama">Air</span>
+              </button>
+              <button
+                type="button"
+                class="item"
+                data-wujud="padat"
+                data-nama="Buku"
+              >
+                <span class="item-ikon" aria-hidden="true">📚</span
+                ><span class="item-nama">Buku</span>
+              </button>
+              <button
+                type="button"
+                class="item"
+                data-wujud="gas"
+                data-nama="Udara"
+              >
+                <span class="item-ikon" aria-hidden="true">🌬️</span
+                ><span class="item-nama">Udara</span>
+              </button>
+              <button
+                type="button"
+                class="item"
+                data-wujud="padat"
+                data-nama="Es"
+              >
+                <span class="item-ikon" aria-hidden="true">🧊</span
+                ><span class="item-nama">Es</span>
+              </button>
+              <button
+                type="button"
+                class="item"
+                data-wujud="cair"
+                data-nama="Susu"
+              >
+                <span class="item-ikon" aria-hidden="true">🥛</span
+                ><span class="item-nama">Susu</span>
+              </button>
+              <button
+                type="button"
+                class="item"
+                data-wujud="cair"
+                data-nama="Jus"
+              >
+                <span class="item-ikon" aria-hidden="true">🧃</span
+                ><span class="item-nama">Jus</span>
+              </button>
+              <button
+                type="button"
+                class="item"
+                data-wujud="gas"
+                data-nama="Balon berisi udara"
+              >
+                <span class="item-ikon" aria-hidden="true">🎈</span
+                ><span class="item-nama">Balon berisi udara</span>
+              </button>
+            </div>
+
+            <div class="zona-daftar">
+              <button type="button" class="zona zona-padat" data-wujud="padat">
+                <span class="zona-judul">🧊 PADAT</span>
+                <span class="zona-isi"></span>
+              </button>
+              <button type="button" class="zona zona-cair" data-wujud="cair">
+                <span class="zona-judul">💧 CAIR</span>
+                <span class="zona-isi"></span>
+              </button>
+              <button type="button" class="zona zona-gas" data-wujud="gas">
+                <span class="zona-judul">💨 GAS</span>
+                <span class="zona-isi"></span>
+              </button>
+            </div>
+
+            <p
+              class="umpan-balik"
+              id="umpan-kelompok"
+              role="status"
+              aria-live="polite"
+            ></p>
+
+            <div class="kotak-selesai" id="selesai-kelompok" hidden>
+              <p class="selesai-judul">🌟 Semua benda sudah dikelompokkan!</p>
+              <p class="selesai-info" id="skor-akhir"></p>
+              <button
+                type="button"
+                class="tombol tombol-garis"
+                id="ulang-kelompok"
+              >
+                🔄 Kelompokkan lagi
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== BAGIAN 8: ZAT DI SEKITAR KITA ==================== -->
+        <section class="bagian" aria-labelledby="judul-sekitar">
+          <h2 id="judul-sekitar">🏠 ZAT DI SEKITAR KITA</h2>
+
+          <ul class="sekitar-daftar">
+            <li class="sekitar">
+              <span class="sekitar-ikon" aria-hidden="true">🧒🥤</span
+              ><span class="sekitar-nama">Minum air</span
+              ><span class="label-wujud label-cair">Air: zat cair</span>
+            </li>
+            <li class="sekitar">
+              <span class="sekitar-ikon" aria-hidden="true">🧒🍧</span
+              ><span class="sekitar-nama">Makan es</span
+              ><span class="label-wujud label-padat">Es: zat padat</span>
+            </li>
+            <li class="sekitar">
+              <span class="sekitar-ikon" aria-hidden="true">🧒📖</span
+              ><span class="sekitar-nama">Membaca buku</span
+              ><span class="label-wujud label-padat">Buku: zat padat</span>
+            </li>
+            <li class="sekitar">
+              <span class="sekitar-ikon" aria-hidden="true">🧒🎈</span
+              ><span class="sekitar-nama">Meniup balon</span
+              ><span class="label-wujud label-gas">Udara: zat gas</span>
+            </li>
+            <li class="sekitar">
+              <span class="sekitar-ikon" aria-hidden="true">👕☀️</span
+              ><span class="sekitar-nama">Menjemur pakaian</span
+              ><span class="label-wujud label-padat">Pakaian: zat padat</span>
+            </li>
+          </ul>
+
+          <div class="renungan">
+            <p class="renungan-tanya">
+              🔎 Coba lihat sekelilingmu. Berapa banyak zat yang dapat kamu
+              temukan?
+            </p>
+
+            <!-- Penghitung sederhana -->
+            <div class="penghitung">
+              <button
+                type="button"
+                class="tombol-bulat"
+                id="kurang-temuan"
+                aria-label="Kurangi jumlah"
+              >
+                −
+              </button>
+              <output
+                class="penghitung-angka"
+                id="jumlah-temuan"
+                aria-live="polite"
+                >0</output
+              >
+              <button
+                type="button"
+                class="tombol-bulat"
+                id="tambah-temuan"
+                aria-label="Tambah jumlah"
+              >
+                +
+              </button>
+            </div>
+            <p class="penghitung-info" id="info-temuan">
+              Ketuk + setiap kali kamu menemukan zat.
+            </p>
+
+            <p class="renungan-pesan">Ternyata zat ada di mana-mana!</p>
+          </div>
+        </section>
+
+        <!-- ==================== BAGIAN 9: PENUTUP ==================== -->
+        <section class="bagian penutup" aria-labelledby="judul-penutup">
+          <h2 id="judul-penutup">🚀 PETUALANGANMU BARU DIMULAI!</h2>
+          <p class="penutup-teks">
+            Sekarang kamu sudah mengenal apa itu zat. Yuk, lanjutkan
+            petualanganmu untuk mempelajari zat padat, zat cair, dan zat gas!
+          </p>
+
+          <!-- Status Hutan Zat (berubah saat dua aktivitas utama selesai) -->
+          <p class="status-hutan" id="status-hutan">
+            🌳 Hutan Zat — ⏳ Belum selesai (<span id="status-angka">0</span>
+            dari 2 aktivitas utama)
+          </p>
+
+          <!-- Halaman Dunia Cair dan Dunia Gas dibuat di langkah berikutnya.
+             data-cek-halaman: js/hutan-zat.js memeriksa dulu apakah halamannya ada. -->
+          <div class="dunia-tombol">
+            <a
+              class="tombol tombol-dunia tombol-dunia-padat"
+              id="tombol-padat"
+              href="dunia-padat.html"
+              data-cek-halaman
+              data-nama="Dunia Padat"
+              >🧊 DUNIA PADAT</a
+            >
+            <a
+              class="tombol tombol-dunia tombol-dunia-cair"
+              href="dunia-cair.html"
+              data-cek-halaman
+              data-nama="Dunia Cair"
+              >💧 DUNIA CAIR</a
+            >
+            <a
+              class="tombol tombol-dunia tombol-dunia-gas"
+              href="dunia-gas.html"
+              data-cek-halaman
+              data-nama="Dunia Gas"
+              >💨 DUNIA GAS</a
+            >
+          </div>
+
+          <div class="navigasi-materi">
+            <a class="tombol tombol-garis" href="peta.html"
+              >🗺️ KEMBALI KE PETA</a
+            >
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p><strong>ZATOPIA</strong> - Petualangan Dunia Zat</p>
+      <p>IPAS Kelas IV SD, materi Wujud, Zat, dan Perubahannya</p>
+    </footer>
+
+    <!-- Pesan singkat untuk halaman yang belum dibuat -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript (urutan penting: main.js dan storage.js dulu, hutan-zat.js terakhir) -->
+    <script src="../js/main.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/hutan-zat.js"></script>
+  </body>
+</html>

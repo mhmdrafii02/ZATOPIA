@@ -1,0 +1,121 @@
+/* =====================================================
+   ZATOPIA - Petualangan Dunia Zat
+   File: css/hasil.css
+   Tampilan halaman Hasil Belajar: kartu skor bulat,
+   rincian benar/salah, dan pesan feedback.
+   Dimuat SETELAH style.css dan materi.css.
+   ===================================================== */
+
+[hidden] {
+  display: none !important;
+}
+
+.kartu-hasil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 32px clamp(18px, 5vw, 36px);
+  border-radius: 28px;
+  background: var(--putih);
+  border: 3px solid var(--tema-garis);
+  box-shadow: 0 10px 24px rgba(60, 30, 130, 0.1);
+  text-align: center;
+}
+
+.kartu-hasil-kecil {
+  padding: 20px clamp(16px, 4vw, 28px);
+  gap: 10px;
+}
+
+.hasil-nama {
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--tema-tua);
+}
+
+.hasil-subjudul {
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--tema-tua);
+}
+
+/* ---------- Lingkaran skor ---------- */
+.hasil-skor-lingkaran {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: clamp(140px, 32vw, 180px);
+  height: clamp(140px, 32vw, 180px);
+  border-radius: 50%;
+  background: var(--tema-muda);
+  border: 6px solid var(--tema);
+  box-shadow: 0 6px 0 var(--tema-garis);
+}
+.hasil-skor-angka {
+  font-family: var(--font-judul);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 8vw, 3.4rem);
+  line-height: 1;
+  color: var(--tema-tua);
+}
+.hasil-skor-bagi {
+  font-weight: 700;
+  color: var(--tema-tua);
+  opacity: 0.75;
+}
+
+/* ---------- Rincian benar/salah ---------- */
+.hasil-rincian {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 16px;
+}
+.hasil-rincian-item {
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: 1rem;
+}
+.hasil-rincian-benar {
+  background: #e6f8ee;
+  color: #1e8a4c;
+}
+.hasil-rincian-salah {
+  background: #fff4d6;
+  color: #a8720a;
+}
+.hasil-rincian-item strong {
+  font-weight: 800;
+}
+
+.hasil-pesan {
+  margin-top: 6px;
+  font-weight: 700;
+  font-size: 1.08rem;
+  line-height: 1.5;
+  color: var(--teks);
+}
+
+/* ---------- Navigasi aksi ---------- */
+.navigasi-hasil {
+  justify-content: center;
+  gap: 16px 20px;
+}
+
+@media (max-width: 560px) {
+  .navigasi-hasil {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+  .navigasi-hasil .tombol {
+    text-align: center;
+  }
+}

@@ -1,0 +1,113 @@
+/* =====================================================
+   ZATOPIA - Petualangan Dunia Zat
+   File: css/penghargaan.css
+   Tampilan halaman Balai Penghargaan: badge besar dengan
+   animasi muncul sederhana, gelar, dan pesan motivasi.
+   Dimuat SETELAH style.css dan materi.css.
+   ===================================================== */
+
+.kartu-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 36px clamp(18px, 5vw, 36px);
+  border-radius: 28px;
+  background: var(--putih);
+  border: 3px solid var(--tema-garis);
+  box-shadow: 0 10px 24px rgba(60, 30, 130, 0.1);
+  text-align: center;
+}
+
+.badge-nama {
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--tema-tua);
+}
+
+/* ---------- Lingkaran badge dengan animasi muncul ---------- */
+.badge-lingkaran {
+  display: grid;
+  place-items: center;
+  width: clamp(150px, 36vw, 190px);
+  height: clamp(150px, 36vw, 190px);
+  margin: 10px 0;
+  border-radius: 50%;
+  background: var(--tema-muda);
+  border: 6px solid var(--tema);
+  box-shadow: 0 6px 0 var(--tema-garis);
+  animation: badge-muncul 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.badge-emoji {
+  font-size: clamp(3.6rem, 12vw, 5rem);
+  line-height: 1;
+  animation: badge-goyang 2.2s ease-in-out infinite;
+}
+
+@keyframes badge-muncul {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-15deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+@keyframes badge-goyang {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+.badge-gelar {
+  font-family: var(--font-judul);
+  font-weight: 800;
+  font-size: clamp(1.3rem, 4vw, 1.6rem);
+  color: var(--tema-tua);
+}
+
+.badge-skor {
+  font-weight: 700;
+  color: var(--teks);
+  opacity: 0.85;
+}
+
+.badge-motivasi {
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--teks);
+}
+
+/* ---------- Navigasi aksi ---------- */
+.navigasi-badge {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px 18px;
+}
+
+@media (max-width: 640px) {
+  .navigasi-badge {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+  .navigasi-badge .tombol {
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-lingkaran,
+  .badge-emoji {
+    animation: none;
+  }
+}

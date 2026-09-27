@@ -1,0 +1,630 @@
+/* =====================================================
+   ZATOPIA - Petualangan Dunia Zat
+   File: css/style.css
+   Dipakai oleh SEMUA halaman. Ubah warna di bagian :root
+   agar berubah di seluruh website.
+   ===================================================== */
+
+/* ---------- 1. VARIABEL (warna, font, ukuran) ---------- */
+:root {
+  /* Ungu = identitas ZATOPIA */
+  --ungu: #6c3fc5;
+  --ungu-tua: #3b1f87;
+  --ungu-muda: #efe8ff;
+
+  /* Biru = air / cair */
+  --biru: #2f9bff;
+  --biru-muda: #ddf0ff;
+
+  /* Hijau = eksplorasi */
+  --hijau: #2fbf71;
+
+  /* Kuning = energi / panas */
+  --kuning: #ffc93c;
+  --kuning-tua: #e0a100;
+
+  /* Putih = area konten */
+  --putih: #ffffff;
+  --teks: #2b2350;
+  --teks-lembut: #5b5580;
+
+  /* Font: Fredoka untuk judul, Nunito untuk isi. Ada font cadangan bila offline */
+  --font-judul: "Fredoka", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  --font-isi: "Nunito", "Segoe UI", system-ui, sans-serif;
+
+  --radius: 24px;
+}
+
+/* ---------- 2. RESET & DASAR ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-isi);
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--teks);
+  background: var(--putih);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-judul);
+  line-height: 1.15;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Fokus keyboard yang jelas */
+a:focus-visible {
+  outline: 4px solid var(--kuning);
+  outline-offset: 3px;
+}
+
+/* ---------- 3. TOMBOL (dipakai semua halaman) ---------- */
+.tombol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 60px;
+  padding: 0 32px;
+  border: 0; /* agar class ini rapi juga di elemen <button> */
+  border-radius: 999px;
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+/* Tombol utama: kuning, timbul seperti tombol game */
+.tombol-utama {
+  background: var(--kuning);
+  color: var(--ungu-tua);
+  box-shadow:
+    0 6px 0 var(--kuning-tua),
+    0 14px 22px rgba(0, 0, 0, 0.22);
+}
+.tombol-utama:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 9px 0 var(--kuning-tua),
+    0 18px 26px rgba(0, 0, 0, 0.25);
+}
+.tombol-utama:active {
+  transform: translateY(4px);
+  box-shadow:
+    0 2px 0 var(--kuning-tua),
+    0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Tombol kedua: garis putih, transparan */
+.tombol-kedua {
+  color: var(--putih);
+  background: rgba(255, 255, 255, 0.12);
+  border: 3px solid var(--putih);
+}
+.tombol-kedua:hover {
+  transform: translateY(-3px);
+  background: var(--putih);
+  color: var(--ungu);
+}
+.tombol-kedua:active {
+  transform: translateY(2px);
+}
+
+/* ---------- 4. NAVIGASI ---------- */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 16px 20px;
+}
+
+.navbar-logo {
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--putih);
+  text-decoration: none;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 6px;
+}
+
+.navbar-menu a {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+.navbar-menu a:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+/* Menu halaman yang sedang dibuka */
+.navbar-menu a.aktif {
+  background: var(--putih);
+  color: var(--ungu);
+}
+
+/* ---------- 5. HERO (bagian pembuka) ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 110px 20px 100px;
+  color: var(--putih);
+  /* Bintang kecil + langit ungu ke biru */
+  background:
+    radial-gradient(
+      circle at 12% 22%,
+      rgba(255, 255, 255, 0.85) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 78% 12%,
+      rgba(255, 255, 255, 0.7) 0 3px,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 92% 62%,
+      rgba(255, 255, 255, 0.7) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 32% 82%,
+      rgba(255, 255, 255, 0.6) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 56% 9%,
+      rgba(255, 255, 255, 0.6) 0 2px,
+      transparent 3px
+    ),
+    linear-gradient(170deg, #4b2aa8 0%, var(--ungu) 45%, #2f7fe0 100%);
+}
+
+.hero-isi {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+/* Logo besar bergaya kartun (bayangan tebal ungu tua) */
+.logo-besar {
+  font-size: clamp(2.8rem, 9vw, 5rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--putih);
+  text-shadow:
+    0 5px 0 var(--ungu-tua),
+    0 12px 20px rgba(0, 0, 0, 0.25);
+}
+
+.subjudul {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: var(--kuning);
+  color: var(--ungu-tua);
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+}
+
+.salam {
+  margin-top: 28px;
+  font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+  font-weight: 600;
+}
+
+.pengantar {
+  margin-top: 12px;
+  max-width: 34ch;
+  font-size: 1.25rem;
+  color: var(--ungu-muda);
+}
+
+.tombol-grup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 32px;
+}
+
+/* Gelombang di bawah hero */
+.gelombang {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+
+/* ---------- 6. ILUSTRASI DUNIA ZATOPIA ---------- */
+.ilustrasi {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+}
+
+.dunia {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Kartu zat melayang */
+.kartu-zat {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 18px;
+  background: var(--putih);
+  color: var(--teks);
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: 1.15rem;
+  border-bottom: 5px solid var(--biru);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  animation: mengambang 4s ease-in-out infinite;
+}
+.kartu-zat span {
+  font-size: 1.5rem;
+}
+.kartu-gas {
+  top: 2%;
+  right: 4%;
+  border-bottom-color: #8fb1e6;
+  animation-delay: 0s;
+}
+.kartu-padat {
+  top: 26%;
+  left: -2%;
+  border-bottom-color: #b98555;
+  animation-delay: -1.3s;
+}
+.kartu-cair {
+  top: 40%;
+  right: -2%;
+  border-bottom-color: var(--biru);
+  animation-delay: -2.6s;
+}
+
+/* Karakter Zaki & Zara */
+.karakter {
+  position: absolute;
+  bottom: -4%;
+  width: 25%;
+  margin: 0;
+  text-align: center;
+  animation: mengambang 5s ease-in-out infinite;
+}
+.karakter-zaki {
+  left: 2%;
+}
+.karakter-zara {
+  right: 2%;
+  animation-delay: -2.2s;
+}
+
+/* Gambar asli disembunyikan sampai file-nya ada (diatur oleh js/main.js) */
+.karakter img {
+  display: none;
+  width: 100%;
+  height: auto;
+}
+.karakter.ada-gambar img {
+  display: block;
+}
+.karakter.ada-gambar .karakter-placeholder {
+  display: none;
+}
+
+/* Placeholder: lingkaran dengan emoji, garis putus-putus menandakan sementara */
+.karakter-placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--ungu-muda), #cbb8f5);
+  border: 4px dashed var(--ungu);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+.karakter-zara .karakter-placeholder {
+  background: linear-gradient(160deg, var(--biru-muda), #a9d8ff);
+  border-color: var(--biru);
+}
+.karakter-emoji {
+  font-size: clamp(2.2rem, 9vw, 4rem);
+  line-height: 1;
+}
+
+/* Label nama karakter */
+.karakter figcaption {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 14px;
+  border-radius: 999px;
+  background: var(--putih);
+  color: var(--ungu-tua);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.3;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.karakter figcaption small {
+  display: block;
+  font-family: var(--font-isi);
+  font-weight: 600;
+  font-size: 0.65rem;
+  color: var(--teks-lembut);
+}
+/* Kalau gambar asli sudah ada, teks "gambar sementara" disembunyikan */
+.karakter.ada-gambar figcaption small {
+  display: none;
+}
+
+/* Animasi ringan: naik turun pelan */
+@keyframes mengambang {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* ---------- 7. PETUNJUK ---------- */
+.petunjuk {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 50px 20px 70px;
+  text-align: center;
+  scroll-margin-top: 10px;
+}
+
+.petunjuk h2 {
+  font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+  color: var(--ungu);
+}
+
+.petunjuk-intro {
+  margin-top: 10px;
+  color: var(--teks-lembut);
+}
+
+.langkah-daftar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+  margin-top: 36px;
+  text-align: left;
+}
+
+.langkah {
+  padding: 26px 22px;
+  border-radius: var(--radius);
+  background: var(--putih);
+  border: 3px solid var(--ungu-muda);
+  box-shadow: 0 6px 0 var(--ungu-muda);
+}
+
+.nomor {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+.langkah-1 .nomor {
+  background: var(--ungu);
+}
+.langkah-2 .nomor {
+  background: var(--hijau);
+}
+.langkah-3 .nomor {
+  background: var(--biru);
+}
+.langkah-4 .nomor {
+  background: var(--kuning-tua);
+}
+
+.langkah h3 {
+  font-size: 1.3rem;
+  color: var(--ungu-tua);
+}
+.langkah p {
+  margin-top: 6px;
+  color: var(--teks-lembut);
+  font-size: 1.02rem;
+}
+
+.petunjuk-aksi {
+  margin-top: 40px;
+}
+/* Di area putih, bayangan tombol dibuat lebih ringan */
+.petunjuk-aksi .tombol-utama {
+  box-shadow:
+    0 6px 0 var(--kuning-tua),
+    0 10px 16px rgba(60, 30, 130, 0.18);
+}
+
+/* ---------- 8. FOOTER ---------- */
+.footer {
+  padding: 28px 20px;
+  background: var(--ungu-tua);
+  color: var(--ungu-muda);
+  text-align: center;
+  font-size: 0.95rem;
+}
+.footer strong {
+  font-family: var(--font-judul);
+  font-size: 1.15rem;
+  color: var(--putih);
+}
+
+/* ---------- 9. PESAN SINGKAT (toast) ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 50;
+  max-width: calc(100% - 32px);
+  padding: 14px 24px;
+  border-radius: 16px;
+  background: var(--ungu-tua);
+  color: var(--putih);
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 12px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s;
+}
+.toast.tampil {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- 10. RESPONSIVE ---------- */
+
+/* Laptop & tablet landscape: teks di kiri, ilustrasi di kanan */
+@media (min-width: 900px) {
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+  }
+  .hero-isi {
+    grid-template-columns: 1.05fr 0.95fr;
+    width: 100%;
+  }
+}
+
+/* Tablet & HP: teks di tengah */
+@media (max-width: 899px) {
+  .hero-teks {
+    text-align: center;
+  }
+  .pengantar {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .tombol-grup {
+    justify-content: center;
+  }
+}
+
+/* HP */
+@media (max-width: 560px) {
+  .navbar {
+    justify-content: center;
+  }
+  .navbar-menu a {
+    padding: 6px 14px;
+    font-size: 1rem;
+  }
+  .hero {
+    padding-top: 130px;
+  }
+  .tombol {
+    width: 100%;
+    font-size: 1.15rem;
+    padding: 0 20px;
+  }
+  .kartu-zat {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+  .kartu-padat {
+    left: 0;
+    top: 24%;
+  }
+  .kartu-cair {
+    right: 0;
+    top: 38%;
+  }
+}
+
+/* Hormati pengguna yang tidak nyaman dengan animasi */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .kartu-zat,
+  .karakter {
+    animation: none;
+  }
+  .tombol,
+  .toast {
+    transition: none;
+  }
+}

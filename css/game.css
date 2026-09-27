@@ -1,0 +1,435 @@
+/* =====================================================
+   ZATOPIA - Petualangan Dunia Zat
+   File: css/game.css
+   Tampilan khusus halaman Arena Game: papan skor dan
+   tiga mini-game (Tangkap Wujud, Pasangkan Perubahan,
+   Detektif Zat). Dimuat SETELAH css/style.css dan
+   css/materi.css.
+   ===================================================== */
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- 1. PAPAN SKOR DI HERO ---------- */
+.papan-skor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 14px;
+  margin-top: 20px;
+}
+.papan-skor-item {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: 1rem;
+}
+.papan-skor-item strong {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.progres-game {
+  margin-top: 12px;
+  font-weight: 700;
+  color: var(--ungu-muda);
+}
+
+/* Kepala tiap game (nomor + judul + lencana), dipakai ulang dari pola eksperimen */
+.aktivitas.game .aktivitas-kepala {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+.nomor-eksperimen {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--tema);
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.aktivitas.game .aktivitas-kepala h2 {
+  flex: 1;
+  min-width: 200px;
+}
+
+.aksi-lanjut {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+/* Tombol utama di atas latar putih (bayangan lebih ringan, konsisten dengan halaman lain) */
+.game .tombol-utama,
+.pilihan-wujud .tombol-utama {
+  box-shadow:
+    0 6px 0 var(--kuning-tua),
+    0 10px 16px rgba(60, 30, 130, 0.18);
+}
+.game .tombol-utama:hover {
+  box-shadow:
+    0 9px 0 var(--kuning-tua),
+    0 14px 20px rgba(60, 30, 130, 0.2);
+}
+.game .tombol-utama:active {
+  box-shadow: 0 2px 0 var(--kuning-tua);
+}
+
+/* ---------- 2. GAME 1: TANGKAP WUJUD ---------- */
+.panggung-tangkap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 30px 20px;
+  border-radius: 26px;
+  background: var(--tema-muda);
+  border: 3px solid var(--tema-garis);
+}
+.tangkap-ikon {
+  font-size: clamp(3.4rem, 12vw, 5rem);
+  line-height: 1;
+  animation: tangkap-muncul 0.35s ease;
+}
+.tangkap-nama {
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--tema-tua);
+}
+@keyframes tangkap-muncul {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) rotate(-8deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+.pilihan-wujud {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 480px;
+  margin: 18px auto 0;
+}
+.tombol-wujud {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-height: 76px;
+  padding: 12px 8px;
+  border: 3px solid var(--tema-muda);
+  border-radius: 20px;
+  background: var(--putih);
+  box-shadow: 0 5px 0 var(--tema-muda);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--teks);
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.tombol-wujud span {
+  font-size: 1.8rem;
+}
+.tombol-wujud:hover {
+  transform: translateY(-3px);
+  border-color: var(--tema);
+}
+.tombol-wujud:focus-visible {
+  outline: 4px solid var(--kuning);
+  outline-offset: 3px;
+}
+.tombol-wujud[aria-disabled="true"] {
+  cursor: default;
+}
+.tombol-wujud.benar {
+  border-color: var(--hijau);
+  background: #e6f8ee;
+  box-shadow: 0 5px 0 #b6e6c9;
+}
+.tombol-wujud.salah {
+  border-color: var(--kuning-tua);
+  background: #fff4d6;
+  box-shadow: 0 5px 0 #f3dc9a;
+  animation: goyang-opsi 0.4s ease;
+}
+
+/* ---------- 3. GAME 2: PASANGKAN PERUBAHAN ---------- */
+.papan-pasangkan {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 18px;
+}
+.kolom-pasangkan {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kartu-transisi,
+.kartu-nama {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 10px 14px;
+  border: 3px solid var(--tema-muda);
+  border-radius: 16px;
+  background: var(--putih);
+  box-shadow: 0 4px 0 var(--tema-muda);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: clamp(0.95rem, 2.4vw, 1.15rem);
+  color: var(--teks);
+  cursor: pointer;
+  text-align: center;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.kartu-transisi:hover,
+.kartu-nama:hover {
+  transform: translateY(-2px);
+  border-color: var(--tema);
+}
+.kartu-transisi:focus-visible,
+.kartu-nama:focus-visible {
+  outline: 4px solid var(--kuning);
+  outline-offset: 3px;
+}
+
+.kartu-transisi.dipilih,
+.kartu-nama.dipilih {
+  border-color: var(--tema);
+  background: var(--tema-muda);
+  box-shadow:
+    0 0 0 5px rgba(255, 201, 60, 0.65),
+    0 4px 0 var(--tema-garis);
+  transform: translateY(-2px);
+}
+
+.kartu-transisi.cocok,
+.kartu-nama.cocok {
+  border-color: var(--hijau);
+  background: #e6f8ee;
+  box-shadow: 0 4px 0 #b6e6c9;
+  cursor: default;
+  animation: muncul 0.35s ease;
+}
+.kartu-transisi.cocok::after,
+.kartu-nama.cocok::after {
+  content: " ✓";
+  color: var(--hijau);
+  font-weight: 800;
+}
+
+.kartu-transisi.goyang,
+.kartu-nama.goyang {
+  animation: goyang-opsi 0.4s ease;
+}
+
+/* Saat kartu diseret dengan mouse */
+.kartu-transisi.sedang-diseret {
+  opacity: 0.35;
+}
+.kartu-seret {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1.06) rotate(-2deg);
+  opacity: 0.95;
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.3);
+}
+.kartu-nama.sasaran {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 6px rgba(255, 201, 60, 0.9);
+}
+
+@keyframes muncul {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes goyang-opsi {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+/* ---------- 4. GAME 3: DETEKTIF ZAT ---------- */
+.kartu-kasus {
+  margin-top: 16px;
+  padding: 20px clamp(16px, 4vw, 28px);
+  border-radius: 24px;
+  background: var(--tema-muda);
+  border: 3px solid var(--tema-garis);
+}
+.kasus-label {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 2px 14px;
+  border-radius: 999px;
+  background: var(--tema);
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.kasus-cerita {
+  font-weight: 700;
+  font-size: 1.12rem;
+  line-height: 1.5;
+  color: var(--teks);
+}
+.kasus-tanya {
+  margin-top: 10px;
+  font-family: var(--font-judul);
+  font-weight: 700;
+  color: var(--tema-tua);
+}
+
+.pilihan-kasus {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-width: 560px;
+  margin: 16px auto 0;
+}
+.opsi-kasus {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 3px solid var(--tema-muda);
+  border-radius: 16px;
+  background: var(--putih);
+  box-shadow: 0 4px 0 var(--tema-muda);
+  font-family: var(--font-judul);
+  font-size: 1.05rem;
+  color: var(--teks);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.opsi-kasus:hover {
+  transform: translateY(-2px);
+  border-color: var(--tema);
+}
+.opsi-kasus:focus-visible {
+  outline: 4px solid var(--kuning);
+  outline-offset: 3px;
+}
+.opsi-kasus[aria-disabled="true"] {
+  cursor: default;
+}
+.opsi-kasus[aria-disabled="true"]:hover {
+  transform: none;
+}
+.opsi-kasus.benar {
+  border-color: var(--hijau);
+  background: #e6f8ee;
+}
+.opsi-kasus.benar::after {
+  content: "✓";
+  margin-left: auto;
+  color: var(--hijau);
+  font-weight: 800;
+}
+.opsi-kasus.salah {
+  border-color: var(--kuning-tua);
+  background: #fff4d6;
+  animation: goyang-opsi 0.4s ease;
+}
+.opsi-kasus.salah::after {
+  content: "✕";
+  margin-left: auto;
+  color: var(--kuning-tua);
+  font-weight: 800;
+}
+
+/* ---------- 5. KOTAK SELESAI KESELURUHAN ---------- */
+.kotak-selesai-halaman {
+  margin-top: 40px;
+}
+
+/* ---------- 6. LAYAR KECIL ---------- */
+@media (max-width: 640px) {
+  .papan-pasangkan {
+    grid-template-columns: 1fr;
+  }
+  .pilihan-kasus {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .pilihan-wujud {
+    grid-template-columns: 1fr;
+  }
+  .papan-skor-item {
+    font-size: 0.92rem;
+    padding: 6px 14px;
+  }
+}
+
+/* Hormati pengguna yang tidak nyaman dengan animasi */
+@media (prefers-reduced-motion: reduce) {
+  .tangkap-ikon,
+  .tombol-wujud.salah,
+  .kartu-transisi.cocok,
+  .kartu-nama.cocok,
+  .kartu-transisi.goyang,
+  .kartu-nama.goyang,
+  .opsi-kasus.salah {
+    animation: none;
+  }
+  .tombol-wujud,
+  .kartu-transisi,
+  .kartu-nama,
+  .opsi-kasus {
+    transition: none;
+  }
+}

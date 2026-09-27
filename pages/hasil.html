@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hasil Belajar - ZATOPIA</title>
+    <meta
+      name="description"
+      content="Hasil Belajar ZATOPIA: rangkuman skor Misi Akhir dan pesan semangat untuk penjelajah."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌎</text></svg>"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/materi.css" />
+    <link rel="stylesheet" href="../css/hasil.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <a
+        class="navbar-logo"
+        href="../index.html"
+        aria-label="ZATOPIA, kembali ke Beranda"
+        >🌎 ZATOPIA</a
+      >
+
+      <nav aria-label="Menu utama">
+        <ul class="navbar-menu">
+          <li><a href="../index.html">Beranda</a></li>
+          <li><a href="../index.html#petunjuk">Petunjuk</a></li>
+          <li>
+            <a href="tentang.html" data-placeholder="Tentang ZATOPIA"
+              >Tentang</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main
+      class="halaman-materi"
+      id="halaman-materi"
+      data-tema="hasil"
+      data-lokasi="misi-akhir"
+      data-avatar="zaki"
+    >
+      <section class="hero hero-materi">
+        <div class="hero-isi">
+          <a class="tautan-peta" href="peta.html">← Peta ZATOPIA</a>
+
+          <h1 class="judul-materi">🎉 MISI SELESAI!</h1>
+
+          <div class="teman">
+            <div class="teman-avatar" data-karakter>
+              <img id="avatar-teman" alt="" />
+              <span class="emoji-karakter" id="emoji-teman" aria-hidden="true"
+                >👦</span
+              >
+            </div>
+            <div class="teman-bubble">
+              <p
+                class="teman-teks"
+                id="teman-teks"
+                data-sapa-awal="Ini hasil perjuanganmu"
+              ></p>
+            </div>
+          </div>
+        </div>
+
+        <svg
+          class="gelombang"
+          viewBox="0 0 1440 80"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,30 L1440,80 L0,80 Z"
+            fill="#ffffff"
+          />
+        </svg>
+      </section>
+
+      <div class="materi-isi">
+        <!-- ==================== KARTU SKOR UTAMA ==================== -->
+        <section class="bagian">
+          <div class="kartu-hasil">
+            <p class="hasil-nama" id="hasil-nama">Penjelajah ZATOPIA</p>
+
+            <div class="hasil-skor-lingkaran" id="hasil-skor-lingkaran">
+              <span class="hasil-skor-angka" id="hasil-skor-angka">0</span>
+              <span class="hasil-skor-bagi">/ 100</span>
+            </div>
+
+            <div class="hasil-rincian">
+              <span class="hasil-rincian-item hasil-rincian-benar">
+                ✅ Benar: <strong id="hasil-benar">0</strong>
+              </span>
+              <span class="hasil-rincian-item hasil-rincian-salah">
+                ❌ Salah: <strong id="hasil-salah">0</strong>
+              </span>
+            </div>
+
+            <p class="hasil-pesan" id="hasil-pesan">Memuat hasil...</p>
+          </div>
+        </section>
+
+        <!-- ==================== SKOR ARENA GAME (jika ada) ==================== -->
+        <section class="bagian" id="bagian-skor-game" hidden>
+          <div class="kartu-hasil kartu-hasil-kecil">
+            <p class="hasil-subjudul">🎮 Skor Arena Game</p>
+            <div class="hasil-rincian">
+              <span class="hasil-rincian-item hasil-rincian-benar">
+                ✅ Benar: <strong id="game-benar">0</strong>
+              </span>
+              <span class="hasil-rincian-item hasil-rincian-salah">
+                ❌ Salah: <strong id="game-salah">0</strong>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== AKSI ==================== -->
+        <nav
+          class="navigasi-materi navigasi-hasil"
+          aria-label="Navigasi Hasil Belajar"
+        >
+          <a class="tombol tombol-garis" href="peta.html">🗺️ Kembali ke Peta</a>
+          <a
+            class="tombol tombol-utama"
+            id="tombol-penghargaan"
+            href="penghargaan.html"
+            data-cek-halaman
+            data-nama="Balai Penghargaan"
+            >🏆 Lihat Penghargaan</a
+          >
+        </nav>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p><strong>ZATOPIA</strong> - Petualangan Dunia Zat</p>
+      <p>IPAS Kelas IV SD, materi Wujud, Zat, dan Perubahannya</p>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/hasil.js"></script>
+  </body>
+</html>

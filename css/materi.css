@@ -1,0 +1,626 @@
+/* =====================================================
+   ZATOPIA - Petualangan Dunia Zat
+   File: css/materi.css
+   Tampilan halaman materi: Dunia Padat (Halaman 4),
+   dan nanti dipakai juga oleh Dunia Cair dan Dunia Gas.
+   Warna, font, tombol, navigasi, dan footer memakai
+   css/style.css (dimuat lebih dulu).
+
+   Warna tiap dunia diatur oleh atribut data-tema pada
+   <main> di file HTML. Saat ini tersedia: "padat".
+   ===================================================== */
+
+/* Elemen dengan atribut hidden harus benar-benar hilang */
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- 1. WARNA TEMA ---------- */
+.halaman-materi {
+  /* Warna dasar (ungu ZATOPIA) */
+  --tema: var(--ungu);
+  --tema-tua: var(--ungu-tua);
+  --tema-muda: var(--ungu-muda);
+  --tema-garis: #cbb8f5;
+
+  /* Warna avatar teman: ungu untuk Zaki, biru untuk Zara */
+  --avatar-terang: var(--ungu-muda);
+  --avatar-gelap: #cbb8f5;
+  --avatar-garis: var(--ungu);
+}
+.halaman-materi[data-avatar="zara"] {
+  --avatar-terang: var(--biru-muda);
+  --avatar-gelap: #a9d8ff;
+  --avatar-garis: var(--biru);
+}
+
+/* Tema Dunia Padat: biru es keunguan */
+.halaman-materi[data-tema="padat"] {
+  --tema: #5a6fd0;
+  --tema-tua: #2e3a8c;
+  --tema-muda: #e8ecff;
+  --tema-garis: #b9c4f5;
+}
+
+/* Tema Dunia Cair: biru air */
+.halaman-materi[data-tema="cair"] {
+  --tema: #2384e0;
+  --tema-tua: #145a9c;
+  --tema-muda: #ddf0ff;
+  --tema-garis: #a9d8ff;
+}
+
+/* Tema Dunia Gas: ungu udara */
+.halaman-materi[data-tema="gas"] {
+  --tema: #8e5be0;
+  --tema-tua: #5b3596;
+  --tema-muda: #efe8ff;
+  --tema-garis: #d6c4f7;
+}
+
+/* Tema Laboratorium: hijau kebiruan sains */
+.halaman-materi[data-tema="lab"] {
+  --tema: #0e9488;
+  --tema-tua: #0b6f66;
+  --tema-muda: #dff5f2;
+  --tema-garis: #a8e6dd;
+}
+
+/* Tema Zona Eksperimen: oranye hangat */
+.halaman-materi[data-tema="eksperimen"] {
+  --tema: #e0673f;
+  --tema-tua: #a8452a;
+  --tema-muda: #ffece3;
+  --tema-garis: #ffc7ad;
+}
+
+/* ---------- 2. HERO ---------- */
+.hero.hero-materi {
+  min-height: 0;
+  display: block;
+  padding: 100px 20px 90px;
+}
+
+.hero-materi .hero-isi {
+  grid-template-columns: 1fr;
+  max-width: 820px;
+  gap: 22px;
+  text-align: center;
+  justify-items: center;
+}
+
+/* Tautan kecil kembali ke peta */
+.tautan-peta {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+.tautan-peta:hover {
+  background: var(--putih);
+  color: var(--ungu);
+}
+
+.judul-materi {
+  font-size: clamp(1.9rem, 6.5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--putih);
+  text-shadow:
+    0 4px 0 var(--ungu-tua),
+    0 10px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Karakter teman belajar */
+.teman {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-align: left;
+}
+.teman-avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: clamp(72px, 12vw, 96px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: linear-gradient(
+    160deg,
+    var(--avatar-terang),
+    var(--avatar-gelap)
+  );
+  border: 4px dashed var(--avatar-garis);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  line-height: 1;
+}
+
+/* Gambar asli disembunyikan sampai file-nya ada (diatur oleh js/main.js) */
+[data-karakter] img {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+[data-karakter].ada-gambar img {
+  display: block;
+}
+[data-karakter].ada-gambar .emoji-karakter {
+  display: none;
+}
+[data-karakter].ada-gambar {
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+
+.teman-bubble {
+  position: relative;
+  padding: 14px 22px;
+  border-radius: 22px;
+  background: var(--putih);
+  box-shadow:
+    0 6px 0 rgba(59, 31, 135, 0.3),
+    0 14px 24px rgba(0, 0, 0, 0.18);
+}
+.teman-bubble::before {
+  content: "";
+  position: absolute;
+  left: -11px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 11px solid transparent;
+  border-left: 0;
+  border-right-color: var(--putih);
+}
+.teman-teks {
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: clamp(1.15rem, 2.8vw, 1.5rem);
+  line-height: 1.3;
+  color: var(--ungu-tua);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- 3. ISI MATERI ---------- */
+.materi-isi {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 20px 70px;
+}
+
+.bagian + .bagian {
+  margin-top: 56px;
+}
+
+.bagian h2,
+.aktivitas h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.3rem);
+  color: var(--tema-tua);
+}
+
+/* Kartu materi utama */
+.materi-kartu {
+  margin-top: 18px;
+  padding: 26px clamp(18px, 4vw, 34px);
+  border: 4px solid var(--tema-garis);
+  border-radius: 28px;
+  background: var(--tema-muda);
+}
+.materi-inti {
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: clamp(1.45rem, 3.8vw, 2rem);
+  line-height: 1.3;
+  color: var(--tema-tua);
+}
+
+/* Dua ciri: bentuk tetap & volume tetap */
+.ciri-daftar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+.ciri {
+  padding: 18px 20px;
+  border: 3px solid var(--tema-muda);
+  border-radius: var(--radius);
+  background: var(--putih);
+  box-shadow: 0 5px 0 var(--tema-muda);
+}
+.ciri-ikon {
+  font-size: 2rem;
+  line-height: 1;
+}
+.ciri h3 {
+  margin-top: 6px;
+  font-size: 1.3rem;
+  color: var(--tema-tua);
+}
+.ciri p {
+  margin-top: 4px;
+  color: var(--teks-lembut);
+  font-size: 1.02rem;
+}
+
+/* Contoh zat padat */
+.contoh-daftar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 18px;
+}
+.contoh {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 18px 8px 16px;
+  border: 3px solid var(--tema-muda);
+  border-radius: var(--radius);
+  background: var(--putih);
+  box-shadow: 0 5px 0 var(--tema-muda);
+  text-align: center;
+}
+.contoh-ikon {
+  font-size: 3rem;
+  line-height: 1;
+}
+.contoh-nama {
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--tema-tua);
+}
+
+/* ---------- 4. AKTIVITAS ---------- */
+.aktivitas {
+  padding: 26px clamp(16px, 4vw, 32px) 30px;
+  border: 4px solid var(--tema);
+  border-radius: 32px;
+  background: var(--putih);
+  box-shadow: 0 8px 0 var(--tema-garis);
+}
+
+.aktivitas-kepala {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+.lencana-selesai {
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--hijau);
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.aktivitas-petunjuk {
+  margin-top: 8px;
+  color: var(--teks-lembut);
+}
+
+.pengingat {
+  margin-top: 14px;
+  padding: 10px 16px;
+  border-radius: 16px;
+  background: #fff4d6;
+  border: 3px solid var(--kuning);
+  font-weight: 700;
+  color: var(--teks);
+}
+
+.hitung-temuan {
+  margin-top: 14px;
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--tema);
+}
+
+/* Pilihan benda */
+.daftar-benda {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.benda {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 8px 16px;
+  border: 4px solid var(--tema-muda);
+  border-radius: 24px;
+  background: var(--putih);
+  box-shadow: 0 6px 0 var(--tema-muda);
+  font-family: var(--font-judul);
+  color: var(--tema-tua);
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.benda-ikon {
+  font-size: clamp(2.6rem, 8vw, 3.6rem);
+  line-height: 1;
+}
+.benda-nama {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.benda:hover {
+  transform: translateY(-4px);
+  border-color: var(--tema);
+  box-shadow: 0 10px 0 var(--tema-garis);
+}
+.benda:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--tema-garis);
+}
+.benda:focus-visible {
+  outline: 4px solid var(--kuning);
+  outline-offset: 4px;
+}
+
+/* Benda yang sudah dipilih tidak bisa dipilih lagi */
+.benda.benar,
+.benda.salah,
+.benda.bukan {
+  cursor: default;
+}
+.benda.benar:hover,
+.benda.salah:hover,
+.benda.bukan:hover {
+  transform: none;
+}
+
+/* Benar: hijau + centang */
+.benda.benar {
+  border-color: var(--hijau);
+  background: #e6f8ee;
+  box-shadow: 0 6px 0 #b6e6c9;
+  animation: muncul 0.35s ease;
+}
+.benda.benar::after {
+  content: "✓";
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid var(--putih);
+  background: var(--hijau);
+  color: var(--putih);
+  font-family: var(--font-isi);
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+/* Salah: kuning lembut + tanda silang (bukan merah, supaya ramah) */
+.benda.salah {
+  border-color: var(--kuning-tua);
+  background: #fff4d6;
+  box-shadow: 0 6px 0 #f3dc9a;
+  animation: goyang 0.4s ease;
+}
+.benda.salah::after {
+  content: "✕";
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid var(--putih);
+  background: var(--kuning-tua);
+  color: var(--putih);
+  font-family: var(--font-isi);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+/* Benda yang tidak dipilih setelah misi selesai */
+.benda.bukan {
+  opacity: 0.55;
+  box-shadow: 0 6px 0 var(--tema-muda);
+}
+
+@keyframes muncul {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes goyang {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+/* Umpan balik langsung */
+.umpan-balik {
+  margin-top: 20px;
+  padding: 14px 20px;
+  border-radius: 18px;
+  border: 3px solid transparent;
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 2.6vw, 1.35rem);
+  line-height: 1.35;
+  text-align: center;
+}
+.umpan-balik:empty {
+  display: none;
+}
+.umpan-balik.umpan-benar {
+  background: #e6f8ee;
+  border-color: var(--hijau);
+  color: #1c7444;
+}
+.umpan-balik.umpan-salah {
+  background: #fff4d6;
+  border-color: var(--kuning-tua);
+  color: var(--teks);
+}
+.umpan-balik.baru {
+  animation: muncul 0.3s ease;
+}
+
+/* Kotak selesai */
+.kotak-selesai {
+  margin-top: 20px;
+  padding: 22px 20px;
+  border-radius: 24px;
+  background: var(--tema-muda);
+  border: 3px solid var(--tema-garis);
+  text-align: center;
+  color: var(--tema-tua);
+  font-weight: 700;
+}
+.selesai-judul {
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+.selesai-info {
+  margin: 8px 0 16px;
+  color: var(--teks-lembut);
+  font-size: 1rem;
+}
+.selesai-info:empty {
+  margin: 0 0 6px;
+}
+
+/* ---------- 5. TOMBOL & NAVIGASI ---------- */
+/* Tombol bergaris untuk latar putih */
+.tombol-garis {
+  background: var(--putih);
+  color: var(--ungu);
+  border: 3px solid var(--ungu);
+}
+.tombol-garis:hover {
+  transform: translateY(-3px);
+  background: var(--ungu-muda);
+}
+.tombol-garis:active {
+  transform: translateY(2px);
+}
+
+.navigasi-materi {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 56px;
+}
+/* Di area putih, bayangan tombol kuning dibuat lebih ringan */
+.navigasi-materi .tombol-utama {
+  box-shadow:
+    0 6px 0 var(--kuning-tua),
+    0 10px 16px rgba(60, 30, 130, 0.18);
+}
+.navigasi-materi .tombol-utama:hover {
+  box-shadow:
+    0 9px 0 var(--kuning-tua),
+    0 14px 20px rgba(60, 30, 130, 0.2);
+}
+.navigasi-materi .tombol-utama:active {
+  box-shadow: 0 2px 0 var(--kuning-tua);
+}
+/* Setelah misi selesai, tombol "Materi berikutnya" berdenyut pelan */
+.navigasi-materi .tombol-utama.menyala {
+  animation: denyut-tombol 2s ease-out infinite;
+}
+@keyframes denyut-tombol {
+  0% {
+    box-shadow:
+      0 6px 0 var(--kuning-tua),
+      0 0 0 0 rgba(255, 201, 60, 0.9);
+  }
+  70% {
+    box-shadow:
+      0 6px 0 var(--kuning-tua),
+      0 0 0 18px rgba(255, 201, 60, 0);
+  }
+  100% {
+    box-shadow:
+      0 6px 0 var(--kuning-tua),
+      0 0 0 0 rgba(255, 201, 60, 0);
+  }
+}
+
+/* ---------- 6. LAYAR KECIL ---------- */
+@media (max-width: 720px) {
+  .contoh-daftar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .daftar-benda {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .hero.hero-materi {
+    padding-top: 130px;
+  }
+  .ciri-daftar {
+    grid-template-columns: 1fr;
+  }
+  .teman {
+    gap: 14px;
+  }
+  .navigasi-materi .tombol,
+  .kotak-selesai .tombol {
+    max-width: 360px;
+  }
+}
+
+/* Hormati pengguna yang tidak nyaman dengan animasi */
+@media (prefers-reduced-motion: reduce) {
+  .benda,
+  .umpan-balik,
+  .navigasi-materi .tombol-utama.menyala {
+    animation: none;
+  }
+  .benda {
+    transition: none;
+  }
+}

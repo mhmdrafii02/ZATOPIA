@@ -1,0 +1,386 @@
+/* =====================================================
+   ZATOPIA - Petualangan Dunia Zat
+   File: css/eksperimen.css
+   Tampilan khusus halaman Zona Eksperimen: tiga panggung
+   eksperimen dan kuis pilihan ganda. Dimuat SETELAH
+   css/style.css dan css/materi.css.
+   ===================================================== */
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- 1. HERO: pengantar + hitungan ---------- */
+.pengantar-eksperimen {
+  margin-top: 6px;
+  font-size: 1.15rem;
+  color: var(--ungu-muda);
+}
+.hitung-eksperimen {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 600;
+}
+
+/* ---------- 2. KEPALA TIAP EKSPERIMEN ---------- */
+.eksperimen-kepala {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+.eksperimen-nomor {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--tema);
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.eksperimen-kepala h2 {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ---------- 3. PANGGUNG EKSPERIMEN ---------- */
+.panggung-eksperimen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 20px;
+  border-radius: 26px;
+  background: var(--tema-muda);
+  border: 3px solid var(--tema-garis);
+}
+.eksperimen-svg {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+}
+
+.eksperimen-label {
+  padding: 4px 18px;
+  border-radius: 999px;
+  background: var(--tema);
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.1rem;
+  animation: label-muncul 0.35s ease;
+}
+@keyframes label-muncul {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.eksperimen-aksi {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+/* Tombol aksi di atas latar putih (bayangan lebih ringan, seperti tombol lain) */
+.eksperimen-aksi .tombol-utama {
+  box-shadow:
+    0 6px 0 var(--kuning-tua),
+    0 10px 16px rgba(60, 30, 130, 0.18);
+}
+.eksperimen-aksi .tombol-utama:hover {
+  box-shadow:
+    0 9px 0 var(--kuning-tua),
+    0 14px 20px rgba(60, 30, 130, 0.2);
+}
+.eksperimen-aksi .tombol-utama:active {
+  box-shadow: 0 2px 0 var(--kuning-tua);
+}
+
+/* ---------- 4. EKSPERIMEN 1: ES -> AIR ---------- */
+/* Permukaan air bergoyang pelan */
+#permukaan-air {
+  animation: goyang-air-kecil 2.2s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+@keyframes goyang-air-kecil {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Api muncul sesaat lalu berkedip kecil */
+.api {
+  animation: kedip-api 0.6s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+@keyframes kedip-api {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.08);
+  }
+}
+
+/* ---------- 5. EKSPERIMEN 2: GELAS BEREMBUN ---------- */
+.tetes-embun {
+  opacity: 0;
+  animation: embun-muncul 0.5s ease forwards;
+}
+.tetes-embun.d2 {
+  animation-delay: 0.1s;
+}
+.tetes-embun.d3 {
+  animation-delay: 0.2s;
+}
+.tetes-embun.d4 {
+  animation-delay: 0.3s;
+}
+.tetes-embun.d5 {
+  animation-delay: 0.4s;
+}
+.tetes-embun.d6 {
+  animation-delay: 0.5s;
+}
+
+.tetes-alir {
+  opacity: 0;
+  animation: alir-muncul 0.6s ease 0.5s forwards;
+}
+.tetes-alir.a2 {
+  animation-delay: 0.65s;
+}
+
+@keyframes embun-muncul {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes alir-muncul {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+/* ---------- 6. EKSPERIMEN 3: PAKAIAN DIJEMUR ---------- */
+.sinar {
+  transform-origin: 182px 40px;
+  animation: putar-sinar 10s linear infinite;
+}
+@keyframes putar-sinar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tetes-jemur ellipse {
+  animation: menetes 1.6s ease-in infinite;
+  transform-origin: center top;
+}
+.tetes-jemur ellipse:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.tetes-jemur ellipse:nth-child(3) {
+  animation-delay: 0.8s;
+}
+@keyframes menetes {
+  0% {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 0.2;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* Pakaian berpindah dari basah ke kering dengan sedikit efek memudar */
+#keadaan-basah,
+#keadaan-kering {
+  animation: kain-muncul 0.4s ease;
+}
+@keyframes kain-muncul {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ---------- 7. PERTANYAAN & PILIHAN (gaya sama dengan Dunia Cair/Gas) ---------- */
+.pertanyaan-eksperimen {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 2px dashed var(--tema-garis);
+}
+.pertanyaan-teks {
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--tema-tua);
+  text-align: center;
+}
+
+.pilihan-kuis {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-width: 560px;
+  margin: 16px auto 0;
+}
+
+.opsi-kuis {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 3px solid var(--tema-muda);
+  border-radius: 16px;
+  background: var(--putih);
+  box-shadow: 0 4px 0 var(--tema-muda);
+  font-family: var(--font-judul);
+  font-size: 1.05rem;
+  color: var(--teks);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.opsi-huruf {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--tema-muda);
+  color: var(--tema-tua);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.opsi-kuis:hover {
+  transform: translateY(-2px);
+  border-color: var(--tema);
+}
+.opsi-kuis:focus-visible {
+  outline: 4px solid var(--kuning);
+  outline-offset: 3px;
+}
+.opsi-kuis[aria-disabled="true"] {
+  cursor: default;
+}
+.opsi-kuis[aria-disabled="true"]:hover {
+  transform: none;
+}
+
+.opsi-kuis.benar {
+  border-color: var(--hijau);
+  background: #e6f8ee;
+}
+.opsi-kuis.benar .opsi-huruf {
+  background: var(--hijau);
+  color: var(--putih);
+}
+.opsi-kuis.benar::after {
+  content: "✓";
+  margin-left: auto;
+  color: var(--hijau);
+  font-weight: 800;
+}
+.opsi-kuis.salah {
+  border-color: var(--kuning-tua);
+  background: #fff4d6;
+  animation: goyang-opsi 0.4s ease;
+}
+.opsi-kuis.salah::after {
+  content: "✕";
+  margin-left: auto;
+  color: var(--kuning-tua);
+  font-weight: 800;
+}
+@keyframes goyang-opsi {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* ---------- 8. KOTAK SELESAI HALAMAN ---------- */
+.kotak-selesai-halaman {
+  margin-top: 40px;
+}
+
+/* ---------- 9. LAYAR KECIL ---------- */
+@media (max-width: 560px) {
+  .eksperimen-svg {
+    max-width: 210px;
+  }
+  .pilihan-kuis {
+    grid-template-columns: 1fr;
+  }
+  .opsi-kuis {
+    font-size: 1rem;
+  }
+}
+
+/* Hormati pengguna yang tidak nyaman dengan animasi */
+@media (prefers-reduced-motion: reduce) {
+  #permukaan-air,
+  .api,
+  .tetes-embun,
+  .tetes-alir,
+  .sinar,
+  .tetes-jemur ellipse,
+  #keadaan-basah,
+  #keadaan-kering,
+  .eksperimen-label,
+  .opsi-kuis.salah {
+    animation: none;
+  }
+  .opsi-kuis {
+    transition: none;
+  }
+}

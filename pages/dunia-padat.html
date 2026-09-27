@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Misi 1: Dunia Padat - ZATOPIA</title>
+    <meta
+      name="description"
+      content="Misi 1 ZATOPIA: kenali zat padat, lihat contohnya, lalu cari benda yang termasuk zat padat."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌎</text></svg>"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS umum ZATOPIA -->
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- CSS untuk halaman materi (dipakai juga oleh Dunia Cair dan Dunia Gas nanti) -->
+    <link rel="stylesheet" href="../css/materi.css" />
+  </head>
+  <body>
+    <!-- ==================== NAVIGASI (sama dengan halaman lain) ==================== -->
+    <header class="navbar">
+      <a
+        class="navbar-logo"
+        href="../index.html"
+        aria-label="ZATOPIA, kembali ke Beranda"
+        >🌎 ZATOPIA</a
+      >
+
+      <nav aria-label="Menu utama">
+        <ul class="navbar-menu">
+          <li><a href="../index.html">Beranda</a></li>
+          <li><a href="../index.html#petunjuk">Petunjuk</a></li>
+          <!-- HAPUS data-placeholder setelah pages/tentang.html dibuat -->
+          <li>
+            <a href="tentang.html" data-placeholder="Tentang ZATOPIA"
+              >Tentang</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!--
+    data-tema     : warna halaman ("padat")
+    data-lokasi   : kode lokasi di peta, dipakai untuk menyimpan progress
+    data-avatar   : diisi otomatis oleh js/materi.js ("zaki" atau "zara")
+  -->
+    <main
+      class="halaman-materi"
+      id="halaman-materi"
+      data-tema="padat"
+      data-lokasi="gunung-es"
+      data-avatar="zaki"
+    >
+      <!-- ==================== HERO ==================== -->
+      <section class="hero hero-materi">
+        <div class="hero-isi">
+          <a class="tautan-peta" href="peta.html">← Peta ZATOPIA</a>
+
+          <h1 class="judul-materi">🧊 MISI 1 — DUNIA PADAT</h1>
+
+          <!-- Karakter teman belajar (gambar: assets/images/karakter/zaki.png / zara.png) -->
+          <div class="teman">
+            <div class="teman-avatar" data-karakter>
+              <img id="avatar-teman" alt="" />
+              <span class="emoji-karakter" id="emoji-teman" aria-hidden="true"
+                >👦</span
+              >
+            </div>
+            <div class="teman-bubble">
+              <!-- data-sapa-awal: kalimat awal, nama siswa ditambahkan oleh js/materi.js -->
+              <p
+                class="teman-teks"
+                id="teman-teks"
+                data-sapa-awal="Ayo kenali zat padat bersama"
+              >
+                Ayo kenali zat padat bersama!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gelombang pemisah menuju area putih -->
+        <svg
+          class="gelombang"
+          viewBox="0 0 1440 80"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,30 L1440,80 L0,80 Z"
+            fill="#ffffff"
+          />
+        </svg>
+      </section>
+
+      <!-- ==================== ISI MATERI ==================== -->
+      <div class="materi-isi">
+        <!-- 1. Materi -->
+        <section class="bagian" aria-labelledby="judul-materi">
+          <h2 id="judul-materi">Apa itu zat padat?</h2>
+
+          <div class="materi-kartu">
+            <p class="materi-inti">
+              Zat padat memiliki bentuk dan volume yang tetap.
+            </p>
+          </div>
+
+          <div class="ciri-daftar">
+            <div class="ciri">
+              <span class="ciri-ikon" aria-hidden="true">🔷</span>
+              <h3>Bentuk tetap</h3>
+              <p>Bentuknya tidak berubah walau dipindahkan ke wadah lain.</p>
+            </div>
+            <div class="ciri">
+              <span class="ciri-ikon" aria-hidden="true">📦</span>
+              <h3>Volume tetap</h3>
+              <p>Ruang yang ditempatinya selalu sama.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Contoh -->
+        <section class="bagian" aria-labelledby="judul-contoh">
+          <h2 id="judul-contoh">Contoh zat padat</h2>
+
+          <ul class="contoh-daftar">
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">🧊</span
+              ><span class="contoh-nama">Es batu</span>
+            </li>
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">📚</span
+              ><span class="contoh-nama">Buku</span>
+            </li>
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">✏️</span
+              ><span class="contoh-nama">Pensil</span>
+            </li>
+            <li class="contoh">
+              <span class="contoh-ikon" aria-hidden="true">🪨</span
+              ><span class="contoh-nama">Batu</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 3. Aktivitas -->
+        <section class="bagian">
+          <!--
+          Pesan umpan balik ada di atribut data-pesan-benar dan data-pesan-salah.
+          Setiap benda punya data-benar="true" (zat padat) atau "false" (bukan zat padat).
+        -->
+          <div
+            class="aktivitas"
+            id="aktivitas"
+            data-pesan-benar="🎉 Hebat! Benda tersebut termasuk zat padat."
+            data-pesan-salah="Belum tepat. Coba perhatikan kembali ciri-ciri zat padat."
+          >
+            <div class="aktivitas-kepala">
+              <h2 id="judul-aktivitas">Mana yang termasuk zat padat?</h2>
+              <!-- Muncul jika misi ini pernah diselesaikan -->
+              <span class="lencana-selesai" id="lencana-selesai" hidden
+                >✓ Sudah selesai</span
+              >
+            </div>
+
+            <p class="aktivitas-petunjuk">
+              Ketuk satu benda. Temukan semua zat padat!
+            </p>
+
+            <p class="pengingat">
+              <span aria-hidden="true">💡</span> Ingat: zat padat bentuk dan
+              volumenya tetap.
+            </p>
+
+            <p class="hitung-temuan" id="hitung-temuan">Ditemukan: 0 dari 3</p>
+
+            <div
+              class="daftar-benda"
+              id="daftar-benda"
+              role="group"
+              aria-labelledby="judul-aktivitas"
+            >
+              <button
+                type="button"
+                class="benda"
+                data-benar="true"
+                data-nama="Kursi"
+              >
+                <span class="benda-ikon" aria-hidden="true">🪑</span
+                ><span class="benda-nama">Kursi</span>
+              </button>
+              <button
+                type="button"
+                class="benda"
+                data-benar="false"
+                data-nama="Air"
+              >
+                <span class="benda-ikon" aria-hidden="true">💧</span
+                ><span class="benda-nama">Air</span>
+              </button>
+              <button
+                type="button"
+                class="benda"
+                data-benar="true"
+                data-nama="Kunci"
+              >
+                <span class="benda-ikon" aria-hidden="true">🔑</span
+                ><span class="benda-nama">Kunci</span>
+              </button>
+              <button
+                type="button"
+                class="benda"
+                data-benar="false"
+                data-nama="Susu"
+              >
+                <span class="benda-ikon" aria-hidden="true">🥛</span
+                ><span class="benda-nama">Susu</span>
+              </button>
+              <button
+                type="button"
+                class="benda"
+                data-benar="true"
+                data-nama="Batu bata"
+              >
+                <span class="benda-ikon" aria-hidden="true">🧱</span
+                ><span class="benda-nama">Batu bata</span>
+              </button>
+              <button
+                type="button"
+                class="benda"
+                data-benar="false"
+                data-nama="Udara"
+              >
+                <span class="benda-ikon" aria-hidden="true">💨</span
+                ><span class="benda-nama">Udara</span>
+              </button>
+            </div>
+
+            <!-- Umpan balik langsung (diisi oleh js/materi.js) -->
+            <p
+              class="umpan-balik"
+              id="umpan-balik"
+              role="status"
+              aria-live="polite"
+            ></p>
+
+            <!-- Muncul setelah semua zat padat ditemukan -->
+            <div class="kotak-selesai" id="kotak-selesai" hidden>
+              <p class="selesai-judul">🌟 Misi 1 selesai!</p>
+              <p>Kamu berhasil menemukan semua zat padat.</p>
+              <p class="selesai-info" id="selesai-info"></p>
+              <button
+                type="button"
+                class="tombol tombol-garis"
+                id="tombol-ulang"
+              >
+                🔄 Main lagi
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Navigasi -->
+        <nav class="navigasi-materi" aria-label="Navigasi misi">
+          <a class="tombol tombol-garis" href="peta.html">← Kembali ke Peta</a>
+          <!-- Halaman Dunia Cair dibuat di langkah berikutnya. data-cek-halaman: js/materi.js memeriksa dulu apakah halamannya ada. -->
+          <a
+            class="tombol tombol-utama"
+            id="tombol-berikutnya"
+            href="dunia-cair.html"
+            data-cek-halaman
+            data-nama="Dunia Cair"
+            >Materi berikutnya →</a
+          >
+        </nav>
+      </div>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p><strong>ZATOPIA</strong> - Petualangan Dunia Zat</p>
+      <p>IPAS Kelas IV SD, materi Wujud, Zat, dan Perubahannya</p>
+    </footer>
+
+    <!-- Pesan singkat untuk halaman yang belum dibuat -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JavaScript (urutan penting: main.js dan storage.js dulu, materi.js terakhir) -->
+    <script src="../js/main.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/materi.js"></script>
+  </body>
+</html>

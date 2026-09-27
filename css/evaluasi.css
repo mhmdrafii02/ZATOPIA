@@ -1,0 +1,250 @@
+/* =====================================================
+   ZATOPIA - Petualangan Dunia Zat
+   File: css/evaluasi.css
+   Tampilan khusus halaman Evaluasi (Misi Akhir): layar
+   pembuka, satu soal per tampilan, dan layar selesai.
+   Dimuat SETELAH css/style.css dan css/materi.css.
+   ===================================================== */
+
+[hidden] {
+  display: none !important;
+}
+
+/* Isi halaman lebih sempit supaya soal mudah dibaca */
+.materi-isi.materi-isi-sempit {
+  max-width: 640px;
+}
+
+/* ---------- 1. KARTU PEMBUKA & SELESAI ---------- */
+.kartu-pembuka {
+  padding: 34px clamp(20px, 5vw, 40px) 32px;
+  border: 4px solid var(--tema);
+  border-radius: 32px;
+  background: var(--tema-muda);
+  box-shadow: 0 8px 0 var(--tema-garis);
+  text-align: center;
+}
+.pembuka-ikon {
+  font-size: 3.4rem;
+  line-height: 1;
+}
+.kartu-pembuka h2 {
+  margin-top: 8px;
+  font-size: clamp(1.5rem, 4.5vw, 1.9rem);
+  color: var(--tema-tua);
+}
+.pembuka-teks {
+  margin-top: 12px;
+  font-weight: 700;
+  color: var(--teks);
+  line-height: 1.5;
+}
+.kartu-pembuka .tombol-utama {
+  margin-top: 22px;
+  box-shadow:
+    0 6px 0 var(--kuning-tua),
+    0 10px 16px rgba(60, 30, 130, 0.18);
+}
+.kartu-pembuka .tombol-utama:hover {
+  box-shadow:
+    0 9px 0 var(--kuning-tua),
+    0 14px 20px rgba(60, 30, 130, 0.2);
+}
+.kartu-pembuka .tombol-utama:active {
+  box-shadow: 0 2px 0 var(--kuning-tua);
+}
+
+.aksi-selesai {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+/* ---------- 2. KARTU SOAL ---------- */
+.aktivitas.evaluasi {
+  padding: 26px clamp(16px, 4vw, 32px) 30px;
+  border: 4px solid var(--tema);
+  border-radius: 32px;
+  background: var(--putih);
+  box-shadow: 0 8px 0 var(--tema-garis);
+  animation: soal-muncul 0.3s ease;
+}
+@keyframes soal-muncul {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.progres-soal-teks {
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--tema-tua);
+}
+.progres-bar {
+  height: 16px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: var(--tema-muda);
+  overflow: hidden;
+}
+.progres-isi {
+  width: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--kuning), var(--tema));
+  transition: width 0.4s ease;
+}
+
+.topik-soal {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 3px 14px;
+  border-radius: 999px;
+  background: var(--tema-muda);
+  color: var(--tema-tua);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.teks-soal {
+  margin-top: 12px;
+  font-size: clamp(1.2rem, 3.6vw, 1.5rem);
+  line-height: 1.4;
+  color: var(--teks);
+}
+
+/* ---------- 3. PILIHAN JAWABAN ---------- */
+.pilihan-soal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.opsi-soal {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  border: 3px solid var(--tema-muda);
+  border-radius: 18px;
+  background: var(--putih);
+  box-shadow: 0 4px 0 var(--tema-muda);
+  font-family: var(--font-judul);
+  font-size: 1.1rem;
+  color: var(--teks);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.opsi-huruf {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--tema-muda);
+  color: var(--tema-tua);
+  font-weight: 700;
+}
+.opsi-soal:hover {
+  transform: translateY(-2px);
+  border-color: var(--tema);
+}
+.opsi-soal:focus-visible {
+  outline: 4px solid var(--kuning);
+  outline-offset: 3px;
+}
+
+/* Dipilih: HANYA menandai pilihan siswa, bukan benar/salah (jawaban dirahasiakan) */
+.opsi-soal.dipilih {
+  border-color: var(--tema);
+  background: var(--tema-muda);
+  box-shadow:
+    0 0 0 5px rgba(255, 201, 60, 0.55),
+    0 4px 0 var(--tema-garis);
+}
+.opsi-soal.dipilih .opsi-huruf {
+  background: var(--tema);
+  color: var(--putih);
+}
+
+/* Setelah menekan Berikutnya, seluruh soal terkunci (tidak bisa diganti) */
+.pilihan-soal.terkunci .opsi-soal {
+  cursor: default;
+}
+.pilihan-soal.terkunci .opsi-soal:hover {
+  transform: none;
+  border-color: var(--tema-muda);
+}
+.pilihan-soal.terkunci .opsi-soal.dipilih:hover {
+  border-color: var(--tema);
+}
+
+/* ---------- 4. TOMBOL AKSI ---------- */
+.aksi-soal {
+  display: flex;
+  justify-content: center;
+  margin-top: 26px;
+}
+.aksi-soal .tombol-utama {
+  box-shadow:
+    0 6px 0 var(--kuning-tua),
+    0 10px 16px rgba(60, 30, 130, 0.18);
+}
+.aksi-soal .tombol-utama:hover {
+  box-shadow:
+    0 9px 0 var(--kuning-tua),
+    0 14px 20px rgba(60, 30, 130, 0.2);
+}
+.aksi-soal .tombol-utama:active {
+  box-shadow: 0 2px 0 var(--kuning-tua);
+}
+.aksi-soal .tombol-utama:disabled {
+  opacity: 0.55;
+  cursor: default;
+  transform: none !important;
+  box-shadow: 0 6px 0 var(--kuning-tua) !important;
+}
+
+/* ---------- 5. LAYAR KECIL ---------- */
+@media (max-width: 560px) {
+  .hero.hero-materi {
+    padding-top: 130px;
+  }
+  .opsi-soal {
+    font-size: 1.02rem;
+    padding: 12px 16px;
+  }
+  .kartu-pembuka .tombol,
+  .aksi-selesai .tombol {
+    width: 100%;
+    max-width: 340px;
+  }
+}
+
+/* Hormati pengguna yang tidak nyaman dengan animasi */
+@media (prefers-reduced-motion: reduce) {
+  .aktivitas.evaluasi {
+    animation: none;
+  }
+  .opsi-soal,
+  .progres-isi {
+    transition: none;
+  }
+}
