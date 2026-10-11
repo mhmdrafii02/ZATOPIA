@@ -17,6 +17,79 @@ document.addEventListener("DOMContentLoaded", function () {
   var halaman = document.getElementById("halaman-materi");
   var kodeLokasi = halaman.getAttribute("data-lokasi"); // "hutan-zat"
 
+  /* ---------- 0. Pop-up Tujuan Pembelajaran ----------
+     Muncul setiap kali halaman Hutan Zat dibuka. Ditaruh paling atas
+     supaya tetap berfungsi walaupun bagian lain belum selesai dimuat. */
+  var tpOverlay = document.getElementById("tp-overlay");
+  var tpMulai = document.getElementById("tp-mulai");
+  var tpKembali = document.getElementById("tp-kembali");
+  var tpTerbuka = false;
+
+  // Bagian halaman yang dikunci selama pop-up terbuka
+  var tpLatar = [
+    document.querySelector("header.navbar"),
+    halaman,
+    document.querySelector("footer.footer"),
+  ];
+
+  function kunciLatar(kunci) {
+    tpLatar.forEach(function (elemen) {
+      if (!elemen) {
+        return;
+      }
+      if (kunci) {
+        elemen.setAttribute("inert", "");
+      } else {
+        elemen.removeAttribute("inert");
+      }
+    });
+  }
+
+  function bukaTujuan() {
+    tpTerbuka = true;
+    tpOverlay.classList.remove("menutup");
+    tpOverlay.hidden = false;
+    document.body.classList.add("tp-terbuka");
+    kunciLatar(true);
+    tpMulai.focus();
+  }
+
+  function tutupTujuan() {
+    if (!tpTerbuka) {
+      return;
+    }
+    tpTerbuka = false;
+    tpOverlay.classList.add("menutup"); // animasi keluar
+    kunciLatar(false);
+    document.body.classList.remove("tp-terbuka");
+    setTimeout(function () {
+      tpOverlay.hidden = true;
+      tpOverlay.classList.remove("menutup");
+    }, 300);
+  }
+
+  tpMulai.addEventListener("click", tutupTujuan);
+
+  // Escape menutup pop-up. Tab berputar di antara dua tombol saja.
+  document.addEventListener("keydown", function (event) {
+    if (!tpTerbuka) {
+      return;
+    }
+    if (event.key === "Escape") {
+      tutupTujuan();
+    } else if (event.key === "Tab") {
+      if (event.shiftKey && document.activeElement === tpMulai) {
+        event.preventDefault();
+        tpKembali.focus();
+      } else if (!event.shiftKey && document.activeElement === tpKembali) {
+        event.preventDefault();
+        tpMulai.focus();
+      }
+    }
+  });
+
+  bukaTujuan();
+
   /* ---------- Status halaman ---------- */
   var temukanSelesai = false; // aktivitas utama 1: "Temukan Zat!"
   var kelompokSelesai = false; // aktivitas utama 2: "Kelompokkan Zat"

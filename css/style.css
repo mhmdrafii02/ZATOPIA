@@ -628,3 +628,289 @@ a:focus-visible {
     transition: none;
   }
 }
+
+/* Pastikan pop-up benar-benar hilang saat hidden */
+.tp-overlay[hidden] {
+  display: none !important;
+}
+
+/* Gambar avatar asli (otomatis aktif saat file zaki.png / zara.png ada) */
+.tp-avatar img {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.tp-avatar.ada-gambar img {
+  display: block;
+}
+.tp-avatar.ada-gambar .emoji-karakter {
+  display: none;
+}
+.tp-avatar.ada-gambar {
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+
+/* Tombol kembali bergaris (tidak bergantung pada materi.css) */
+.tp-aksi .tp-tombol-kembali {
+  background: var(--putih);
+  color: var(--ungu);
+  border: 3px solid var(--ungu);
+}
+.tp-aksi .tp-tombol-kembali:hover {
+  transform: translateY(-3px);
+  background: var(--ungu-muda);
+}
+.tp-aksi .tp-tombol-kembali:active {
+  transform: translateY(2px);
+}
+
+/* =====================================================
+   POP-UP TUJUAN PEMBELAJARAN (blok utama)
+   ===================================================== */
+body.tp-terbuka {
+  overflow: hidden;
+}
+
+.tp-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(59, 31, 135, 0.72);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  animation: tp-overlay-masuk 0.3s ease;
+}
+.tp-overlay.menutup {
+  animation: tp-overlay-keluar 0.3s ease forwards;
+}
+
+.tp-kotak {
+  width: 100%;
+  max-width: 680px;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  border: 4px solid var(--ungu);
+  border-radius: 32px;
+  background: var(--putih);
+  box-shadow:
+    0 10px 0 var(--ungu-muda),
+    0 24px 48px rgba(0, 0, 0, 0.35);
+  animation: tp-kotak-masuk 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.tp-overlay.menutup .tp-kotak {
+  animation: tp-kotak-keluar 0.3s ease forwards;
+}
+
+/* ---------- Kepala: judul + Zaki dan Zara ---------- */
+.tp-kepala {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 22px 18px 26px;
+  background: linear-gradient(
+    160deg,
+    #4b2aa8 0%,
+    var(--ungu) 50%,
+    #2f7fe0 100%
+  );
+  text-align: center;
+}
+.tp-judul {
+  flex: 1;
+  font-size: clamp(1.3rem, 4.6vw, 2rem);
+  color: var(--putih);
+  text-shadow: 0 3px 0 var(--ungu-tua);
+}
+.tp-avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: clamp(52px, 12vw, 76px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--ungu-muda), #cbb8f5);
+  border: 4px dashed var(--ungu);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+  font-size: clamp(1.7rem, 6vw, 2.6rem);
+  line-height: 1;
+  animation: mengambang 4s ease-in-out infinite;
+}
+.tp-avatar-zara {
+  background: linear-gradient(160deg, var(--biru-muda), #a9d8ff);
+  border-color: var(--biru);
+  animation-delay: -2s;
+}
+
+/* ---------- Isi ---------- */
+.tp-isi {
+  padding: 22px clamp(16px, 4vw, 32px) 28px;
+}
+.tp-intro {
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--teks);
+}
+
+.tp-daftar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+.tp-kartu {
+  --tp-warna: var(--ungu);
+  --tp-muda: var(--ungu-muda);
+  --tp-garis: #cbb8f5;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 3px solid var(--tp-garis);
+  border-radius: 20px;
+  background: var(--tp-muda);
+  box-shadow: 0 4px 0 var(--tp-garis);
+}
+.tp-kartu-2 {
+  --tp-warna: var(--hijau);
+  --tp-muda: #e6f8ee;
+  --tp-garis: #b6e6c9;
+}
+.tp-kartu-3 {
+  --tp-warna: var(--biru);
+  --tp-muda: var(--biru-muda);
+  --tp-garis: #a9d8ff;
+}
+.tp-nomor {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--tp-warna);
+  color: var(--putih);
+  font-family: var(--font-judul);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+.tp-teks {
+  flex: 1;
+  font-weight: 700;
+  font-size: 1.02rem;
+  line-height: 1.45;
+  color: var(--teks);
+}
+.tp-ikon {
+  flex: none;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.tp-ajakan {
+  margin-top: 22px;
+  font-family: var(--font-judul);
+  font-weight: 600;
+  font-size: clamp(1.05rem, 3vw, 1.25rem);
+  line-height: 1.4;
+  text-align: center;
+  color: var(--ungu-tua);
+}
+
+.tp-aksi {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+.tp-aksi .tombol-utama {
+  box-shadow:
+    0 6px 0 var(--kuning-tua),
+    0 10px 16px rgba(60, 30, 130, 0.18);
+}
+.tp-aksi .tombol-utama:hover {
+  box-shadow:
+    0 9px 0 var(--kuning-tua),
+    0 14px 20px rgba(60, 30, 130, 0.2);
+}
+.tp-aksi .tombol-utama:active {
+  box-shadow: 0 2px 0 var(--kuning-tua);
+}
+
+/* ---------- Animasi ---------- */
+@keyframes tp-overlay-masuk {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes tp-overlay-keluar {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes tp-kotak-masuk {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes tp-kotak-keluar {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+}
+
+/* ---------- Layar kecil ---------- */
+@media (max-width: 560px) {
+  .tp-overlay {
+    padding: 10px;
+  }
+  .tp-kotak {
+    border-radius: 26px;
+  }
+  .tp-kepala {
+    padding: 16px 12px 20px;
+    gap: 8px;
+  }
+  .tp-kartu {
+    padding: 12px;
+    gap: 10px;
+  }
+  .tp-ikon {
+    font-size: 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tp-overlay,
+  .tp-overlay.menutup,
+  .tp-kotak,
+  .tp-overlay.menutup .tp-kotak,
+  .tp-avatar {
+    animation: none;
+  }
+}

@@ -11,6 +11,99 @@
    ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
+  /* ---------- 0. Pop-up Tujuan Pembelajaran ----------
+     Muncul saat siswa masuk ke Peta ZATOPIA. Ditaruh paling atas
+     supaya tetap berfungsi walaupun bagian lain bermasalah.
+     TP_SEKALI_PER_SESI = true  -> muncul sekali per sesi browser
+                                   (tidak muncul lagi tiap kembali dari materi)
+     TP_SEKALI_PER_SESI = false -> muncul setiap kali Peta dibuka */
+  var TP_SEKALI_PER_SESI = true;
+
+  var tpOverlay = document.getElementById("tp-overlay");
+  var tpMulai = document.getElementById("tp-mulai");
+  var tpKembali = document.getElementById("tp-kembali");
+  var tpTerbuka = false;
+
+  var tpLatar = [
+    document.querySelector("header.navbar"),
+    document.querySelector("main"),
+    document.querySelector("footer.footer"),
+  ];
+
+  function kunciLatar(kunci) {
+    tpLatar.forEach(function (elemen) {
+      if (!elemen) {
+        return;
+      }
+      if (kunci) {
+        elemen.setAttribute("inert", "");
+      } else {
+        elemen.removeAttribute("inert");
+      }
+    });
+  }
+
+  function bukaTujuan() {
+    tpTerbuka = true;
+    tpOverlay.classList.remove("menutup");
+    tpOverlay.hidden = false;
+    document.body.classList.add("tp-terbuka");
+    kunciLatar(true);
+    tpMulai.focus();
+  }
+
+  function tutupTujuan() {
+    if (!tpTerbuka) {
+      return;
+    }
+    tpTerbuka = false;
+    try {
+      sessionStorage.setItem("zatopia_tujuan_dilihat", "1");
+    } catch (galat) {
+      // abaikan
+    }
+    tpOverlay.classList.add("menutup"); // animasi keluar
+    kunciLatar(false);
+    document.body.classList.remove("tp-terbuka");
+    setTimeout(function () {
+      tpOverlay.hidden = true;
+      tpOverlay.classList.remove("menutup");
+    }, 300);
+  }
+
+  tpMulai.addEventListener("click", tutupTujuan);
+
+  // Escape menutup pop-up. Tab berputar di antara dua tombol saja.
+  document.addEventListener("keydown", function (event) {
+    if (!tpTerbuka) {
+      return;
+    }
+    if (event.key === "Escape") {
+      tutupTujuan();
+    } else if (event.key === "Tab") {
+      if (event.shiftKey && document.activeElement === tpMulai) {
+        event.preventDefault();
+        tpKembali.focus();
+      } else if (!event.shiftKey && document.activeElement === tpKembali) {
+        event.preventDefault();
+        tpMulai.focus();
+      }
+    }
+  });
+
+  var tpSudahDilihat = false;
+  try {
+    tpSudahDilihat = sessionStorage.getItem("zatopia_tujuan_dilihat") === "1";
+  } catch (galat) {
+    tpSudahDilihat = false;
+  }
+
+  if (TP_SEKALI_PER_SESI && tpSudahDilihat) {
+    tpOverlay.hidden = true;
+  } else {
+    bukaTujuan();
+  }
+
   /* ---------- Elemen di halaman ---------- */
   var petaIsi = document.getElementById("peta-isi");
   var sapaanTeks = document.getElementById("sapaan-teks");
